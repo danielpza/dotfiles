@@ -1,7 +1,9 @@
+(recentf-mode)
+
 (defun my/find-init-file ()
   "Open user-init-file."
   (interactive)
-  (find-file user-init-file))
+  (find-file "~/.config/nixpkgs/emacs/init.el"))
 
 (defun my/find-home-manager-config ()
   "Open home manager config file."
@@ -16,6 +18,21 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package magit)
+
+(use-package apheleia
+  :config
+  (apheleia-global-mode)
+  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent)))
+
+(use-package nix-mode)
+
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
+  :hook
+  (nix-mode . eglot-ensure))
 
 (use-package evil
   :init
@@ -33,19 +50,36 @@
   :config
   (evil-collection-init))
 
-(use-package magit)
+(use-package evil-indent-plus
+  :after evil
+  :bind (
+	 :map evil-inner-text-objects-map
+	 ("i" . evil-indent-plus-i-indent)
+	 ("I" . evil-indent-plus-i-indent-up)
+	 ("k" . evil-indent-plus-i-indent-up)
+	 ("j" . evil-indent-plus-i-indent-up-down)
+	 ("J" . evil-indent-plus-i-indent-up-down)
+	 :map evil-outer-text-objects-map
+	 ("i" . evil-indent-plus-a-indent)
+	 ("I" . evil-indent-plus-a-indent-up)
+	 ("J" . evil-indent-plus-a-indent-up-down)))
 
-(use-package apheleia
-  :config
-  (apheleia-global-mode)
-  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent)))
+(setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
-(use-package nix-mode)
+(defun my/setup-evil-leader-key ()
+  ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
+  (define-minor-mode leader-mode
+    "Bind leader-map to SPC prefix in evil modes"
+    :lighter " Leader"
+    :init-value t
+    :global t
+    :keymap (make-sparse-keymap))
 
-(use-package eglot
-  :config
-  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
-  :hook
-  (nix-mode . eglot-ensure))
+  (dolist (state '(normal visual insert))
+    (evil-make-intercept-map
+     (evil-get-auxiliary-keymap leader-mode-map state t t)
+     state))
+  (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
 
-(recentf-mode)
+(with-eval-after-load 'evil
+  (my/setup-evil-leader-key))
