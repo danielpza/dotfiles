@@ -44,6 +44,8 @@ in {
       ];
   };
 
+  home.file.".config/emacs/".source = ./emacs;
+
   programs.git = {
     enable = true;
     userName = userfullname;
