@@ -1,5 +1,7 @@
 (recentf-mode)
 
+(setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
+
 (defun my/find-init-file ()
   "Open user-init-file."
   (interactive)
@@ -64,7 +66,12 @@
 	 ("I" . evil-indent-plus-a-indent-up)
 	 ("J" . evil-indent-plus-a-indent-up-down)))
 
-(setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
+(define-key leader-map (kbd "f") 'find-file)
+(define-key leader-map (kbd "g") 'magit-status)
+(define-key leader-map (kbd "p") project-prefix-map)
+(define-key leader-map (kbd "d") 'my/find-init-file)
+(define-key leader-map (kbd "b") 'switch-to-buffer)
+(define-key leader-map (kbd "SPC") 'execute-extended-command)
 
 (defun my/setup-evil-leader-key ()
   ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden

@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  userfullname = "Daniel Perez";
+  userfullname = "Daniel Perez Alvarez";
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/daniel";
@@ -22,9 +22,16 @@ in {
   ];
 
   home.packages = with pkgs; [
-    nodejs
+    signal-desktop
+    # protonvpn-gui
     firefox
     keepassxc
+    tor-browser-bundle-bin
+    # web dev:
+    nodejs
+    yarn
+    # nix:
+    cachix # nix caching
     nil # nix lsp
     nixfmt # nix formatter
   ];
@@ -54,6 +61,7 @@ in {
 
   # GNOME configuration
   dconf.settings = {
+    "org/gnome/desktop/interface" = { show-battery-percentage = true; };
     "org/gnome/desktop/input-sources" = { xkb-options = [ "caps:escape" ]; };
     "org/gtk/gtk4/settings/file-chooser" = { sort-directories-first = true; };
     "org/gnome/settings-daemon/plugins/color" = {
