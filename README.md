@@ -1,6 +1,6 @@
 # dotfiles
 
-My emacs and nixos home-manager configuration:
+My (WIP) emacs and nixos home-manager configuration:
 
 ## Installation
 
