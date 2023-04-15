@@ -2,6 +2,7 @@
 
 (setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
+;; my functions
 (defun my/find-init-file ()
   "Open user-init-file."
   (interactive)
@@ -12,6 +13,17 @@
   (interactive)
   (find-file "~/.config/nixpkgs/home.nix"))
 
+;; https://stackoverflow.com/a/24809045/6051261
+(defun my/text-scale-increase ()
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+(defun my/text-scale-decrease ()
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+
+;; completion
 (use-package vertico
   :config
   (vertico-mode))
@@ -26,9 +38,9 @@
 (use-package apheleia
   :config
   (apheleia-global-mode)
-  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent)))
-
-(use-package nix-mode)
+  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
+  (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
+  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown)))
 
 (use-package eglot
   :config
@@ -87,6 +99,15 @@
      (evil-get-auxiliary-keymap leader-mode-map state t t)
      state))
   (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
+
+;; languages
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  ;; :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+              ("C-c C-e" . markdown-do)))
+
+(use-package nix-mode)
 
 (with-eval-after-load 'evil
   (my/setup-evil-leader-key))

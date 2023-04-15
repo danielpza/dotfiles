@@ -58,6 +58,7 @@ in {
     # web dev:
     nodejs
     yarn
+    nodePackages.prettier
     # nix:
     cachix # nix caching
     nil # nix lsp
@@ -73,6 +74,7 @@ in {
         evil
         evil-collection
         magit
+        markdown-mode
         nix-mode
         orderless
         vertico
