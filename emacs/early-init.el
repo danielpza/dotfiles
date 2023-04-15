@@ -2,6 +2,6 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
-(load-theme 'modus-vivendi-tinted)
+(load-theme 'modus-operandi)
 
 (customize-set-variable 'ring-bell-function 'ignore)

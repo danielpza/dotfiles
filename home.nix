@@ -5,6 +5,8 @@ let
   useremail = "danielpza@protonmail.com";
   homedir = "/home/daniel";
 in {
+  nixpkgs.config.allowUnfree = true;
+
   # TL;DR: don't touch this line
   home.stateVersion = "22.11";
 
@@ -22,10 +24,35 @@ in {
   ];
 
   home.packages = with pkgs; [
-    signal-desktop
     # protonvpn-gui
+    appimage-run # for AppImage
     firefox
     keepassxc
+    # logseq
+    (appimageTools.wrapType2 rec {
+      # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
+      pname = "logseq";
+      version = "0.9.2";
+
+      src = fetchurl {
+        url =
+          "https://github.com/logseq/logseq/releases/download/0.9.2/Logseq-linux-x64-${version}.AppImage";
+        sha256 =
+          "9d7373507657876346720fce5d12a16a0fc158b07f60e02408f21388188c2081";
+        name = "${pname}-${version}.AppImage";
+      };
+
+      extraInstallCommands =
+        let contents = appimageTools.extract { inherit pname version src; };
+        in ''
+          mkdir -p $out/bin $out/share/${pname} $out/share/applications
+          cp -a ${contents}/{locales,resources} $out/share/${pname}
+          cp -a ${contents}/Logseq.desktop $out/share/applications/${pname}.desktop
+        '';
+    })
+    signal-desktop
+    spotify
+    syncthing
     tor-browser-bundle-bin
     # web dev:
     nodejs
@@ -38,7 +65,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsGit;
+    package = pkgs.emacsUnstable;
     extraPackages = epkgs:
       with epkgs; [
         apheleia

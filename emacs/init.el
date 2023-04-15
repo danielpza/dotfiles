@@ -90,3 +90,5 @@
 
 (with-eval-after-load 'evil
   (my/setup-evil-leader-key))
+
+(require 'treesit)
