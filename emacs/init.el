@@ -13,12 +13,14 @@
   (interactive)
   (find-file "~/.config/nixpkgs/home.nix"))
 
-;; https://stackoverflow.com/a/24809045/6051261
 (defun my/text-scale-increase ()
+  "Increase font size."
   (interactive)
   (let ((old-face-attribute (face-attribute 'default :height)))
     (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+
 (defun my/text-scale-decrease ()
+  "Decrease font size."
   (interactive)
   (let ((old-face-attribute (face-attribute 'default :height)))
     (set-face-attribute 'default nil :height (- old-face-attribute 10))))
@@ -46,7 +48,9 @@
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   :hook
-  (nix-mode . eglot-ensure))
+  ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
+
+(use-package treesit)
 
 (use-package evil
   :init
@@ -57,6 +61,24 @@
   (evil-want-Y-yank-to-eol t)
   (evil-undo-system 'undo-redo)
   :config
+  (defun my/setup-evil-leader-key ()
+    ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
+    (define-minor-mode leader-mode
+      "Bind leader-map to SPC prefix in evil modes"
+      :lighter " Leader"
+      :init-value t
+      :global t
+      :keymap (make-sparse-keymap))
+
+    (dolist (state '(normal visual insert))
+      (evil-make-intercept-map
+       (evil-get-auxiliary-keymap leader-mode-map state t t)
+       state))
+    (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
+
+  ;; (add-hook 'after-init-hook 'my/setup-evil-leader-key)
+  (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
+
   (evil-mode))
 
 (use-package evil-collection
@@ -78,6 +100,12 @@
 	 ("I" . evil-indent-plus-a-indent-up)
 	 ("J" . evil-indent-plus-a-indent-up-down)))
 
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
+(define-key (current-global-map) (kbd "<f6>") 'load-theme)
+(define-key (current-global-map) (kbd "C--") 'my/text-scale-decrease)
+(define-key (current-global-map) (kbd "C-=") 'my/text-scale-increase)
+
 (define-key leader-map (kbd "f") 'find-file)
 (define-key leader-map (kbd "g") 'magit-status)
 (define-key leader-map (kbd "p") project-prefix-map)
@@ -85,31 +113,10 @@
 (define-key leader-map (kbd "b") 'switch-to-buffer)
 (define-key leader-map (kbd "SPC") 'execute-extended-command)
 
-(defun my/setup-evil-leader-key ()
-  ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
-  (define-minor-mode leader-mode
-    "Bind leader-map to SPC prefix in evil modes"
-    :lighter " Leader"
-    :init-value t
-    :global t
-    :keymap (make-sparse-keymap))
-
-  (dolist (state '(normal visual insert))
-    (evil-make-intercept-map
-     (evil-get-auxiliary-keymap leader-mode-map state t t)
-     state))
-  (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
-
 ;; languages
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
-  ;; :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
               ("C-c C-e" . markdown-do)))
 
 (use-package nix-mode)
-
-(with-eval-after-load 'evil
-  (my/setup-evil-leader-key))
-
-(require 'treesit)

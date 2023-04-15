@@ -32,9 +32,8 @@ in {
     syncthing
     tldr
     tor-browser-bundle-bin
-    # logseq
-    (appimageTools.wrapType2 rec {
-      # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
+    ispell # for emacs
+    (appimageTools.wrapType2 rec { # logseq
       pname = "logseq";
       version = "0.9.2";
       name = "Logseq";
@@ -47,6 +46,7 @@ in {
         name = "${pname}-${version}.AppImage";
       };
 
+      # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
       extraInstallCommands =
         let contents = appimageTools.extract { inherit pname version src; };
         in ''
