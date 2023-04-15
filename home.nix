@@ -24,15 +24,20 @@ in {
   ];
 
   home.packages = with pkgs; [
-    # protonvpn-gui
     appimage-run # for AppImage
     firefox
     keepassxc
+    signal-desktop
+    spotify
+    syncthing
+    tldr
+    tor-browser-bundle-bin
     # logseq
     (appimageTools.wrapType2 rec {
       # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
       pname = "logseq";
       version = "0.9.2";
+      name = "Logseq";
 
       src = fetchurl {
         url =
@@ -50,10 +55,6 @@ in {
           cp -a ${contents}/Logseq.desktop $out/share/applications/${pname}.desktop
         '';
     })
-    signal-desktop
-    spotify
-    syncthing
-    tor-browser-bundle-bin
     # web dev:
     nodejs
     yarn
