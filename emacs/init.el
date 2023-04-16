@@ -50,7 +50,15 @@
   :hook
   ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
 
-(use-package treesit)
+(use-package treesit
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+  (add-to-list 'auto-mode-alist '(".*rc\\'" . json-ts-mode))
+  )
 
 (use-package evil
   :init
@@ -76,6 +84,7 @@
        state))
     (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
 
+  ;; https://emacs.stackexchange.com/questions/14551/whats-the-difference-between-after-init-hook-and-emacs-startup-hook
   ;; (add-hook 'after-init-hook 'my/setup-evil-leader-key)
   (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
 
