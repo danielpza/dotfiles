@@ -6,12 +6,12 @@
 (defun my/find-init-file ()
   "Open user-init-file."
   (interactive)
-  (find-file "~/.config/nixpkgs/emacs/init.el"))
+  (find-file "~/.config/home-manager/emacs/init.el"))
 
 (defun my/find-home-manager-config ()
   "Open home manager config file."
   (interactive)
-  (find-file "~/.config/nixpkgs/home.nix"))
+  (find-file "~/.config/home-manager/home.nix"))
 
 (defun my/text-scale-increase ()
   "Increase font size."
