@@ -1,5 +1,3 @@
-(recentf-mode)
-
 (setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
 ;; my functions
@@ -25,6 +23,39 @@
   (let ((old-face-attribute (face-attribute 'default :height)))
     (set-face-attribute 'default nil :height (- old-face-attribute 10))))
 
+;; https://reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer/
+(defun my/switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer nil))
+
+(use-package hideshow
+  :hook ((prog-mode . hs-minor-mode)))
+
+;; core
+(use-package emacs
+  :bind
+  ("<f6>" . load-theme)
+  ("C--" . my/text-scale-decrease)
+  ("C-=" . my/text-scale-increase)
+  (:map leader-map
+	("f f" . find-file)
+	("f s" . save-buffer)
+	("f r" . recentf)
+
+	("d d" . my/find-init-file)
+	("d n" . my/find-home-manager-config)
+
+	("b b" . switch-to-buffer)
+	("b d" . kill-current-buffer)
+	("b r" . revert-buffer-quick)
+
+	("TAB" . my/switch-to-last-buffer)
+	("SPC" . execute-extended-command))
+  :config
+  (recentf-mode)
+  (global-display-line-numbers-mode)
+  (keymap-set leader-map "p" project-prefix-map))
+
 ;; completion
 (use-package vertico
   :config
@@ -35,7 +66,10 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package magit)
+(use-package magit
+  :bind
+  (:map leader-map
+	("g g" . magit-status)))
 
 (use-package apheleia
   :config
@@ -52,13 +86,15 @@
 
 (use-package treesit
   :config
+  ;; js
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
   (add-to-list 'auto-mode-alist '(".*rc\\'" . json-ts-mode))
-  )
+  ;; python
+  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
 
 (use-package evil
   :init
@@ -97,30 +133,17 @@
 
 (use-package evil-indent-plus
   :after evil
-  :bind (
-	 :map evil-inner-text-objects-map
-	 ("i" . evil-indent-plus-i-indent)
-	 ("I" . evil-indent-plus-i-indent-up)
-	 ("k" . evil-indent-plus-i-indent-up)
-	 ("j" . evil-indent-plus-i-indent-up-down)
-	 ("J" . evil-indent-plus-i-indent-up-down)
-	 :map evil-outer-text-objects-map
-	 ("i" . evil-indent-plus-a-indent)
-	 ("I" . evil-indent-plus-a-indent-up)
-	 ("J" . evil-indent-plus-a-indent-up-down)))
-
-(add-hook 'prog-mode-hook 'hs-minor-mode)
-
-(define-key (current-global-map) (kbd "<f6>") 'load-theme)
-(define-key (current-global-map) (kbd "C--") 'my/text-scale-decrease)
-(define-key (current-global-map) (kbd "C-=") 'my/text-scale-increase)
-
-(define-key leader-map (kbd "f") 'find-file)
-(define-key leader-map (kbd "g") 'magit-status)
-(define-key leader-map (kbd "p") project-prefix-map)
-(define-key leader-map (kbd "d") 'my/find-init-file)
-(define-key leader-map (kbd "b") 'switch-to-buffer)
-(define-key leader-map (kbd "SPC") 'execute-extended-command)
+  :bind
+  (:map evil-inner-text-objects-map
+	("i" . evil-indent-plus-i-indent)
+	("I" . evil-indent-plus-i-indent-up)
+	("k" . evil-indent-plus-i-indent-up)
+	("j" . evil-indent-plus-i-indent-up-down)
+	("J" . evil-indent-plus-i-indent-up-down))
+  (:map evil-outer-text-objects-map
+	("i" . evil-indent-plus-a-indent)
+	("I" . evil-indent-plus-a-indent-up)
+	("J" . evil-indent-plus-a-indent-up-down)))
 
 ;; languages
 (use-package markdown-mode
