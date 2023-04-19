@@ -91,7 +91,7 @@ in {
   };
 
   home.file = {
-    ".config/emacs-nix/" = {
+    ".config/emacs/" = {
       source = ./emacs;
       recursive = true;
     };
