@@ -196,6 +196,6 @@
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
   :bind (:map markdown-mode-map
-              ("C-c C-e" . markdown-do)))
+	      ("C-c C-e" . markdown-do)))
 
 (use-package nix-mode)
