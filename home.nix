@@ -82,7 +82,12 @@ in {
       ];
   };
 
-  home.file.".config/emacs/".source = ./emacs;
+  home.file = {
+    ".config/emacs-nix/" = {
+      source = ./emacs;
+      recursive = true;
+    };
+  };
 
   programs.git = {
     enable = true;
