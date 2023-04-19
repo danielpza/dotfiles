@@ -110,6 +110,7 @@
 (use-package magit
   :bind
   (:map leader-map
+	("g b" . magit-blame)
 	("g g" . magit-status)))
 
 (use-package diff-hl
