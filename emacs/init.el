@@ -199,6 +199,9 @@
   (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
   (add-to-list 'auto-mode-alist '(".*rc\\'" . json-ts-mode))
+  ;; bash/shell
+  (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
+  (add-to-list 'interpreter-mode-alist '("sh" . bash-ts-mode))
   ;; python
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
 
@@ -208,6 +211,8 @@
   (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
   (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
+  (add-to-list 'apheleia-mode-alist '(sh-mode . shfmt))
+  (add-to-list 'apheleia-mode-alist '(bash-ts-mode . shfmt))
 
   ;; more formatters
   (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
