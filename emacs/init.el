@@ -153,6 +153,7 @@
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
   (add-to-list 'auto-mode-alist '(".*rc\\'" . json-ts-mode))
   ;; python
@@ -192,6 +193,17 @@
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   :hook
   ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook ((;; js modes
+	  js-ts-mode tsx-ts-mode typescript-ts-mode
+	  ;; config files modes
+	  json-ts-mode yaml-ts-mode
+	  ;; css modes
+	  scss-mode css-ts-mode
+	  ;; others
+	  lua-mode python-ts-mode) . lsp-deferred))
 
 (use-package flymake
   :bind

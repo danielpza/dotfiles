@@ -23,3 +23,7 @@
 
 ;; visual
 (load-theme 'tango-dark)
+
+(use-package doom-modeline
+  :config
+  (doom-modeline-mode))

@@ -72,9 +72,11 @@ in {
       with epkgs; [
         apheleia
         corfu
+        doom-modeline
         editorconfig
         evil
         evil-collection
+        lsp-mode
         magit
         markdown-mode
         nix-mode
