@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
 ;; my functions
@@ -61,6 +62,8 @@
   :config
   (recentf-mode)
   (global-display-line-numbers-mode)
+  (global-goto-address-mode)
+  (electric-pair-mode)
   (keymap-set leader-map "p" project-prefix-map))
 
 ;; completion
