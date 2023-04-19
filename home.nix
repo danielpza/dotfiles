@@ -71,6 +71,7 @@ in {
     extraPackages = epkgs:
       with epkgs; [
         apheleia
+        corfu
         evil
         evil-collection
         magit
