@@ -63,6 +63,7 @@
   (recentf-mode)
   (global-display-line-numbers-mode)
   (global-goto-address-mode)
+  (global-visual-line-mode)
   (electric-pair-mode)
   (keymap-set leader-map "p" project-prefix-map))
 
@@ -91,8 +92,10 @@
 ;; evil
 (use-package evil
   :init
+  ;; these variables need to be set before loading evil
   (setq evil-want-integration t) ;; required by evil-collection
   (setq evil-want-keybinding nil) ;; required by evil-collection
+  (setq evil-respect-visual-line-mode t)
   :custom
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
