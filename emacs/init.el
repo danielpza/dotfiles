@@ -83,6 +83,15 @@
   :config
   (global-corfu-mode))
 
+(use-package consult
+  :bind
+  ([remap project-find-regexp] . consult-ripgrep)
+  ([remap isearch-forward] . consult-line)
+  ([remap switch-to-buffer] . consult-buffer)
+  ([remap load-theme]. consult-theme)
+  ([remap imenu] . consult-imenu)
+  ([remap recentf-open-files] . consult-recent-file))
+
 ;; git
 (use-package magit
   :bind

@@ -71,6 +71,7 @@ in {
     extraPackages = epkgs:
       with epkgs; [
         apheleia
+        consult
         corfu
         diff-hl
         doom-modeline
