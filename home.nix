@@ -86,6 +86,7 @@ in {
         nix-mode
         orderless
         vertico
+        which-key
       ];
   };
 

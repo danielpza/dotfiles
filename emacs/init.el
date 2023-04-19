@@ -240,6 +240,10 @@
   :config
   (keymap-set leader-map "l" lsp-command-map))
 
+(use-package which-key
+  :config
+  (which-key-mode))
+
 (use-package flymake
   :bind
   (:map leader-map
