@@ -165,25 +165,29 @@
   (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
 
+  ;; more formatters
+  (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
+	'(npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify"))
+
+  (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
+    "Change formatter of package.json files to align with prettier default output."
+    ;; https://github.com/radian-software/apheleia/pull/183
+    (defun my/set-package-json-apheleia-formatter ()
+      "Set the apheleia formatter to json-stringnify for package.json file."
+      (when (equal (file-name-nondirectory (buffer-file-name)) "package.json")
+	(setq-local apheleia-formatter 'prettier-json-stringify)))
+    (add-hook 'json-ts-mode-hook 'my/set-package-json-apheleia-formatter))
+
+  (my/setup-fix-for-apheleia-prettier-package-json-files)
   (apheleia-global-mode))
 
-(define-minor-mode apheleia-sort-package-json-minor-mode
-  "Run sort-package-json on package.json files with apheleia."
-  t
-  :global t
-  :lighter " SortPkgJSON"
-  ;; adjust formatter for package.json files
-  (setf (alist-get 'sort-package-json apheleia-formatters)
-	'("sort-package-json" "--stdin"))
-
-  (defun my/set-package-json-formatter ()
-    (when (equal (file-name-nondirectory (buffer-file-name)) "package.json")
-      (setq-local apheleia-formatter 'sort-package-json)))
-  (if apheleia-sort-package-json-minor-mode
-      (add-hook 'json-ts-mode-hook 'my/set-package-json-formatter)
-    (remove-hook 'json-ts-mode-hook 'my/set-package-json-formatter)))
+(use-package apheleia-sort-package-json
+  :load-path "local-packages"
+  :config
+  (apheleia-sort-package-json-minor-mode))
 
 (use-package eglot
+  :disabled
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   :hook
