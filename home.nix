@@ -72,6 +72,7 @@ in {
       with epkgs; [
         apheleia
         corfu
+        diff-hl
         doom-modeline
         editorconfig
         evil

@@ -89,6 +89,18 @@
   (:map leader-map
 	("g g" . magit-status)))
 
+(use-package diff-hl
+  :demand
+  :bind
+  (:map leader-map
+	("g [" . diff-hl-previous-hunk)
+	("g ]" . diff-hl-next-hunk))
+  :config
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (global-diff-hl-mode 1)
+  (diff-hl-flydiff-mode 1))
+
 ;; evil
 (use-package evil
   :init
