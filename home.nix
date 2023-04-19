@@ -70,6 +70,7 @@ in {
     package = pkgs.emacsUnstable;
     extraPackages = epkgs:
       with epkgs; [
+        all-the-icons-completion
         apheleia
         consult
         corfu
@@ -78,6 +79,7 @@ in {
         editorconfig
         evil
         evil-collection
+        kind-icon
         lsp-mode
         magit
         markdown-mode

@@ -83,6 +83,17 @@
   :config
   (global-corfu-mode))
 
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package all-the-icons-completion
+  :config
+  (all-the-icons-completion-mode))
+
 (use-package consult
   :bind
   ([remap project-find-regexp] . consult-ripgrep)
@@ -90,7 +101,7 @@
   ([remap switch-to-buffer] . consult-buffer)
   ([remap load-theme]. consult-theme)
   ([remap imenu] . consult-imenu)
-  ([remap recentf-open-files] . consult-recent-file))
+  ([remap recentf] . consult-recent-file))
 
 ;; git
 (use-package magit
