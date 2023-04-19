@@ -101,7 +101,10 @@
   ([remap switch-to-buffer] . consult-buffer)
   ([remap load-theme]. consult-theme)
   ([remap imenu] . consult-imenu)
-  ([remap recentf] . consult-recent-file))
+  ([remap recentf] . consult-recent-file)
+  :config
+  (setq xref-show-xrefs-function #'consult-xref
+	xref-show-definitions-function #'consult-xref))
 
 ;; git
 (use-package magit
@@ -124,6 +127,7 @@
 
 ;; evil
 (use-package evil
+  :demand
   :init
   ;; these variables need to be set before loading evil
   (setq evil-want-integration t) ;; required by evil-collection
@@ -133,6 +137,9 @@
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
   (evil-undo-system 'undo-redo)
+  :bind
+  ([remap evil-goto-definition] . xref-find-definitions)
+  (:map evil-normal-state-map ("z l" . hs-hide-level))
   :config
   (defun my/setup-evil-leader-key ()
     ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
@@ -152,6 +159,8 @@
   ;; https://emacs.stackexchange.com/questions/14551/whats-the-difference-between-after-init-hook-and-emacs-startup-hook
   ;; (add-hook 'after-init-hook 'my/setup-evil-leader-key)
   (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
+
+  (keymap-set leader-map "w" evil-window-map)
 
   (evil-mode))
 
