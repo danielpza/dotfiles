@@ -82,11 +82,13 @@
   :config
   (global-corfu-mode))
 
+;; git
 (use-package magit
   :bind
   (:map leader-map
 	("g g" . magit-status)))
 
+;; evil
 (use-package evil
   :init
   (setq evil-want-integration t) ;; required by evil-collection
@@ -136,6 +138,7 @@
 	("I" . evil-indent-plus-a-indent-up)
 	("J" . evil-indent-plus-a-indent-up-down)))
 
+;; lang helpers
 (use-package treesit
   :config
   ;; js
