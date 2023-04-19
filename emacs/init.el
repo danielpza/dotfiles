@@ -153,10 +153,28 @@
 
 (use-package apheleia
   :config
-  (apheleia-global-mode)
+  ;; support for more languages
   (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
   (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
-  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown)))
+  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
+
+  (apheleia-global-mode))
+
+(define-minor-mode apheleia-sort-package-json-minor-mode
+  "Run sort-package-json on package.json files with apheleia."
+  t
+  :global t
+  :lighter " SortPkgJSON"
+  ;; adjust formatter for package.json files
+  (setf (alist-get 'sort-package-json apheleia-formatters)
+	'("sort-package-json" "--stdin"))
+
+  (defun my/set-package-json-formatter ()
+    (when (equal (file-name-nondirectory (buffer-file-name)) "package.json")
+      (setq-local apheleia-formatter 'sort-package-json)))
+  (if apheleia-sort-package-json-minor-mode
+      (add-hook 'json-ts-mode-hook 'my/set-package-json-formatter)
+    (remove-hook 'json-ts-mode-hook 'my/set-package-json-formatter)))
 
 (use-package eglot
   :config
