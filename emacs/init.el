@@ -186,6 +186,12 @@
   :hook
   ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
 
+(use-package flymake
+  :bind
+  (:map leader-map
+	("e n" . flymake-goto-next-error)
+	("e p" . flymake-goto-prev-error)))
+
 ;; languages
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
