@@ -72,6 +72,7 @@ in {
       with epkgs; [
         apheleia
         corfu
+        editorconfig
         evil
         evil-collection
         magit

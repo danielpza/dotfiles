@@ -139,6 +139,10 @@
 	("J" . evil-indent-plus-a-indent-up-down)))
 
 ;; lang helpers
+(use-package editorconfig
+  :config
+  (editorconfig-mode))
+
 (use-package treesit
   :config
   ;; js
