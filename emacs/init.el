@@ -236,7 +236,9 @@
 	  ;; css modes
 	  scss-mode css-ts-mode
 	  ;; others
-	  lua-mode python-ts-mode) . lsp-deferred))
+	  lua-mode python-ts-mode) . lsp-deferred)
+  :config
+  (keymap-set leader-map "l" lsp-command-map))
 
 (use-package flymake
   :bind
