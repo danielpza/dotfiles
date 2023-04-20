@@ -206,6 +206,10 @@
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
 
 (use-package apheleia
+  :demand
+  :bind
+  (:map leader-map
+	("c f" . apheleia-format-buffer))
   :config
   ;; support for more languages
   (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
