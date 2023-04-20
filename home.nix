@@ -70,6 +70,7 @@ in {
     package = pkgs.emacsUnstable;
     extraPackages = epkgs:
       with epkgs; [
+        all-the-icons
         all-the-icons-completion
         apheleia
         consult
@@ -86,6 +87,10 @@ in {
         markdown-mode
         nix-mode
         orderless
+        treemacs
+        treemacs-all-the-icons
+        treemacs-evil
+        treemacs-magit
         vertico
         which-key
       ];

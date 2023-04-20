@@ -269,6 +269,28 @@
 	("e n" . flymake-goto-next-error)
 	("e p" . flymake-goto-prev-error)))
 
+;; treemacs
+(use-package treemacs
+  :custom
+  (treemacs-pulse-on-success nil)
+  (treemacs-width-is-initially-locked nil)
+  :bind
+  (:map project-prefix-map
+	("t" . treemacs-display-current-project-exclusively))
+  :config
+  (treemacs-follow-mode))
+
+(use-package treemacs-evil
+  :after (treemacs evil))
+
+(use-package treemacs-all-the-icons
+  :after (treemacs all-the-icons)
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
 ;; languages
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
