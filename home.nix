@@ -79,6 +79,7 @@ in {
         editorconfig
         evil
         evil-collection
+        evil-indent-plus
         kind-icon
         lsp-mode
         magit
