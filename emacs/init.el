@@ -102,6 +102,8 @@
   ([remap load-theme]. consult-theme)
   ([remap imenu] . consult-imenu)
   ([remap recentf] . consult-recent-file)
+  (:map leader-map
+	("e c" . consult-flymake))
   :config
   (setq xref-show-xrefs-function #'consult-xref
 	xref-show-definitions-function #'consult-xref))
@@ -111,7 +113,8 @@
   :bind
   (:map leader-map
 	("g b" . magit-blame)
-	("g g" . magit-status)))
+	("g g" . magit-status)
+	("g l b" . magit-log-buffer-file)))
 
 (use-package diff-hl
   :demand
