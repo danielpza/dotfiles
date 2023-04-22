@@ -195,16 +195,20 @@
 (use-package treesit
   :config
   ;; js
+  (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.Dockerfile\\'" . dockerfile-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
-  (add-to-list 'auto-mode-alist '(".*rc\\'" . json-ts-mode))
+  (add-to-list 'auto-mode-alist '(".babelrc\\'" . json-ts-mode))
   ;; bash/shell
   (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
   (add-to-list 'interpreter-mode-alist '("sh" . bash-ts-mode))
+  (add-to-list 'interpreter-mode-alist '("node" . js-ts-mode))
   ;; python
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
 
