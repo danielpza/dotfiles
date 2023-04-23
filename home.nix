@@ -71,6 +71,7 @@ in {
     pkgsUnstable.nodePackages.prettier
     pkgsUnstable.nodePackages.typescript
     pkgsUnstable.nodePackages.typescript-language-server
+    pkgsUnstable.nodePackages.vscode-langservers-extracted
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
