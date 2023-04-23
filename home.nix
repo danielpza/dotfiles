@@ -52,6 +52,7 @@ in {
     firefox
     keepassxc
     signal-desktop
+    slack
     spotify
     # others
     appimage-run # for AppImage
