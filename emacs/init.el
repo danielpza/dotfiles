@@ -61,7 +61,7 @@
   (tab-always-indent 'complete) ;; for corfu completions
   :config
   (recentf-mode)
-  (global-display-line-numbers-mode)
+  ;; (global-display-line-numbers-mode)
   (global-goto-address-mode)
   (global-visual-line-mode)
   (electric-pair-mode)
@@ -161,7 +161,7 @@
     (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
 
   ;; https://emacs.stackexchange.com/questions/14551/whats-the-difference-between-after-init-hook-and-emacs-startup-hook
-  ;; (add-hook 'after-init-hook 'my/setup-evil-leader-key)
+  (add-hook 'after-init-hook 'my/setup-evil-leader-key)
   (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
 
   (keymap-set leader-map "w" evil-window-map)
