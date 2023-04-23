@@ -21,3 +21,8 @@ nix-shell '<home-manager>' -A install
 ```sh
 home-manager switch
 ```
+
+## Reference
+
+- https://nix-community.github.io/home-manager/index.html#sec-install-standalone
+- https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable
