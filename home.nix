@@ -48,15 +48,16 @@ in {
 
   home.packages = with pkgs; [
     appimage-run # for AppImage
+    custom-logseq
+    fd
     firefox
+    ispell # for emacs
     keepassxc
+    ripgrep
     signal-desktop
     spotify
     syncthing
     tldr
-    ispell # for emacs
-    ripgrep
-    custom-logseq
     # web dev:
     nodejs
     yarn
