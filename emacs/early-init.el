@@ -11,7 +11,6 @@
 				  (setq read-process-output-max (* 1024 1024)) ;; 1mb
 				  )))
 
-
 ;; disable ui elements
 (tool-bar-mode 0)
 (menu-bar-mode 0)
