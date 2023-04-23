@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 (setq comp-deferred-compilation t)
-(setq comp-async-report-warnings-errors nil) ; silence compilation warnings
+(setq comp-async-report-warnings-errors nil) ;; silence compilation warnings
+(setq inhibit-startup-screen t) ;; remove startup screen
 
 (let ((prev-gc-threshold gc-cons-threshold))
   ;; increase gc threshold while loading to make loading faster
