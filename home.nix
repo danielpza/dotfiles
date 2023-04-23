@@ -27,6 +27,7 @@ let
           cp -a ${contents}/Logseq.desktop $out/share/applications/${pname}.desktop
         '';
     });
+  pkgsUnstable = import <nixpkgs-unstable> { };
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -63,9 +64,13 @@ in {
     fd
     ripgrep
     tldr
-    # web dev:
+    # web dev
     nodejs
     yarn
+    # node packages
+    pkgsUnstable.nodePackages.prettier
+    pkgsUnstable.nodePackages.typescript
+    pkgsUnstable.nodePackages.typescript-language-server
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
