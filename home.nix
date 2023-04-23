@@ -35,14 +35,14 @@ in {
     ispell # for emacs
     (appimageTools.wrapType2 rec { # logseq
       pname = "logseq";
-      version = "0.9.2";
+      version = "0.9.3";
       name = "Logseq";
 
       src = fetchurl {
         url =
           "https://github.com/logseq/logseq/releases/download/0.9.2/Logseq-linux-x64-${version}.AppImage";
         sha256 =
-          "9d7373507657876346720fce5d12a16a0fc158b07f60e02408f21388188c2081";
+          "8700534ba8630fae923ce3dcb5c4b67acc9b9d5ae0c3bedf169b7ca611addf7e";
         name = "${pname}-${version}.AppImage";
       };
 
