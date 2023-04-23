@@ -53,7 +53,6 @@ in {
     keepassxc
     signal-desktop
     spotify
-    syncthing
     # others
     appimage-run # for AppImage
     ispell # for emacs
