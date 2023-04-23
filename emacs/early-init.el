@@ -21,9 +21,7 @@
 (customize-set-variable 'ring-bell-function 'ignore)
 
 ;; visual
-(use-package monokai-theme
-  :config
-  (load-theme 'monokai t))
+(load-theme 'modus-vivendi t)
 
 (use-package doom-modeline
   :config

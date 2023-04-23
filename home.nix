@@ -86,7 +86,6 @@ in {
         lsp-mode
         magit
         markdown-mode
-        monokai-theme
         nix-mode
         orderless
         treemacs
