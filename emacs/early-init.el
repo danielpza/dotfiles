@@ -22,7 +22,7 @@
 (customize-set-variable 'ring-bell-function 'ignore)
 
 ;; visual
-(load-theme 'wombat)
+(load-theme 'monokai t)
 
 (use-package doom-modeline
   :config
