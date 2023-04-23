@@ -47,17 +47,21 @@ in {
   ];
 
   home.packages = with pkgs; [
-    appimage-run # for AppImage
+    # apps
     custom-logseq
-    fd
     firefox
-    ispell # for emacs
     keepassxc
-    ripgrep
     signal-desktop
     spotify
     syncthing
+    # others
+    appimage-run # for AppImage
+    ispell # for emacs
+    # command line helpers
     tldr
+    fd
+    ripgrep
+    zoxide
     # web dev:
     nodejs
     yarn
