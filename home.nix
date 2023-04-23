@@ -31,7 +31,6 @@ in {
     spotify
     syncthing
     tldr
-    tor-browser-bundle-bin
     ispell # for emacs
     (appimageTools.wrapType2 rec { # logseq
       pname = "logseq";
@@ -58,7 +57,6 @@ in {
     # web dev:
     nodejs
     yarn
-    nodePackages.prettier
     # nix:
     cachix # nix caching
     nil # nix lsp
