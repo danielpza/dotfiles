@@ -39,6 +39,8 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
+  programs.bash.enable = true;
+
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url =
@@ -58,18 +60,21 @@ in {
     appimage-run # for AppImage
     ispell # for emacs
     # command line helpers
-    tldr
     fd
     ripgrep
-    zoxide
+    tldr
     # web dev:
     nodejs
     yarn
     # nix:
-    cachix # nix caching
     nil # nix lsp
     nixfmt # nix formatter
   ];
+
+  programs.zoxide = {
+    enable = true;
+    options = [ "--cmd" "j" ];
+  };
 
   programs.emacs = {
     enable = true;
