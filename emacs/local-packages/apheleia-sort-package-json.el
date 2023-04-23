@@ -6,7 +6,8 @@
 
 (defun apheleia-sort-package-json--is-package-json ()
   "Return t when the current buffer is visiting a package.json file."
-  (equal (file-name-nondirectory (buffer-file-name)) "package.json"))
+  (and (not (equal (buffer-file-name) nil))
+       (equal (file-name-nondirectory (buffer-file-name)) "package.json")))
 
 (defun apheleia-sort-package-json--set-sort-package-json-formatter ()
   (when (apheleia-sort-package-json--is-package-json)
