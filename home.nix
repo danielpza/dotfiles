@@ -4,6 +4,29 @@ let
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/daniel";
+  custom-logseq = with pkgs;
+    (appimageTools.wrapType2 rec { # logseq
+      pname = "logseq";
+      version = "0.9.3";
+      name = "Logseq";
+
+      src = fetchurl {
+        url =
+          "https://github.com/logseq/logseq/releases/download/0.9.2/Logseq-linux-x64-${version}.AppImage";
+        sha256 =
+          "8700534ba8630fae923ce3dcb5c4b67acc9b9d5ae0c3bedf169b7ca611addf7e";
+        name = "${pname}-${version}.AppImage";
+      };
+
+      # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
+      extraInstallCommands =
+        let contents = appimageTools.extract { inherit pname version src; };
+        in ''
+          mkdir -p $out/bin $out/share/${pname} $out/share/applications
+          cp -a ${contents}/{locales,resources} $out/share/${pname}
+          cp -a ${contents}/Logseq.desktop $out/share/applications/${pname}.desktop
+        '';
+    });
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -32,28 +55,8 @@ in {
     syncthing
     tldr
     ispell # for emacs
-    (appimageTools.wrapType2 rec { # logseq
-      pname = "logseq";
-      version = "0.9.3";
-      name = "Logseq";
-
-      src = fetchurl {
-        url =
-          "https://github.com/logseq/logseq/releases/download/0.9.2/Logseq-linux-x64-${version}.AppImage";
-        sha256 =
-          "8700534ba8630fae923ce3dcb5c4b67acc9b9d5ae0c3bedf169b7ca611addf7e";
-        name = "${pname}-${version}.AppImage";
-      };
-
-      # from https://github.com/NixOS/nixpkgs/blob/nixos-22.11/pkgs/applications/misc/logseq/default.nix#L30
-      extraInstallCommands =
-        let contents = appimageTools.extract { inherit pname version src; };
-        in ''
-          mkdir -p $out/bin $out/share/${pname} $out/share/applications
-          cp -a ${contents}/{locales,resources} $out/share/${pname}
-          cp -a ${contents}/Logseq.desktop $out/share/applications/${pname}.desktop
-        '';
-    })
+    ripgrep
+    custom-logseq
     # web dev:
     nodejs
     yarn
