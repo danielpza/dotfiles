@@ -16,7 +16,12 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      . "${./xdg-base-directory-fix.sh}"
+    '';
+  };
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
