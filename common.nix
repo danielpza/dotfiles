@@ -102,8 +102,10 @@ in {
 
   home.sessionVariables = {
     EDITOR = "emacs --alternate-editor=";
-    # make other programs play nice with xdg
-    BUN_INSTALL = "${config.xdg.dataHome}/.bun";
+
+    # make other programs play nice with xdg https://wiki.archlinux.org/title/XDG_Base_Directory
+    BUN_INSTALL =
+      "${config.xdg.dataHome}/.bun"; # https://github.com/oven-sh/bun/issues/696
     GOPATH = "${config.xdg.dataHome}/go";
     PYENV_ROOT = "${config.xdg.dataHome}/pyenv";
     VOLTA_HOME = "${config.xdg.dataHome}/volta";
