@@ -29,10 +29,8 @@ in {
     # apps
     firefox
     keepassxc
+    libreoffice
     logseq
-    signal-desktop
-    slack
-    spotify
     # others
     appimage-run # for AppImage
     ispell # for emacs
@@ -41,8 +39,8 @@ in {
     ripgrep
     tldr
     # web dev
-    nodejs
-    yarn
+    # nodejs
+    # yarn
     # node packages
     nodePackages.prettier
     nodePackages.typescript

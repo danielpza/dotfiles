@@ -20,6 +20,13 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 ```
 
+Then choose what configuration to use:
+
+```sh
+cd .config/home-manager
+ln -sfr $PWD/<c1|c2>.nix home.nix
+```
+
 - Then run
 
 ```sh
