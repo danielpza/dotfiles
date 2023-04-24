@@ -16,12 +16,7 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
-  programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-      . "${./xdg-base-directory-fix.sh}"
-    '';
-  };
+  programs.bash.enable = true;
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
@@ -105,7 +100,40 @@ in {
     userEmail = useremail;
   };
 
-  home.sessionVariables = { EDITOR = "emacs --alternate-editor="; };
+  home.sessionVariables = {
+    EDITOR = "emacs --alternate-editor=";
+    # make other programs play nice with xdg
+    BUN_INSTALL = "${config.xdg.dataHome}/.bun";
+    GOPATH = "${config.xdg.dataHome}/go";
+    PYENV_ROOT = "${config.xdg.dataHome}/pyenv";
+    VOLTA_HOME = "${config.xdg.dataHome}/volta";
+    SSB_HOME = "${config.xdg.dataHome}/zoom"; # zoom app
+
+    # pnpm
+    PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+
+    # npm https://github.com/npm/rfcs/issues/389#issuecomment-871656832
+    npm_config_userconfig = "${config.xdg.configHome}/npm/config";
+    npm_config_cache = "${config.xdg.cacheHome}/npm";
+    npm_config_prefix = "${config.xdg.dataHome}/npm";
+    NODE_REPL_HISTORY = "${config.xdg.dataHome}/node_repl_history";
+
+    # gtk 1&2
+    GTK_RC_FILES = "${config.xdg.configHome}/gtk-1.0/gtkrc";
+    GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+
+    # kde
+    KDEHOME = "${config.xdg.configHome}/kde";
+  };
+
+  home.sessionPath = [
+    "$BUN_INSTALL/bin"
+    "$GOPATH/bin"
+    "$PYENV_ROOT/bin"
+    "$VOLTA_HOME/bin"
+    "$PNPM_HOME/bin"
+    "$npm_config_prefix/bin"
+  ];
 
   # home.keyboard.options = [ "caps:escape" ];
 
