@@ -33,12 +33,6 @@ ln -sfr $PWD/<c1|c2>.nix home.nix
 home-manager switch
 ```
 
-- If installing on non-nixos and not managing your shell configuration through home-manager add these lines to your .bashrc file:
-
-```sh
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-```
-
 ## Reference
 
 - https://nix-community.github.io/home-manager/index.html#sec-install-standalone
