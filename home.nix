@@ -3,7 +3,7 @@ let
   userfullname = "Daniel Perez Alvarez";
   username = "daniel";
   useremail = "danielpza@protonmail.com";
-  homedir = "/home/daniel";
+  homedir = "/home/${username}";
   pkgsUnstable = import <nixpkgs-unstable> { };
 in {
   nixpkgs.config.allowUnfree = true;
@@ -102,6 +102,10 @@ in {
     userName = userfullname;
     userEmail = useremail;
   };
+
+  home.sessionVariables = { EDITOR = "emacs --alternate-editor="; };
+
+  # home.keyboard.options = [ "caps:escape" ];
 
   # GNOME configuration
   dconf.settings = {
