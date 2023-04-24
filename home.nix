@@ -4,7 +4,6 @@ let
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
-  pkgsUnstable = import <nixpkgs-unstable> { };
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -30,7 +29,7 @@ in {
     # apps
     firefox
     keepassxc
-    pkgsUnstable.logseq
+    logseq
     signal-desktop
     slack
     spotify
@@ -45,10 +44,10 @@ in {
     nodejs
     yarn
     # node packages
-    pkgsUnstable.nodePackages.prettier
-    pkgsUnstable.nodePackages.typescript
-    pkgsUnstable.nodePackages.typescript-language-server
-    pkgsUnstable.nodePackages.vscode-langservers-extracted
+    nodePackages.prettier
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
