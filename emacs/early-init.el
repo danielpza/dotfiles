@@ -22,7 +22,9 @@
 (customize-set-variable 'ring-bell-function 'ignore)
 
 ;; visual
-(load-theme 'modus-vivendi t)
+(use-package doom-themes
+  :config
+  (load-theme 'doom-dark+ t))
 
 (use-package doom-modeline
   :config

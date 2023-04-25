@@ -68,6 +68,7 @@ in {
         corfu
         diff-hl
         doom-modeline
+        doom-themes
         editorconfig
         evil
         evil-collection
