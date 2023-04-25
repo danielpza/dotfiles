@@ -221,16 +221,19 @@
   (:map leader-map
 	("c f" . apheleia-format-buffer))
   :config
+  ;; more formatters
+  (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
+	'(npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify"))
+
+  (setf (alist-get 'dockfmt apheleia-formatters) '("dockfmt" "fmt"))
+
   ;; support for more languages
   (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
   (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(sh-mode . shfmt))
   (add-to-list 'apheleia-mode-alist '(bash-ts-mode . shfmt))
-
-  ;; more formatters
-  (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
-	'(npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify"))
+  ;; (add-to-list 'apheleia-mode-alist '(dockerfile-ts-mode . dockfmt))
 
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
     "Change formatter of package.json files to align with prettier default output."

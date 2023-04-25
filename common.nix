@@ -31,6 +31,7 @@ in {
     keepassxc
     libreoffice
     logseq
+    dockfmt
     # others
     appimage-run # for AppImage
     ispell # for emacs
