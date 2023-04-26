@@ -47,6 +47,7 @@ in {
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
+    nodePackages.yaml-language-server
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
