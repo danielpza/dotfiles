@@ -67,6 +67,7 @@ in {
         all-the-icons-completion
         apheleia
         consult
+        consult-flycheck
         corfu
         diff-hl
         doom-modeline
@@ -75,6 +76,8 @@ in {
         evil
         evil-collection
         evil-indent-plus
+        flycheck
+        yasnippet
         kind-icon
         lsp-mode
         magit

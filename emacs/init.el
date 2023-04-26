@@ -10,7 +10,7 @@
 (defun my/find-home-manager-config ()
   "Open home manager config file."
   (interactive)
-  (find-file "~/.config/home-manager/home.nix"))
+  (find-file "~/.config/home-manager/common.nix"))
 
 (defun my/text-scale-increase ()
   "Increase font size."
@@ -67,6 +67,22 @@
   (electric-pair-mode)
   (keymap-set leader-map "p" project-prefix-map))
 
+;; diagnostic
+(use-package flymake
+  :disabled
+  :demand
+  :bind
+  (:map leader-map
+	("e n" . flymake-goto-next-error)
+	("e p" . flymake-goto-prev-error)))
+
+(use-package flycheck
+  :demand
+  :bind
+  (:map leader-map
+	("e n" . flycheck-next-error)
+	("e p" . flycheck-previous-error)))
+
 ;; completion
 (use-package vertico
   :config
@@ -95,6 +111,7 @@
   (all-the-icons-completion-mode))
 
 (use-package consult
+  :demand
   :bind
   ([remap project-find-regexp] . consult-ripgrep)
   ([remap isearch-forward] . consult-line)
@@ -103,7 +120,7 @@
   ([remap imenu] . consult-imenu)
   ([remap recentf] . consult-recent-file)
   (:map leader-map
-	("e c" . consult-flymake))
+	("e c" . consult-flycheck))
   :config
   (setq xref-show-xrefs-function #'consult-xref
 	xref-show-definitions-function #'consult-xref))
@@ -248,6 +265,7 @@
   (apheleia-global-mode))
 
 (use-package apheleia-sort-package-json
+  :disabled
   :load-path "local-packages"
   :config
   (apheleia-sort-package-json-minor-mode))
@@ -259,7 +277,13 @@
   :hook
   ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
 
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
 (use-package lsp-mode
+  :demand
+  :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
   :commands (lsp lsp-deferred)
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
@@ -275,12 +299,6 @@
 (use-package which-key
   :config
   (which-key-mode))
-
-(use-package flymake
-  :bind
-  (:map leader-map
-	("e n" . flymake-goto-next-error)
-	("e p" . flymake-goto-prev-error)))
 
 ;; treemacs
 (use-package treemacs
