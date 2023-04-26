@@ -61,9 +61,9 @@
   (tab-always-indent 'complete) ;; for corfu completions
   :config
   (recentf-mode)
-  ;; (global-display-line-numbers-mode)
+  (global-display-line-numbers-mode)
   (global-goto-address-mode)
-  (global-visual-line-mode)
+  ;; (global-visual-line-mode)
   (electric-pair-mode)
   (keymap-set leader-map "p" project-prefix-map))
 
