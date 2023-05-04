@@ -246,12 +246,15 @@
 
   (setf (alist-get 'dockfmt apheleia-formatters) '("dockfmt" "fmt"))
 
+  (setf (alist-get 'protobuf apheleia-formatters) '(npx "buf" "format" "--path" filepath)) ;; for .proto files https://github.com/bufbuild/buf
+
   ;; support for more languages
   (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
   (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
   (add-to-list 'apheleia-mode-alist '(sh-mode . shfmt))
   (add-to-list 'apheleia-mode-alist '(bash-ts-mode . shfmt))
+  (add-to-list 'apheleia-mode-alist '(protobuf-mode . protobuf))
   ;; (add-to-list 'apheleia-mode-alist '(dockerfile-ts-mode . dockfmt))
 
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
@@ -338,3 +341,6 @@
 	      ("C-c C-e" . markdown-do)))
 
 (use-package nix-mode)
+
+(use-package protobuf-mode
+  :mode ("\\.proto\\'" . protobuf-mode))

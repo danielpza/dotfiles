@@ -84,6 +84,7 @@ in {
         markdown-mode
         nix-mode
         orderless
+        protobuf-mode
         treemacs
         treemacs-all-the-icons
         treemacs-evil
