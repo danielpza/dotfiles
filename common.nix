@@ -68,6 +68,7 @@ in {
         apheleia
         consult
         consult-flycheck
+        consult-lsp
         corfu
         diff-hl
         doom-modeline
@@ -77,7 +78,6 @@ in {
         evil-collection
         evil-indent-plus
         flycheck
-        yasnippet
         kind-icon
         lsp-mode
         magit
@@ -90,6 +90,7 @@ in {
         treemacs-magit
         vertico
         which-key
+        yasnippet
       ];
   };
 
@@ -142,6 +143,10 @@ in {
     "$PNPM_HOME/bin"
     "$npm_config_prefix/bin"
   ];
+
+  home.shellAliases = {
+    "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
+  };
 
   # home.keyboard.options = [ "caps:escape" ];
 

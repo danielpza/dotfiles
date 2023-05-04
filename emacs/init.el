@@ -39,6 +39,7 @@
   ("C--" . my/text-scale-decrease)
   ("C-=" . my/text-scale-increase)
   ("C-SPC" . completion-at-point)
+  ("M-Y" . yank-from-kill-ring)
   (:map leader-map
 	("f f" . find-file)
 	("f s" . save-buffer)
@@ -131,6 +132,7 @@
   (:map leader-map
 	("g b" . magit-blame)
 	("g g" . magit-status)
+	("g s" . magit-stage-file)
 	("g l b" . magit-log-buffer-file)))
 
 (use-package diff-hl
@@ -295,6 +297,13 @@
 	  lua-mode python-ts-mode) . lsp-deferred)
   :config
   (keymap-set leader-map "l" lsp-command-map))
+
+(use-package consult-lsp
+  :after (lsp-mode consult)
+  :bind
+  (:map lsp-command-map
+	([remap xref-find-apropos] . consult-lsp-symbols)
+	("f" . consult-lsp-diagnostics)))
 
 (use-package which-key
   :config
