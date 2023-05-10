@@ -78,6 +78,7 @@ in {
         evil-collection
         evil-indent-plus
         flycheck
+        git-link
         kind-icon
         lsp-mode
         magit

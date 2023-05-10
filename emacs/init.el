@@ -135,6 +135,13 @@
 	("g s" . magit-stage-file)
 	("g l b" . magit-log-buffer-file)))
 
+(use-package git-link
+  :bind
+  (:map leader-map
+	("g l l" . git-link))
+  :custom
+  (git-link-use-commit t))
+
 (use-package diff-hl
   :demand
   :bind
