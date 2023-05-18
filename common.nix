@@ -159,6 +159,10 @@ in {
 
   home.shellAliases = {
     "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
+    "ls" = "ls --color=auto -h";
+    "ll" = "ls -la";
+    "l" = "ls -la -go";
+    "la" = "ls -a";
   };
 
   # home.keyboard.options = [ "caps:escape" ];
