@@ -1,0 +1,30 @@
+theme = "onedark"
+
+[editor]
+bufferline = "multiple"
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.file-picker]
+hidden = false
+
+[keys.insert]
+C-s = ":write"
+"C-space" = "completion"
+"tab" = "completion"
+
+[keys.normal]
+C-l = ":buffer-next"
+C-h = ":buffer-previous"
+C-r = ":reload"
+C-R = ":config-reload"
+C-q = ":buffer-close"
+"^" = "goto_first_nonwhitespace"
+"$" = "goto_line_end"
+A-x = "command_mode"
+A-F = ":format"
+C-s = ":write"
+C-x = { C-c = ":quit", C-s = ":write", C-f = ":open" }
+D = "kill_to_line_end"

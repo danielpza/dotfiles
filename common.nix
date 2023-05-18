@@ -35,6 +35,7 @@ in {
     libreoffice
     logseq
     dockfmt
+    helix
     # others
     appimage-run # for AppImage
     ispell # for emacs
@@ -97,6 +98,13 @@ in {
         which-key
         yasnippet
       ];
+  };
+
+  xdg.configFile = {
+    "helix" = {
+      source = ./helix;
+      recursive = true;
+    };
   };
 
   xdg.configFile = {
