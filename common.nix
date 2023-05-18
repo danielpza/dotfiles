@@ -17,6 +17,9 @@ in {
   home.homeDirectory = homedir;
 
   programs.bash.enable = true;
+  programs.bash.bashrcExtra = ''
+    PS1='\[\e[0;2m\]$? \[\e[0;32m\]\w\[\e[0;32m\]\$ \[\e[0m\]'
+  '';
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
