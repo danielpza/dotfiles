@@ -99,8 +99,8 @@ in {
       ];
   };
 
-  home.file = {
-    ".config/emacs/" = {
+  xdg.configFile = {
+    "emacs" = {
       source = ./emacs;
       recursive = true;
     };
