@@ -61,6 +61,7 @@
   (make-backup-files nil) ;; react issues
   (tab-always-indent 'complete) ;; for corfu completions
   :config
+  (fset 'yes-or-no-p 'y-or-n-p)
   (recentf-mode)
   (global-display-line-numbers-mode)
   (global-goto-address-mode)
@@ -81,6 +82,7 @@
   :demand
   :bind
   (:map leader-map
+	("e l" . flycheck-list-errors)
 	("e n" . flycheck-next-error)
 	("e p" . flycheck-previous-error)))
 
@@ -297,6 +299,8 @@
   :demand
   :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
   :commands (lsp lsp-deferred)
+  :custom
+  (lsp-completion-provider :none)
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
 	  ;; config files modes

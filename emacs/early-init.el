@@ -3,14 +3,9 @@
 (setq comp-async-report-warnings-errors nil) ;; silence compilation warnings
 (setq inhibit-startup-screen t) ;; remove startup screen
 
-(let ((prev-gc-threshold gc-cons-threshold))
-  ;; increase gc threshold while loading to make loading faster
-  (setq gc-cons-threshold (* 50 1000 1000))
-  (add-hook 'emacs-startup-hook (lambda ()
-				  ;; (setq gc-cons-threshold (* 2 1000 1000))
-				  (setq gc-cons-threshold prev-gc-threshold)
-				  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-				  )))
+;; performance
+(setq gc-cons-threshold 100000000) ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#adjust-gc-cons-threshold
+(setq read-process-output-max (* 1024 1024)) ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#increase-the-amount-of-data-which-emacs-reads-from-the-process
 
 ;; disable ui elements
 (tool-bar-mode 0)
