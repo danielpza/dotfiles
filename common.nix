@@ -159,10 +159,10 @@ in {
 
   home.shellAliases = {
     "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
-    "ls" = "ls --color=auto -h";
+    # makes ls nicer: https://stackoverflow.com/a/18451819/6051261 and others
+    "ls" = "LC_ALL=C ls --color=auto -h --group-directories-first";
     "ll" = "ls -la";
-    "l" = "ls -la -go";
-    "la" = "ls -a";
+    "l" = "ls -a";
   };
 
   # home.keyboard.options = [ "caps:escape" ];
