@@ -360,7 +360,10 @@
   :mode ("\\.*ignore\\'" . gitignore-mode))
 
 (use-package copilot
+  :demand
   :hook (prog-mode . copilot-mode)
-  :config
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+  :bind
+  (:map copilot-completion-map
+	("M-C" . copilot-next-completion)
+	("<tab>" . copilot-accept-completion)
+	("TAB" . copilot-accept-completion)))
