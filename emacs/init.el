@@ -358,3 +358,9 @@
 
 (use-package git-modes
   :mode ("\\.*ignore\\'" . gitignore-mode))
+
+(use-package copilot
+  :hook (prog-mode . copilot-mode)
+  :config
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))

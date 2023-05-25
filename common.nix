@@ -74,6 +74,10 @@ in {
         consult
         consult-flycheck
         consult-lsp
+        (callPackage ./copilot.el.nix {
+          inherit (pkgs) fetchFromGitHub;
+          inherit (epkgs) trivialBuild s dash editorconfig;
+        })
         corfu
         diff-hl
         doom-modeline
