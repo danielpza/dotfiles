@@ -52,6 +52,7 @@ in {
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted
     nodePackages.yaml-language-server
+    nodePackages.npm-check-updates
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
@@ -86,6 +87,7 @@ in {
         kind-icon
         lsp-mode
         magit
+        git-modes
         markdown-mode
         nix-mode
         orderless
@@ -158,11 +160,13 @@ in {
   ];
 
   home.shellAliases = {
-    "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
+    "pq" = "pretty-quick";
+    # "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
     # makes ls nicer: https://stackoverflow.com/a/18451819/6051261 and others
     "ls" = "LC_ALL=C ls --color=auto -h --group-directories-first";
     "ll" = "ls -la";
     "l" = "ls -a";
+    "ncu" = "ncu -i --format=group";
   };
 
   # home.keyboard.options = [ "caps:escape" ];

@@ -355,3 +355,6 @@
 
 (use-package protobuf-mode
   :mode ("\\.proto\\'" . protobuf-mode))
+
+(use-package git-modes
+  :mode ("\\.*ignore\\'" . gitignore-mode))
