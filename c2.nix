@@ -10,4 +10,6 @@
   ];
 
   targets.genericLinux.enable = true;
+
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1t" ];
 }
