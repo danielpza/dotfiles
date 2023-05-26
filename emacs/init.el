@@ -34,6 +34,7 @@
 
 ;; core
 (use-package emacs
+  :mode (("\\.npmrc\\'" . conf-mode))
   :bind
   ("<f6>" . load-theme)
   ("C--" . my/text-scale-decrease)
@@ -103,6 +104,7 @@
   (global-corfu-mode))
 
 (use-package kind-icon
+  :disabled
   :after corfu
   :custom
   (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
