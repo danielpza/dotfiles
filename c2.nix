@@ -2,11 +2,12 @@
   imports = [ ./common.nix ];
 
   home.packages = with pkgs; [
+    gh
     github-desktop
     slack
     teams-for-linux
-    gh
-    obs-studio
+    vscodium
+    zoom-us
   ];
 
   targets.genericLinux.enable = true;
