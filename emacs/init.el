@@ -75,14 +75,6 @@
   (dired-mode . nerd-icons-dired-mode))
 
 ;; diagnostic
-(use-package flymake
-  :disabled
-  :demand
-  :bind
-  (:map leader-map
-	("e n" . flymake-goto-next-error)
-	("e p" . flymake-goto-prev-error)))
-
 (use-package flycheck
   :demand
   :bind
@@ -106,14 +98,6 @@
   (corfu-auto t) ;; Enable auto completion
   :config
   (global-corfu-mode))
-
-(use-package kind-icon
-  :disabled
-  :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package consult
   :demand
@@ -279,19 +263,6 @@
 
   (my/setup-fix-for-apheleia-prettier-package-json-files)
   (apheleia-global-mode))
-
-(use-package apheleia-sort-package-json
-  :disabled
-  :load-path "local-packages"
-  :config
-  (apheleia-sort-package-json-minor-mode))
-
-(use-package eglot
-  :disabled
-  :config
-  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
-  :hook
-  ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
 
 (use-package yasnippet
   :config
