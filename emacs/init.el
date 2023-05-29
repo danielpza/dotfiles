@@ -111,10 +111,6 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package all-the-icons-completion
-  :config
-  (all-the-icons-completion-mode))
-
 (use-package consult
   :demand
   :bind
@@ -338,11 +334,6 @@
 
 (use-package treemacs-evil
   :after (treemacs evil))
-
-(use-package treemacs-all-the-icons
-  :after (treemacs all-the-icons)
-  :config
-  (treemacs-load-theme "all-the-icons"))
 
 (use-package treemacs-magit
   :after (treemacs magit))

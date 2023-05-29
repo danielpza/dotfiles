@@ -68,8 +68,6 @@ in {
     package = pkgs.emacsUnstable;
     extraPackages = epkgs:
       with epkgs; [
-        all-the-icons
-        all-the-icons-completion
         apheleia
         consult
         consult-flycheck
@@ -97,12 +95,12 @@ in {
         orderless
         protobuf-mode
         treemacs
-        treemacs-all-the-icons
         treemacs-evil
         treemacs-magit
         vertico
         which-key
         yasnippet
+        nerd-icons
       ];
   };
 
