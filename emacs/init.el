@@ -70,6 +70,10 @@
   (electric-pair-mode)
   (keymap-set leader-map "p" project-prefix-map))
 
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
 ;; diagnostic
 (use-package flymake
   :disabled

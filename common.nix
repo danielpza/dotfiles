@@ -67,15 +67,12 @@ in {
     enable = true;
     package = pkgs.emacsUnstable;
     extraPackages = epkgs:
-      with epkgs; [
+      with epkgs;
+      [
         apheleia
         consult
         consult-flycheck
         consult-lsp
-        (callPackage ./copilot.el.nix {
-          inherit (pkgs) fetchFromGitHub;
-          inherit (epkgs) trivialBuild s dash editorconfig;
-        })
         corfu
         diff-hl
         doom-modeline
@@ -86,11 +83,13 @@ in {
         evil-indent-plus
         flycheck
         git-link
+        git-modes
         kind-icon
         lsp-mode
         magit
-        git-modes
         markdown-mode
+        nerd-icons
+        nerd-icons-dired
         nix-mode
         orderless
         protobuf-mode
@@ -100,7 +99,12 @@ in {
         vertico
         which-key
         yasnippet
-        nerd-icons
+      ] ++ [
+        # non elpa/melpa
+        (callPackage ./emacs/copilot.el.nix {
+          inherit (pkgs) fetchFromGitHub;
+          inherit (epkgs) trivialBuild s dash editorconfig;
+        })
       ];
   };
 
