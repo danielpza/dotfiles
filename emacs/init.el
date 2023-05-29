@@ -1,46 +1,54 @@
 ;; -*- lexical-binding: t -*-
 (setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
-;; my functions
-(defun my/find-init-file ()
-  "Open user-init-file."
-  (interactive)
-  (find-file "~/.config/home-manager/emacs/init.el"))
+(setup emacs
+  (defun my/find-init-file ()
+    "Open user-init-file."
+    (interactive)
+    (find-file "~/.config/home-manager/emacs/init.el"))
 
-(defun my/find-home-manager-config ()
-  "Open home manager config file."
-  (interactive)
-  (find-file "~/.config/home-manager/common.nix"))
+  (defun my/find-home-manager-config ()
+    "Open home manager config file."
+    (interactive)
+    (find-file "~/.config/home-manager/common.nix"))
 
-(defun my/text-scale-increase ()
-  "Increase font size."
-  (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+  (defun my/text-scale-increase ()
+    "Increase font size."
+    (interactive)
+    (let ((old-face-attribute (face-attribute 'default :height)))
+      (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
 
-(defun my/text-scale-decrease ()
-  "Decrease font size."
-  (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+  (defun my/text-scale-decrease ()
+    "Decrease font size."
+    (interactive)
+    (let ((old-face-attribute (face-attribute 'default :height)))
+      (set-face-attribute 'default nil :height (- old-face-attribute 10))))
 
-;; https://reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer/
-(defun my/switch-to-last-buffer ()
-  (interactive)
-  (switch-to-buffer nil))
-
-(use-package hideshow
-  :hook ((prog-mode . hs-minor-mode)))
+  ;; https://reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer/
+  (defun my/switch-to-last-buffer ()
+    (interactive)
+    (switch-to-buffer nil)))
 
 ;; core
+(setup hideshow
+  (:with-mode hs-minor-mode
+    (:hook-into prog-mode)))
+
+(setup global-keybindings
+  (:global "<f6>" load-theme
+	   "C--" my/text-scale-decrease
+	   "C-=" my/text-scale-increase
+	   "C-SPC" completion-at-point
+	   "M-Y" yank-from-kill-ring))
+
 (use-package emacs
-  :mode (("\\.npmrc\\'" . conf-mode))
+  ;; :mode (("\\.npmrc\\'" . conf-mode))
   :bind
-  ("<f6>" . load-theme)
-  ("C--" . my/text-scale-decrease)
-  ("C-=" . my/text-scale-increase)
-  ("C-SPC" . completion-at-point)
-  ("M-Y" . yank-from-kill-ring)
+  ;; ("<f6>" . load-theme)
+  ;; ("C--" . my/text-scale-decrease)
+  ;; ("C-=" . my/text-scale-increase)
+  ;; ("C-SPC" . completion-at-point)
+  ;; ("M-Y" . yank-from-kill-ring)
   (:map leader-map
 	("f f" . find-file)
 	("f s" . save-buffer)
@@ -160,17 +168,33 @@
   (diff-hl-flydiff-mode 1))
 
 ;; evil
-(use-package evil
-  :demand
-  :init
+(setup (:require evil)
+  (:also-load evil-collection)
+  (:option evil-want-C-u-scroll t
+	   evil-want-Y-yank-to-eol t
+	   evil-undo-system 'undo-redo)
+  (:global
+   [remap evil-goto-definition] xref-find-definitions)
+  (:bind-into evil-normal-state-map
+    "z l" hs-hide-level)
+  ;; (:map evil-normal-state-map ("z l" . hs-hide-level))
   ;; these variables need to be set before loading evil
   (setq evil-want-integration t) ;; required by evil-collection
   (setq evil-want-keybinding nil) ;; required by evil-collection
   (setq evil-respect-visual-line-mode t)
-  :custom
-  (evil-want-C-u-scroll t)
-  (evil-want-Y-yank-to-eol t)
-  (evil-undo-system 'undo-redo)
+  (evil-mode))
+
+(use-package evil
+  ;; :demand
+  ;; :init
+  ;; ;; these variables need to be set before loading evil
+  ;; (setq evil-want-integration t) ;; required by evil-collection
+  ;; (setq evil-want-keybinding nil) ;; required by evil-collection
+  ;; (setq evil-respect-visual-line-mode t)
+  ;; :custom
+  ;; (evil-want-C-u-scroll t)
+  ;; (evil-want-Y-yank-to-eol t)
+  ;; (evil-undo-system 'undo-redo)
   :bind
   ([remap evil-goto-definition] . xref-find-definitions)
   (:map evil-normal-state-map ("z l" . hs-hide-level))
@@ -218,149 +242,113 @@
 	("J" . evil-indent-plus-a-indent-up-down)))
 
 ;; lang helpers
-(use-package editorconfig
-  :config
-  (editorconfig-mode))
+(setup editorconfig
+  (:when-loaded (editorconfig-mode)))
 
-(use-package treesit
-  :config
-  ;; js
-  (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.Dockerfile\\'" . dockerfile-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.mts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.cts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
-  (add-to-list 'auto-mode-alist '(".babelrc\\'" . json-ts-mode))
-  ;; bash/shell
-  (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
-  (add-to-list 'interpreter-mode-alist '("sh" . bash-ts-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js-ts-mode))
-  ;; python
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
+(setup treesit
+  (setq auto-mode-alist
+	(append '(("\\Dockerfile\\'" . dockerfile-ts-mode)
+		  ("\\.Dockerfile\\'" . dockerfile-ts-mode)
+		  ;; js
+		  ("\\.js\\'" . js-ts-mode)
+		  ("\\.cjs\\'" . js-ts-mode)
+		  ("\\.mjs\\'" . js-ts-mode)
+		  ("\\.ts\\'" . typescript-ts-mode)
+		  ("\\.mts\\'" . typescript-ts-mode)
+		  ("\\.cts\\'" . typescript-ts-mode)
+		  ("\\.tsx\\'" . tsx-ts-mode)
+		  ("\\.ya?ml\\'" . yaml-ts-mode)
+		  ("\\.css\\'" . css-ts-mode)
+		  ("\\.json\\'" . json-ts-mode)
+		  (".babelrc\\'" . json-ts-mode)
+		  ;; bash/shell
+		  ("\\.sh\\'" . bash-ts-mode)
+		  ;; python
+		  ("\\.py\\'" . python-ts-mode))
+		auto-mode-alist))
+  (setq interpreter-mode-alist
+	(append '(("node" . js-ts-mode)
+		  ("sh" . bash-ts-mode))
+		interpreter-mode-alist)))
 
-(use-package apheleia
-  :demand
-  :bind
-  (:map leader-map
-	("c f" . apheleia-format-buffer))
-  :config
+(setup apheleia
+  (:bind-into leader-map
+    "c f" apheleia-format-buffer)
   ;; more formatters
-  (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
-	'(npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify"))
+  (:when-loaded
+    (setq apheleia-formatters
+	  (append '((prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
+		    (dockfmt . ("dockfmt" "fmt"))
+		    (protobuf . (npx "buf" "format" "--path" filepath)) ;; for .proto files https://github.com/bufbuild/buf
+		    )
+		  apheleia-formatters))
 
-  (setf (alist-get 'dockfmt apheleia-formatters) '("dockfmt" "fmt"))
-
-  (setf (alist-get 'protobuf apheleia-formatters) '(npx "buf" "format" "--path" filepath)) ;; for .proto files https://github.com/bufbuild/buf
-
-  ;; support for more languages
-  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
-  (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
-  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
-  (add-to-list 'apheleia-mode-alist '(sh-mode . shfmt))
-  (add-to-list 'apheleia-mode-alist '(bash-ts-mode . shfmt))
-  (add-to-list 'apheleia-mode-alist '(protobuf-mode . protobuf))
-  ;; (add-to-list 'apheleia-mode-alist '(dockerfile-ts-mode . dockfmt))
-
-  (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
-    "Change formatter of package.json files to align with prettier default output."
-    ;; https://github.com/radian-software/apheleia/pull/183
-    (defun my/set-package-json-apheleia-formatter ()
-      "Set the apheleia formatter to json-stringnify for package.json file."
-      (when (equal (file-name-nondirectory (buffer-file-name)) "package.json")
-	(setq-local apheleia-formatter 'prettier-json-stringify)))
-    (add-hook 'json-ts-mode-hook 'my/set-package-json-apheleia-formatter))
-
-  (my/setup-fix-for-apheleia-prettier-package-json-files)
+    ;; (setf (alist-get 'protobuf apheleia-formatters) ') 
+    ;; support for more languages
+    (setq apheleia-mode-alist
+	  (append '((emacs-lisp-mode . lisp-indent)
+		    (gfm-mode . prettier-markdown)
+		    (markdown-mode . prettier-markdown)
+		    (sh-mode . shfmt)
+		    (bash-ts-mode . shfmt)
+		    (protobuf-mode . protobuf)
+		    ;; (dockerfile-ts-mode . dockfmt)
+		    )
+		  apheleia-mode-alist)))
   (apheleia-global-mode))
 
-(use-package apheleia-sort-package-json
-  :disabled
-  :load-path "local-packages"
-  :config
-  (apheleia-sort-package-json-minor-mode))
+(setup lsp-mode
+  (yas-global-mode 1) ;; required for json-mode to load https://github.com/emacs-lsp/lsp-mode/discussions/4033
+  (:also-load consult-lsp)
+  (:option lsp-completion-provider :none)
+  (:with-function lsp-deferred
+    (:hook-into
+     ;; js modes
+     js-ts-mode tsx-ts-mode typescript-ts-mode
+     ;; config files modes
+     json-ts-mode yaml-ts-mode
+     ;; css modes
+     scss-mode css-ts-mode
+     ;; others
+     lua-mode python-ts-mode))
+  (setup consult-lsp
+    (:when-loaded (keymap-set leader-map "l" lsp-command-map))
+    (:bind-into lsp-command-map
+      [remap xref-find-apropos] consult-lsp-symbols
+      "f"  consult-lsp-diagnostics)))
 
-(use-package eglot
-  :disabled
-  :config
-  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
-  :hook
-  ((nix-mode js-ts-mode json-ts-mode) . eglot-ensure))
-
-(use-package yasnippet
-  :config
-  (yas-global-mode 1))
-
-(use-package lsp-mode
-  :demand
-  :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
-  :commands (lsp lsp-deferred)
-  :custom
-  (lsp-completion-provider :none)
-  :hook ((;; js modes
-	  js-ts-mode tsx-ts-mode typescript-ts-mode
-	  ;; config files modes
-	  json-ts-mode yaml-ts-mode
-	  ;; css modes
-	  scss-mode css-ts-mode
-	  ;; others
-	  lua-mode python-ts-mode) . lsp-deferred)
-  :config
-  (keymap-set leader-map "l" lsp-command-map))
-
-(use-package consult-lsp
-  :after (lsp-mode consult)
-  :bind
-  (:map lsp-command-map
-	([remap xref-find-apropos] . consult-lsp-symbols)
-	("f" . consult-lsp-diagnostics)))
-
-(use-package which-key
-  :config
+(setup which-key
   (which-key-mode))
 
 ;; treemacs
-(use-package treemacs
-  :custom
-  (treemacs-pulse-on-success nil)
-  (treemacs-width-is-initially-locked nil)
-  :bind
-  (:map project-prefix-map
-	("t" . treemacs-display-current-project-exclusively))
-  :config
-  (treemacs-follow-mode))
-
-(use-package treemacs-evil
-  :after (treemacs evil))
-
-(use-package treemacs-magit
-  :after (treemacs magit))
+(setup treemacs
+  (:option treemacs-pulse-on-success nil
+	   treemacs-width-is-initially-locked nil)
+  (:bind-into project-prefix-map
+    "t" treemacs-display-current-project-exclusively)
+  ;; (:when-loaded (treemacs-follow-mode))
+  )
 
 ;; languages
-(use-package markdown-mode
-  :mode ("README\\.md\\'" . gfm-mode)
-  :bind (:map markdown-mode-map
-	      ("C-c C-e" . markdown-do)))
+(setup markdown-mode
+  (:with-mode gfm-mode
+    (:file-match "README\\.md\\'"))
+  (:bind-into markdown-mode-map
+    "C-c C-e" markdown-do))
 
-(use-package nix-mode)
+(setup protobuf-mode
+  (:file-match "\\.proto\\'"))
 
-(use-package protobuf-mode
-  :mode ("\\.proto\\'" . protobuf-mode))
+(setup git-modes
+  (:with-mode gitignore-mode
+    (:file-match "\\.*ignore\\'")))
 
-(use-package git-modes
-  :mode ("\\.*ignore\\'" . gitignore-mode))
+(setup (:require copilot)
+  (:hook-into prog-mode)
+  (:bind-into copilot-completion-map
+    "M-C" copilot-next-completion
+    "<tab>" copilot-accept-completion
+    "TAB" copilot-accept-completion))
 
-(use-package copilot
-  :demand
-  :hook (prog-mode . copilot-mode)
-  :bind
-  (:map copilot-completion-map
-	("M-C" . copilot-next-completion)
-	("<tab>" . copilot-accept-completion)
-	("TAB" . copilot-accept-completion)))
+(setup conf-mode
+  (:file-match "\\.npmrc\\'"))

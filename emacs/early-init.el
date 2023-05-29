@@ -17,10 +17,8 @@
 (customize-set-variable 'ring-bell-function 'ignore)
 
 ;; visual
-(use-package doom-themes
-  :config
-  (load-theme 'doom-dark+ t))
+(require 'doom-themes)
+(load-theme 'doom-dark+ t)
 
-(use-package doom-modeline
-  :config
-  (doom-modeline-mode))
+(require 'doom-modeline)
+(doom-modeline-mode)
