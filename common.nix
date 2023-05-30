@@ -28,7 +28,7 @@ in {
     }))
   ];
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     # apps
     firefox
     keepassxc
@@ -40,23 +40,23 @@ in {
     appimage-run # for AppImage
     ispell # for emacs
     # command line helpers
-    fd
-    ripgrep
+    fd # faster find
+    ripgrep # faster grep
     tldr
     # web dev
-    # nodejs
-    # yarn
-    # node packages
-    nodePackages.prettier
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
-    nodePackages.yaml-language-server
-    nodePackages.npm-check-updates
+    nodejs
+    yarn
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
-  ];
+  ]) ++ (with pkgs.nodePackages; [
+    npm-check-updates
+    prettier
+    typescript
+    typescript-language-server
+    vscode-langservers-extracted
+    yaml-language-server
+  ]);
 
   programs.zoxide = {
     enable = true;
