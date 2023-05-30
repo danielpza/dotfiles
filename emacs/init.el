@@ -22,6 +22,63 @@
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
 (add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; spell check in comments
 
+;; evil
+(use-package evil
+  :init
+  ;; these variables need to be set before loading evil
+  (setq evil-want-integration t) ;; required by evil-collection
+  (setq evil-want-keybinding nil) ;; required by evil-collection
+  (setq evil-respect-visual-line-mode t)
+  :custom
+  (evil-want-C-u-scroll t)
+  (evil-want-Y-yank-to-eol t)
+  (evil-undo-system 'undo-redo)
+  :config
+  (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
+  (bind-keys :map evil-normal-state-map
+	     ("z l" . hs-hide-level))
+  (defun my/setup-evil-leader-key ()
+    ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
+    (define-minor-mode leader-mode
+      "Bind leader-map to SPC prefix in evil modes"
+      :lighter " Leader"
+      :init-value t
+      :global t
+      :keymap (make-sparse-keymap))
+
+    (dolist (state '(normal visual insert))
+      (evil-make-intercept-map
+       (evil-get-auxiliary-keymap leader-mode-map state t t)
+       state))
+    (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
+
+  ;; https://emacs.stackexchange.com/questions/14551/whats-the-difference-between-after-init-hook-and-emacs-startup-hook
+  (add-hook 'after-init-hook 'my/setup-evil-leader-key)
+  (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
+
+  (keymap-set leader-map "w" evil-window-map)
+
+  (evil-mode))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+(use-package evil-indent-plus
+  :after evil
+  :bind
+  (:map evil-inner-text-objects-map
+	("i" . evil-indent-plus-i-indent)
+	("I" . evil-indent-plus-i-indent-up)
+	("k" . evil-indent-plus-i-indent-up)
+	("j" . evil-indent-plus-i-indent-up-down)
+	("J" . evil-indent-plus-i-indent-up-down))
+  (:map evil-outer-text-objects-map
+	("i" . evil-indent-plus-a-indent)
+	("I" . evil-indent-plus-a-indent-up)
+	("J" . evil-indent-plus-a-indent-up-down)))
+
 ;; core improvements
 (use-package nerd-icons)
 
@@ -122,63 +179,6 @@
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
   (global-diff-hl-mode 1)
   (diff-hl-flydiff-mode 1))
-
-;; evil
-(use-package evil
-  :init
-  ;; these variables need to be set before loading evil
-  (setq evil-want-integration t) ;; required by evil-collection
-  (setq evil-want-keybinding nil) ;; required by evil-collection
-  (setq evil-respect-visual-line-mode t)
-  :custom
-  (evil-want-C-u-scroll t)
-  (evil-want-Y-yank-to-eol t)
-  (evil-undo-system 'undo-redo)
-  :config
-  (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
-  (bind-keys :map evil-normal-state-map
-	     ("z l" . hs-hide-level))
-  (defun my/setup-evil-leader-key ()
-    ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
-    (define-minor-mode leader-mode
-      "Bind leader-map to SPC prefix in evil modes"
-      :lighter " Leader"
-      :init-value t
-      :global t
-      :keymap (make-sparse-keymap))
-
-    (dolist (state '(normal visual insert))
-      (evil-make-intercept-map
-       (evil-get-auxiliary-keymap leader-mode-map state t t)
-       state))
-    (evil-define-key '(normal visual) leader-mode-map (kbd "SPC") leader-map))
-
-  ;; https://emacs.stackexchange.com/questions/14551/whats-the-difference-between-after-init-hook-and-emacs-startup-hook
-  (add-hook 'after-init-hook 'my/setup-evil-leader-key)
-  (add-hook 'emacs-startup-hook 'my/setup-evil-leader-key)
-
-  (keymap-set leader-map "w" evil-window-map)
-
-  (evil-mode))
-
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
-(use-package evil-indent-plus
-  :after evil
-  :bind
-  (:map evil-inner-text-objects-map
-	("i" . evil-indent-plus-i-indent)
-	("I" . evil-indent-plus-i-indent-up)
-	("k" . evil-indent-plus-i-indent-up)
-	("j" . evil-indent-plus-i-indent-up-down)
-	("J" . evil-indent-plus-i-indent-up-down))
-  (:map evil-outer-text-objects-map
-	("i" . evil-indent-plus-a-indent)
-	("I" . evil-indent-plus-a-indent-up)
-	("J" . evil-indent-plus-a-indent-up-down)))
 
 ;; lang helpers
 (use-package editorconfig
