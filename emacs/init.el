@@ -34,7 +34,6 @@
 
 ;; core
 (use-package emacs
-  :mode (("\\.npmrc\\'" . conf-mode))
   :bind
   ("<f6>" . load-theme)
   ("C--" . my/text-scale-decrease)
@@ -323,6 +322,9 @@
 
 (use-package protobuf-mode
   :mode ("\\.proto\\'" . protobuf-mode))
+
+(use-package conf-mode
+  :mode (("\\.npmrc\\'" . conf-mode)))
 
 (use-package git-modes
   :mode ("\\.*ignore\\'" . gitignore-mode))
