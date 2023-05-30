@@ -4,6 +4,7 @@
 ;; core
 (custom-set-variables
  '(auto-save-default nil)
+ '(ispell-program-name "aspell") ;; use aspell instead of ispell
  '(use-short-answers t) ;; use y/n instead of yes/no
  '(revert-buffer-quick-short-answers t) ;; use y/n instead of yes/no
  '(create-lockfiles nil) ;; react issues
@@ -19,6 +20,7 @@
 ;; (global-visual-line-mode)
 (electric-pair-mode) ;; auto close brackets
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
+(add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; spell check in comments
 
 ;; core improvements
 (use-package nerd-icons)

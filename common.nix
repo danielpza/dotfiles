@@ -38,7 +38,9 @@ in {
     helix
     # others
     appimage-run # for AppImage
-    ispell # for emacs
+    aspell # spell checking for emacs
+    aspellDicts.en # english dictionary for aspell
+    aspellDicts.en-computers # english computer dictionary for aspell
     # command line helpers
     fd # faster find
     ripgrep # faster grep
