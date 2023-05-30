@@ -1,86 +1,34 @@
 ;; -*- lexical-binding: t -*-
 (setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
-;; my functions
-(defun my/find-init-file ()
-  "Open user-init-file."
-  (interactive)
-  (find-file "~/.config/home-manager/emacs/init.el"))
-
-(defun my/find-home-manager-config ()
-  "Open home manager config file."
-  (interactive)
-  (find-file "~/.config/home-manager/common.nix"))
-
-(defun my/text-scale-increase ()
-  "Increase font size."
-  (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
-
-(defun my/text-scale-decrease ()
-  "Decrease font size."
-  (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
-
-;; https://reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer/
-(defun my/switch-to-last-buffer ()
-  (interactive)
-  (switch-to-buffer nil))
-
-(use-package hideshow
-  :hook ((prog-mode . hs-minor-mode)))
-
 ;; core
-(use-package emacs
-  :bind
-  ("<f6>" . load-theme)
-  ("C--" . my/text-scale-decrease)
-  ("C-=" . my/text-scale-increase)
-  ("C-SPC" . completion-at-point)
-  ("M-Y" . yank-from-kill-ring)
-  (:map leader-map
-	("f f" . find-file)
-	("f s" . save-buffer)
-	("f r" . recentf)
+(custom-set-variables
+ '(revert-buffer-quick-short-answers t)
+ '(auto-save-default nil)
+ '(use-short-answers t) ;; use y/n instead of yes/no
+ '(create-lockfiles nil) ;; react issues
+ '(make-backup-files nil) ;; react issues
+ '(tab-always-indent 'complete)) ;; for corfu completions
 
-	("d d" . my/find-init-file)
-	("d n" . my/find-home-manager-config)
+(recentf-mode)
+(global-display-line-numbers-mode)
+(global-goto-address-mode) ;; make URLs clickable
+;; (global-visual-line-mode)
+(electric-pair-mode) ;; auto close brackets
+(add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
 
-	("b b" . switch-to-buffer)
-	("b d" . kill-current-buffer)
-	("b r" . revert-buffer-quick)
-
-	("TAB" . my/switch-to-last-buffer)
-	("SPC" . execute-extended-command))
-  :custom
-  (revert-buffer-quick-short-answers t)
-  (auto-save-default nil)
-  (create-lockfiles nil) ;; react issues
-  (make-backup-files nil) ;; react issues
-  (tab-always-indent 'complete) ;; for corfu completions
-  :config
-  (fset 'yes-or-no-p 'y-or-n-p)
-  (recentf-mode)
-  (global-display-line-numbers-mode)
-  (global-goto-address-mode)
-  ;; (global-visual-line-mode)
-  (electric-pair-mode)
-  (keymap-set leader-map "p" project-prefix-map))
-
+;; core improvements
 (use-package nerd-icons-dired
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
 ;; diagnostic
 (use-package flycheck
-  :demand
-  :bind
-  (:map leader-map
-	("e l" . flycheck-list-errors)
-	("e n" . flycheck-next-error)
-	("e p" . flycheck-previous-error)))
+  :config
+  (bind-keys :map leader-map
+	     ("e l" . flycheck-list-errors)
+	     ("e n" . flycheck-next-error)
+	     ("e p" . flycheck-previous-error)))
 
 ;; completion
 (use-package vertico
@@ -99,43 +47,39 @@
   (global-corfu-mode))
 
 (use-package consult
-  :demand
-  :bind
-  ([remap project-find-regexp] . consult-ripgrep)
-  ([remap isearch-forward] . consult-line)
-  ([remap switch-to-buffer] . consult-buffer)
-  ([remap load-theme]. consult-theme)
-  ([remap imenu] . consult-imenu)
-  ([remap recentf] . consult-recent-file)
-  (:map leader-map
-	("e c" . consult-flycheck))
   :config
+  (bind-keys ([remap project-find-regexp] . consult-ripgrep)
+	     ([remap isearch-forward] . consult-line)
+	     ([remap switch-to-buffer] . consult-buffer)
+	     ([remap load-theme]. consult-theme)
+	     ([remap imenu] . consult-imenu)
+	     ([remap recentf] . consult-recent-file))
+  (bind-keys :map leader-map
+	     ("e c" . consult-flycheck))
   (setq xref-show-xrefs-function #'consult-xref
 	xref-show-definitions-function #'consult-xref))
 
 ;; git
 (use-package magit
-  :bind
-  (:map leader-map
-	("g b" . magit-blame)
-	("g g" . magit-status)
-	("g s" . magit-stage-file)
-	("g l b" . magit-log-buffer-file)))
+  :config
+  (bind-keys :map leader-map
+	     ("g b" . magit-blame)
+	     ("g g" . magit-status)
+	     ("g s" . magit-stage-file)
+	     ("g l b" . magit-log-buffer-file)))
 
 (use-package git-link
-  :bind
-  (:map leader-map
-	("g l l" . git-link))
+  :config
+  (bind-keys :map leader-map
+	     ("g l l" . git-link))
   :custom
   (git-link-use-commit t))
 
 (use-package diff-hl
-  :demand
-  :bind
-  (:map leader-map
-	("g [" . diff-hl-previous-hunk)
-	("g ]" . diff-hl-next-hunk))
   :config
+  (bind-keys :map leader-map
+	     ("g [" . diff-hl-previous-hunk)
+	     ("g ]" . diff-hl-next-hunk))
   (with-eval-after-load "magit"
     (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
@@ -144,7 +88,6 @@
 
 ;; evil
 (use-package evil
-  :demand
   :init
   ;; these variables need to be set before loading evil
   (setq evil-want-integration t) ;; required by evil-collection
@@ -154,10 +97,10 @@
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
   (evil-undo-system 'undo-redo)
-  :bind
-  ([remap evil-goto-definition] . xref-find-definitions)
-  (:map evil-normal-state-map ("z l" . hs-hide-level))
   :config
+  (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
+  (bind-keys :map evil-normal-state-map
+	     ("z l" . hs-hide-level))
   (defun my/setup-evil-leader-key ()
     ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
     (define-minor-mode leader-mode
@@ -200,6 +143,23 @@
 	("I" . evil-indent-plus-a-indent-up)
 	("J" . evil-indent-plus-a-indent-up-down)))
 
+;; treemacs
+(use-package treemacs
+  :custom
+  (treemacs-pulse-on-success nil)
+  (treemacs-width-is-initially-locked nil)
+  :bind
+  (:map project-prefix-map
+	("t" . treemacs-display-current-project-exclusively))
+  :config
+  (treemacs-follow-mode))
+
+(use-package treemacs-evil
+  :after (treemacs evil))
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
 ;; lang helpers
 (use-package editorconfig
   :config
@@ -231,11 +191,10 @@
 		interpreter-mode-alist)))
 
 (use-package apheleia
-  :demand
-  :bind
-  (:map leader-map
-	("c f" . apheleia-format-buffer))
   :config
+  (bind-keys :map leader-map
+	     ("c f" . apheleia-format-buffer))
+
   ;; more formatters
   (setq apheleia-formatters (append '(
 				      (dockfmt . ("dockfmt" "fmt"))
@@ -271,7 +230,6 @@
   (yas-global-mode 1))
 
 (use-package lsp-mode
-  :demand
   :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
   :commands (lsp lsp-deferred)
   :custom
@@ -298,23 +256,6 @@
   :config
   (which-key-mode))
 
-;; treemacs
-(use-package treemacs
-  :custom
-  (treemacs-pulse-on-success nil)
-  (treemacs-width-is-initially-locked nil)
-  :bind
-  (:map project-prefix-map
-	("t" . treemacs-display-current-project-exclusively))
-  :config
-  (treemacs-follow-mode))
-
-(use-package treemacs-evil
-  :after (treemacs evil))
-
-(use-package treemacs-magit
-  :after (treemacs magit))
-
 ;; languages
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
@@ -326,17 +267,69 @@
 (use-package protobuf-mode
   :mode ("\\.proto\\'" . protobuf-mode))
 
-(use-package conf-mode
-  :mode (("\\.npmrc\\'" . conf-mode)))
-
 (use-package git-modes
   :mode ("\\.*ignore\\'" . gitignore-mode))
 
 (use-package copilot
-  :demand
   :hook (prog-mode . copilot-mode)
-  :bind
-  (:map copilot-completion-map
-	("M-C" . copilot-next-completion)
-	("<tab>" . copilot-accept-completion)
-	("TAB" . copilot-accept-completion)))
+  :config
+  (bind-keys :map copilot-completion-map
+	     ("M-C" . copilot-next-completion)
+	     ("<tab>" . copilot-accept-completion)
+	     ("TAB" . copilot-accept-completion)))
+
+(add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
+
+;; my functions
+(defun my/find-init-file ()
+  "Open user-init-file."
+  (interactive)
+  (find-file "~/.config/home-manager/emacs/init.el"))
+
+(defun my/find-home-manager-config ()
+  "Open home manager config file."
+  (interactive)
+  (find-file "~/.config/home-manager/common.nix"))
+
+(defun my/text-scale-increase ()
+  "Increase font size."
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+
+(defun my/text-scale-decrease ()
+  "Decrease font size."
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+
+;; https://reddit.com/r/emacs/comments/2jzkz7/quickly_switch_to_previous_buffer/
+(defun my/switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer nil))
+
+;; general keybindings
+(bind-keys ("<f6>" . load-theme)
+	   ("C--" . my/text-scale-decrease)
+	   ("C-=" . my/text-scale-increase)
+	   ("C-SPC" . completion-at-point)
+	   ("M-Y" . yank-from-kill-ring))
+
+;; leader keybindings
+(bind-keys :map leader-map
+	   ("f f" . find-file)
+	   ("f s" . save-buffer)
+	   ("f r" . recentf)
+
+	   ("d d" . my/find-init-file)
+	   ("d n" . my/find-home-manager-config)
+
+	   ("b b" . switch-to-buffer)
+	   ("b d" . kill-current-buffer)
+	   ("b r" . revert-buffer-quick)
+
+	   ("TAB" . my/switch-to-last-buffer)
+	   ("SPC" . execute-extended-command))
+
+(keymap-set leader-map "p" project-prefix-map)
+(keymap-set leader-map "h" help-map)
