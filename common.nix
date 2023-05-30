@@ -75,6 +75,7 @@ in {
         consult-lsp
         corfu
         diff-hl
+        dirvish
         doom-modeline
         doom-themes
         editorconfig
@@ -89,13 +90,10 @@ in {
         magit
         markdown-mode
         nerd-icons
-        nerd-icons-dired
+        nerd-icons-completion
         nix-mode
         orderless
         protobuf-mode
-        treemacs
-        treemacs-evil
-        treemacs-magit
         vertico
         which-key
         yasnippet

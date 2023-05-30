@@ -8,6 +8,9 @@
  '(revert-buffer-quick-short-answers t) ;; use y/n instead of yes/no
  '(create-lockfiles nil) ;; react issues
  '(make-backup-files nil) ;; react issues
+ '(dired-mouse-drag-files t)
+ '(mouse-drag-and-drop-region-cross-program t)
+ '(dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group")
  '(tab-always-indent 'complete)) ;; for corfu completions
 
 (recentf-mode)
@@ -18,9 +21,39 @@
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
 
 ;; core improvements
-(use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+(use-package nerd-icons)
+
+(use-package nerd-icons-completion
+  :after nerd-icons
+  :config
+  (nerd-icons-completion-mode))
+
+(use-package dirvish
+  :config
+  (custom-set-variables '(dirvish-subtree-state-style 'nerd)
+			'(dirvish-attributes '(vc-state
+					       subtree-state nerd-icons collapse ;; git-msg
+					       ;; file-time file-size
+					       )))
+  (bind-keys :map project-prefix-map
+	     ("t" . dirvish-side))
+  (bind-keys :map dired-mode-map
+	     ("<mouse-1>" . dirvish-subtree-toggle-or-open)
+             ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
+             ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
+             ([remap dired-do-copy] . dirvish-yank-menu)
+	     ("?"   . dirvish-dispatch)
+             ("q"   . dirvish-quit)
+             ("a"   . dirvish-quick-access)
+             ("f"   . dirvish-file-info-menu)
+             ("x"   . dired-do-delete)
+             ("X"   . dired-do-flagged-delete)
+             ("y"   . dirvish-yank-menu)
+             ("s"   . dirvish-quicksort)
+	     ;; ("<return>" . dirvish-subtree-toggle)
+             ("<tab>" . dirvish-subtree-toggle)
+	     ("TAB" . dirvish-subtree-toggle))
+  (dirvish-override-dired-mode))
 
 ;; diagnostic
 (use-package flycheck
@@ -142,23 +175,6 @@
 	("i" . evil-indent-plus-a-indent)
 	("I" . evil-indent-plus-a-indent-up)
 	("J" . evil-indent-plus-a-indent-up-down)))
-
-;; treemacs
-(use-package treemacs
-  :custom
-  (treemacs-pulse-on-success nil)
-  (treemacs-width-is-initially-locked nil)
-  :bind
-  (:map project-prefix-map
-	("t" . treemacs-display-current-project-exclusively))
-  :config
-  (treemacs-follow-mode))
-
-(use-package treemacs-evil
-  :after (treemacs evil))
-
-(use-package treemacs-magit
-  :after (treemacs magit))
 
 ;; lang helpers
 (use-package editorconfig
