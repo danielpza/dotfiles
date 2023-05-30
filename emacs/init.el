@@ -207,26 +207,28 @@
 
 (use-package treesit
   :config
-  ;; js
-  (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.Dockerfile\\'" . dockerfile-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.mts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.cts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . css-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
-  (add-to-list 'auto-mode-alist '(".babelrc\\'" . json-ts-mode))
-  ;; bash/shell
-  (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
-  (add-to-list 'interpreter-mode-alist '("sh" . bash-ts-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js-ts-mode))
-  ;; python
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode)))
+  (setq auto-mode-alist (append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
+				  ;; js
+				  ("\\.[cm]?jsx?\\'" . js-ts-mode)
+				  ("\\.[cm]?tsx?\\'" . typescript-ts-mode)
+				  ;; css
+				  ("\\.css\\'" . css-ts-mode)
+				  ;; json
+				  ("\\.json\\'" . json-ts-mode)
+				  (".babelrc\\'" . json-ts-mode)
+				  ;; yaml
+				  ("\\.ya?ml\\'" . yaml-ts-mode)
+				  ;; bash/shell
+				  ("\\.sh\\'" . bash-ts-mode)
+				  ;; python
+				  ("\\.py\\'" . python-ts-mode))
+				auto-mode-alist))
+  (setq interpreter-mode-alist
+	(append '(("node" . js-ts-mode)
+		  ("bash" . bash-ts-mode)
+		  ("sh" . bash-ts-mode)
+		  ("python" . python-ts-mode))
+		interpreter-mode-alist)))
 
 (use-package apheleia
   :demand
@@ -235,22 +237,23 @@
 	("c f" . apheleia-format-buffer))
   :config
   ;; more formatters
-  (setf (alist-get 'prettier-json-stringify apheleia-formatters) ;; https://github.com/radian-software/apheleia/pull/183
-	'(npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify"))
+  (setq apheleia-formatters (append '(
+				      (dockfmt . ("dockfmt" "fmt"))
+				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
+				      (prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
+				      ) apheleia-formatters))
 
-  (setf (alist-get 'dockfmt apheleia-formatters) '("dockfmt" "fmt"))
-
-  (setf (alist-get 'protobuf apheleia-formatters) '(npx "buf" "format" "--path" filepath)) ;; for .proto files https://github.com/bufbuild/buf
+  (setq apheleia-mode-alist
+	(append '((emacs-lisp-mode . lisp-indent)
+		  (gfm-mode . prettier-markdown)
+		  (markdown-mode . prettier-markdown)
+		  (sh-mode . shfmt)
+		  (bash-ts-mode . shfmt)
+		  (protobuf-mode . protobuf)
+		  ;; (dockerfile-ts-mode . dockfmt)
+		  ) apheleia-mode-alist))
 
   ;; support for more languages
-  (add-to-list 'apheleia-mode-alist '(emacs-lisp-mode . lisp-indent))
-  (add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
-  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
-  (add-to-list 'apheleia-mode-alist '(sh-mode . shfmt))
-  (add-to-list 'apheleia-mode-alist '(bash-ts-mode . shfmt))
-  (add-to-list 'apheleia-mode-alist '(protobuf-mode . protobuf))
-  ;; (add-to-list 'apheleia-mode-alist '(dockerfile-ts-mode . dockfmt))
-
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
     "Change formatter of package.json files to align with prettier default output."
     ;; https://github.com/radian-software/apheleia/pull/183
