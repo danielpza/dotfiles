@@ -73,6 +73,8 @@
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
+  (orderless-component-separator #'orderless-escapable-split-on-space)
+  (orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-regexp))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package corfu
