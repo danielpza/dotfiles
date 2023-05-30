@@ -3,9 +3,9 @@
 
 ;; core
 (custom-set-variables
- '(revert-buffer-quick-short-answers t)
  '(auto-save-default nil)
  '(use-short-answers t) ;; use y/n instead of yes/no
+ '(revert-buffer-quick-short-answers t) ;; use y/n instead of yes/no
  '(create-lockfiles nil) ;; react issues
  '(make-backup-files nil) ;; react issues
  '(tab-always-indent 'complete)) ;; for corfu completions
