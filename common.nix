@@ -83,6 +83,7 @@ in {
         doom-modeline
         doom-themes
         editorconfig
+        ef-themes
         evil
         evil-collection
         evil-indent-plus
