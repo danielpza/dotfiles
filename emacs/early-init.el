@@ -19,8 +19,13 @@
 
 ;; visual
 (use-package doom-themes
+  :disabled
   :config
   (load-theme 'doom-dark+ t))
+
+(use-package ef-themes
+  :config
+  (load-theme 'ef-night t))
 
 (use-package doom-modeline
   :config
