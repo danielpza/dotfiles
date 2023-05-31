@@ -20,7 +20,7 @@
 ;; (global-visual-line-mode)
 (electric-pair-mode) ;; auto close brackets
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
-(add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; spell check in comments
+;; (add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; spell check in comments
 
 ;; evil
 (use-package evil
