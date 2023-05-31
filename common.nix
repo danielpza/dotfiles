@@ -96,6 +96,7 @@ in {
         nix-mode
         orderless
         protobuf-mode
+        treesit-grammars.with-all-grammars
         vertico
         which-key
         yasnippet
