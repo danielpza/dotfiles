@@ -256,6 +256,14 @@
   (my/setup-fix-for-apheleia-prettier-package-json-files)
   (apheleia-global-mode))
 
+(use-package copilot
+  :hook ((prog-mode markdown-mode) . copilot-mode)
+  :config
+  (bind-keys :map copilot-completion-map
+	     ("M-C" . copilot-next-completion)
+	     ("<tab>" . copilot-accept-completion)
+	     ("TAB" . copilot-accept-completion)))
+
 (use-package yasnippet
   :config
   (yas-global-mode 1))
@@ -301,14 +309,6 @@
 
 (use-package git-modes
   :mode ("\\.*ignore\\'" . gitignore-mode))
-
-(use-package copilot
-  :hook ((prog-mode markdown-mode) . copilot-mode)
-  :config
-  (bind-keys :map copilot-completion-map
-	     ("M-C" . copilot-next-completion)
-	     ("<tab>" . copilot-accept-completion)
-	     ("TAB" . copilot-accept-completion)))
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 
