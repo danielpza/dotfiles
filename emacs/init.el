@@ -206,7 +206,7 @@
 		  ("\\.css\\'" . css-ts-mode)
 		  ;; json
 		  ("\\.json\\'" . json-ts-mode)
-		  (".babelrc\\'" . json-ts-mode)
+		  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
 		  ;; yaml
 		  ("\\.ya?ml\\'" . yaml-ts-mode)
 		  ;; bash/shell
