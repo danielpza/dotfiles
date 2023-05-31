@@ -265,6 +265,7 @@
   :commands (lsp lsp-deferred)
   :custom
   (lsp-completion-provider :none)
+  (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
 	  ;; config files modes
