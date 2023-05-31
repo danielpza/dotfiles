@@ -88,29 +88,38 @@
   (nerd-icons-completion-mode))
 
 (use-package dirvish
+  :demand
+  :commands (dired project-switch-project)
+  :bind
+  ("C-x d" . dirvish-dwim)
+  (:map leader-map
+	("a d" . dirvish-dwim))
+  (:map project-prefix-map
+	("t" . dirvish-side))
   :config
   (custom-set-variables '(dirvish-subtree-state-style 'nerd)
 			'(dirvish-attributes '(vc-state
-					       subtree-state nerd-icons collapse ;; git-msg
-					       ;; file-time file-size
+					       subtree-state nerd-icons collapse
+					       ;; git-msg file-time file-size
 					       )))
-  (bind-keys :map project-prefix-map
-	     ("t" . dirvish-side))
   (bind-keys :map dired-mode-map
+	     ("u" . dirvish-subtree-up))
+  (bind-keys :map dirvish-mode-map
 	     ("<mouse-1>" . dirvish-subtree-toggle-or-open)
-             ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
-             ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
-             ([remap dired-do-copy] . dirvish-yank-menu)
+	     ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
+	     ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
+	     ([remap dired-do-copy] . dirvish-yank-menu)
 	     ("?" . dirvish-dispatch)
-             ("q" . dirvish-quit)
-             ("a" . dirvish-quick-access)
-             ("f" . dirvish-file-info-menu)
-             ("x" . dired-do-delete)
-             ("X" . dired-do-flagged-delete)
-             ("y" . dirvish-yank-menu)
-             ("s" . dirvish-quicksort)
+	     ("q" . dirvish-quit)
+	     ("a" . dirvish-quick-access)
+	     ("f" . dirvish-file-info-menu)
+	     ("x" . dired-do-delete)
+	     ("X" . dired-do-flagged-delete)
+	     ("y" . dirvish-yank-menu)
+	     ("s" . dirvish-quicksort)
+	     ("u" . dirvish-subtree-up)
 	     ;; ("<return>" . dirvish-subtree-toggle)
-             ("<tab>" . dirvish-subtree-toggle)
+	     ("<tab>" . dirvish-subtree-toggle)
 	     ("TAB" . dirvish-subtree-toggle))
   (dirvish-override-dired-mode))
 
