@@ -16,6 +16,8 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
+  programs.bat.enable = true;
+
   programs.bash.enable = true;
   programs.bash.bashrcExtra = ''
     PS1='\[\e[0;2m\]$? \[\e[0;1;32m\]\w\[\e[0;1;32m\]\$ \[\e[0m\]'
@@ -167,6 +169,7 @@ in {
   ];
 
   home.shellAliases = {
+    "cat" = "bat";
     "pq" = "pretty-quick";
     # "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
     # makes ls nicer: https://stackoverflow.com/a/18451819/6051261 and others
