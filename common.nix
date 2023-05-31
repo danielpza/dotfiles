@@ -5,6 +5,8 @@ let
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
 in {
+  imports = [ ./ssh/ssh.nix ];
+
   nixpkgs.config.allowUnfree = true;
 
   # TL;DR: don't touch this line
