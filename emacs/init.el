@@ -303,7 +303,7 @@
   :mode ("\\.*ignore\\'" . gitignore-mode))
 
 (use-package copilot
-  :hook (prog-mode . copilot-mode)
+  :hook ((prog-mode markdown-mode) . copilot-mode)
   :config
   (bind-keys :map copilot-completion-map
 	     ("M-C" . copilot-next-completion)
