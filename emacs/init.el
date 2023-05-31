@@ -187,22 +187,24 @@
 
 (use-package treesit
   :config
-  (setq auto-mode-alist (append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
-				  ;; js
-				  ("\\.[cm]?jsx?\\'" . js-ts-mode)
-				  ("\\.[cm]?tsx?\\'" . typescript-ts-mode)
-				  ;; css
-				  ("\\.css\\'" . css-ts-mode)
-				  ;; json
-				  ("\\.json\\'" . json-ts-mode)
-				  (".babelrc\\'" . json-ts-mode)
-				  ;; yaml
-				  ("\\.ya?ml\\'" . yaml-ts-mode)
-				  ;; bash/shell
-				  ("\\.sh\\'" . bash-ts-mode)
-				  ;; python
-				  ("\\.py\\'" . python-ts-mode))
-				auto-mode-alist))
+  (setq auto-mode-alist
+	(append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
+		  ;; js
+		  ("\\.[cm]?jsx?\\'" . js-ts-mode)
+		  ("\\.[cm]?ts\\'" . typescript-ts-mode)
+		  ("\\.[cm]?tsx\\'" . tsx-ts-mode)
+		  ;; css
+		  ("\\.css\\'" . css-ts-mode)
+		  ;; json
+		  ("\\.json\\'" . json-ts-mode)
+		  (".babelrc\\'" . json-ts-mode)
+		  ;; yaml
+		  ("\\.ya?ml\\'" . yaml-ts-mode)
+		  ;; bash/shell
+		  ("\\.sh\\'" . bash-ts-mode)
+		  ;; python
+		  ("\\.py\\'" . python-ts-mode))
+		auto-mode-alist))
   (setq interpreter-mode-alist
 	(append '(("node" . js-ts-mode)
 		  ("bash" . bash-ts-mode)
@@ -328,8 +330,14 @@
   (interactive)
   (switch-to-buffer nil))
 
+;; https://emacs.stackexchange.com/questions/76678/how-to-get-help-on-a-symbol-at-point-with-f1
+(defun my/describe-symbol ()
+  (interactive)
+  (describe-symbol (symbol-at-point)))
+
 ;; general keybindings
-(bind-keys ("<f6>" . load-theme)
+(bind-keys ("<f1>" . my/describe-symbol)
+	   ("<f6>" . load-theme)
 	   ("C--" . my/text-scale-decrease)
 	   ("C-=" . my/text-scale-increase)
 	   ("C-SPC" . completion-at-point)
