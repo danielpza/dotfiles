@@ -37,3 +37,9 @@ home-manager switch
 
 - https://nix-community.github.io/home-manager/index.html#sec-install-standalone
 - https://nix-community.github.io/home-manager/index.html#_how_do_i_install_packages_from_nixpkgs_unstable
+
+## TODO
+
+- [ ] flakes (https://nixos.wiki/wiki/Flakes)
+- [ ] DE agnostic setup (only apply dconf settings if gnome is installed, etc)
+- [ ] emacsclient/emacs daemon
