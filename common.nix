@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   userfullname = "Daniel Perez Alvarez";
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
 in {
-  imports = [ ./ssh/ssh.nix ];
+  imports = lib.optional (builtins.pathExists ./personal/personal.nix)
+    ./personal/personal.nix;
 
   nixpkgs.config.allowUnfree = true;
 
