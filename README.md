@@ -2,6 +2,8 @@
 
 My (WIP) emacs and nixos home-manager configuration:
 
+Previous dotfiles of arch linux + dwm + emacs doom are available at https://github.com/danielpza/dotfiles-old
+
 ## Installation
 
 - Clone config
