@@ -134,6 +134,7 @@ in {
     enable = true;
     userName = userfullname;
     userEmail = useremail;
+    extraConfig = { init.defaultBranch = "master"; };
   };
 
   home.sessionVariables = {
