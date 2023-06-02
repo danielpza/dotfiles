@@ -39,7 +39,6 @@ in {
     keepassxc
     libreoffice
     logseq
-    dockfmt
     helix
     # others
     appimage-run # for AppImage
@@ -50,6 +49,7 @@ in {
     fd # faster find
     ripgrep # faster grep
     tldr
+    dprint # code formatter
     # web dev
     nodejs
     yarn
@@ -120,9 +120,10 @@ in {
       source = ./helix;
       recursive = true;
     };
-  };
-
-  xdg.configFile = {
+    "dprint" = {
+      source = ./dprint;
+      recursive = true;
+    };
     "emacs" = {
       source = ./emacs;
       recursive = true;

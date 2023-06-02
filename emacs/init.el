@@ -227,8 +227,7 @@
 	     ("c f" . apheleia-format-buffer))
 
   ;; more formatters
-  (setq apheleia-formatters (append '(
-				      (dockfmt . ("dockfmt" "fmt"))
+  (setq apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
 				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
 				      (prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
 				      ) apheleia-formatters))
@@ -240,7 +239,7 @@
 		  (sh-mode . shfmt)
 		  (bash-ts-mode . shfmt)
 		  (protobuf-mode . protobuf)
-		  ;; (dockerfile-ts-mode . dockfmt)
+		  (dockerfile-ts-mode . dprint)
 		  ) apheleia-mode-alist))
 
   ;; support for more languages
