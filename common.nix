@@ -40,12 +40,10 @@ in {
     libreoffice
     logseq
     helix
-    # others
-    appimage-run # for AppImage
+    # command line helpers
     aspell # spell checking for emacs
     aspellDicts.en # english dictionary for aspell
     aspellDicts.en-computers # english computer dictionary for aspell
-    # command line helpers
     fd # faster find
     ripgrep # faster grep
     tldr
@@ -56,7 +54,7 @@ in {
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
-  ]) ++ (with pkgs.nodePackages; [
+  ]) ++ (with pkgs.nodePackages_latest; [
     npm-check-updates
     prettier
     typescript
@@ -72,7 +70,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsUnstablePgtk;
+    package = pkgs.emacs-unstable-pgtk;
     extraPackages = epkgs:
       with epkgs;
       [
@@ -182,6 +180,7 @@ in {
     "ll" = "ls -la";
     "l" = "ls -a";
     "ncu" = "ncu -i --format=group";
+    "hm" = "home-manager switch";
   };
 
   # home.keyboard.options = [ "caps:escape" ];
