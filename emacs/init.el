@@ -1,18 +1,19 @@
 ;; -*- lexical-binding: t -*-
-(setq leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
+(defvar leader-map (make-sparse-keymap)) ;; bind SPC-* keybindings here
 
 ;; core
-(custom-set-variables
- '(auto-save-default nil)
- '(ispell-program-name "aspell") ;; use aspell instead of ispell
- '(use-short-answers t) ;; use y/n instead of yes/no
- '(revert-buffer-quick-short-answers t) ;; use y/n instead of yes/no
- '(create-lockfiles nil) ;; react issues
- '(make-backup-files nil) ;; react issues
- '(dired-mouse-drag-files t)
- '(mouse-drag-and-drop-region-cross-program t)
- '(dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group")
- '(tab-always-indent 'complete)) ;; for corfu completions
+(setopt
+ auto-save-default nil
+ ispell-program-name "aspell" ;; use aspell instead of ispell
+ use-short-answers t ;; use y/n instead of yes/no
+ revert-buffer-quick-short-answers t ;; use y/n instead of yes/no
+ create-lockfiles nil ;; lockfiles causes issues with react-scripts
+ make-backup-files nil ;; backup files causes issues with react-scripts
+ tab-always-indent 'complete ;; for corfu completions
+ ;; dired related
+ dired-mouse-drag-files t ;; allow drag and drop from dired
+ mouse-drag-and-drop-region-cross-program t ;; allow drag and drop from emacs to other programs
+ dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group")
 
 (recentf-mode)
 (global-display-line-numbers-mode)
@@ -26,9 +27,9 @@
 (use-package evil
   :init
   ;; these variables need to be set before loading evil
-  (setq evil-want-integration t) ;; required by evil-collection
-  (setq evil-want-keybinding nil) ;; required by evil-collection
-  (setq evil-respect-visual-line-mode t)
+  (setopt evil-want-integration t ;; required by evil-collection
+	  evil-want-keybinding nil ;; required by evil-collection
+	  evil-respect-visual-line-mode t)
   :custom
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
@@ -125,6 +126,8 @@
 
 ;; diagnostic
 (use-package flycheck
+  :custom
+  (flycheck-disabled-checkers '(emacs-lisp-checkdoc)) ;; https://emacs.stackexchange.com/questions/21664/how-to-prevent-flycheck-from-treating-my-init-el-as-a-package-file
   :config
   (bind-keys :map leader-map
 	     ("e l" . flycheck-list-errors)
@@ -159,8 +162,8 @@
 	     ([remap recentf] . consult-recent-file))
   (bind-keys :map leader-map
 	     ("e c" . consult-flycheck))
-  (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref))
+  (setopt xref-show-xrefs-function #'consult-xref
+	  xref-show-definitions-function #'consult-xref))
 
 ;; git
 (use-package magit
@@ -196,30 +199,29 @@
 
 (use-package treesit
   :config
-  (setq auto-mode-alist
-	(append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
-		  ;; js
-		  ("\\.[cm]?jsx?\\'" . js-ts-mode)
-		  ("\\.[cm]?ts\\'" . typescript-ts-mode)
-		  ("\\.[cm]?tsx\\'" . tsx-ts-mode)
-		  ;; css
-		  ("\\.css\\'" . css-ts-mode)
-		  ;; json
-		  ("\\.json\\'" . json-ts-mode)
-		  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
-		  ;; yaml
-		  ("\\.ya?ml\\'" . yaml-ts-mode)
-		  ;; bash/shell
-		  ("\\.sh\\'" . bash-ts-mode)
-		  ;; python
-		  ("\\.py\\'" . python-ts-mode))
-		auto-mode-alist))
-  (setq interpreter-mode-alist
-	(append '(("node" . js-ts-mode)
-		  ("bash" . bash-ts-mode)
-		  ("sh" . bash-ts-mode)
-		  ("python" . python-ts-mode))
-		interpreter-mode-alist)))
+  (setopt auto-mode-alist (append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
+				    ;; js
+				    ("\\.[cm]?jsx?\\'" . js-ts-mode)
+				    ("\\.[cm]?ts\\'" . typescript-ts-mode)
+				    ("\\.[cm]?tsx\\'" . tsx-ts-mode)
+				    ;; css
+				    ("\\.css\\'" . css-ts-mode)
+				    ;; json
+				    ("\\.json\\'" . json-ts-mode)
+				    ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+				    ;; yaml
+				    ("\\.ya?ml\\'" . yaml-ts-mode)
+				    ;; bash/shell
+				    ("\\.sh\\'" . bash-ts-mode)
+				    ;; python
+				    ("\\.py\\'" . python-ts-mode))
+				  auto-mode-alist)
+
+	  interpreter-mode-alist (append '(("node" . js-ts-mode)
+					   ("bash" . bash-ts-mode)
+					   ("sh" . bash-ts-mode)
+					   ("python" . python-ts-mode))
+					 interpreter-mode-alist)))
 
 (use-package apheleia
   :config
@@ -227,20 +229,19 @@
 	     ("c f" . apheleia-format-buffer))
 
   ;; more formatters
-  (setq apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
-				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
-				      (prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
-				      ) apheleia-formatters))
+  (setopt apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
+					(protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
+					(prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
+					) apheleia-formatters))
 
-  (setq apheleia-mode-alist
-	(append '((emacs-lisp-mode . lisp-indent)
-		  (gfm-mode . prettier-markdown)
-		  (markdown-mode . prettier-markdown)
-		  (sh-mode . shfmt)
-		  (bash-ts-mode . shfmt)
-		  (protobuf-mode . protobuf)
-		  (dockerfile-ts-mode . dprint)
-		  ) apheleia-mode-alist))
+  (setopt apheleia-mode-alist (append '((emacs-lisp-mode . lisp-indent)
+					(gfm-mode . prettier-markdown)
+					(markdown-mode . prettier-markdown)
+					(sh-mode . shfmt)
+					(bash-ts-mode . shfmt)
+					(protobuf-mode . protobuf)
+					(dockerfile-ts-mode . dprint)
+					) apheleia-mode-alist))
 
   ;; support for more languages
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
