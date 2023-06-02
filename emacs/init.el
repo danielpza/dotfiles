@@ -199,29 +199,30 @@
 
 (use-package treesit
   :config
-  (setopt auto-mode-alist (append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
-				    ;; js
-				    ("\\.[cm]?jsx?\\'" . js-ts-mode)
-				    ("\\.[cm]?ts\\'" . typescript-ts-mode)
-				    ("\\.[cm]?tsx\\'" . tsx-ts-mode)
-				    ;; css
-				    ("\\.css\\'" . css-ts-mode)
-				    ;; json
-				    ("\\.json\\'" . json-ts-mode)
-				    ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
-				    ;; yaml
-				    ("\\.ya?ml\\'" . yaml-ts-mode)
-				    ;; bash/shell
-				    ("\\.sh\\'" . bash-ts-mode)
-				    ;; python
-				    ("\\.py\\'" . python-ts-mode))
-				  auto-mode-alist)
-
-	  interpreter-mode-alist (append '(("node" . js-ts-mode)
-					   ("bash" . bash-ts-mode)
-					   ("sh" . bash-ts-mode)
-					   ("python" . python-ts-mode))
-					 interpreter-mode-alist)))
+  (setq auto-mode-alist
+	(append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
+		  ;; js
+		  ("\\.[cm]?jsx?\\'" . js-ts-mode)
+		  ("\\.[cm]?ts\\'" . typescript-ts-mode)
+		  ("\\.[cm]?tsx\\'" . tsx-ts-mode)
+		  ;; css
+		  ("\\.css\\'" . css-ts-mode)
+		  ;; json
+		  ("\\.json\\'" . json-ts-mode)
+		  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+		  ;; yaml
+		  ("\\.ya?ml\\'" . yaml-ts-mode)
+		  ;; bash/shell
+		  ("\\.sh\\'" . bash-ts-mode)
+		  ;; python
+		  ("\\.py\\'" . python-ts-mode))
+		auto-mode-alist))
+  (setq interpreter-mode-alist
+	(append '(("node" . js-ts-mode)
+		  ("bash" . bash-ts-mode)
+		  ("sh" . bash-ts-mode)
+		  ("python" . python-ts-mode))
+		interpreter-mode-alist)))
 
 (use-package apheleia
   :config
@@ -229,19 +230,20 @@
 	     ("c f" . apheleia-format-buffer))
 
   ;; more formatters
-  (setopt apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
-					(protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
-					(prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
-					) apheleia-formatters))
+  (setq apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
+				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
+				      (prettier-json-stringify . (npx "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
+				      ) apheleia-formatters))
 
-  (setopt apheleia-mode-alist (append '((emacs-lisp-mode . lisp-indent)
-					(gfm-mode . prettier-markdown)
-					(markdown-mode . prettier-markdown)
-					(sh-mode . shfmt)
-					(bash-ts-mode . shfmt)
-					(protobuf-mode . protobuf)
-					(dockerfile-ts-mode . dprint)
-					) apheleia-mode-alist))
+  (setq apheleia-mode-alist
+	(append '((emacs-lisp-mode . lisp-indent)
+		  (gfm-mode . prettier-markdown)
+		  (markdown-mode . prettier-markdown)
+		  (sh-mode . shfmt)
+		  (bash-ts-mode . shfmt)
+		  (protobuf-mode . protobuf)
+		  (dockerfile-ts-mode . dprint)
+		  ) apheleia-mode-alist))
 
   ;; support for more languages
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
