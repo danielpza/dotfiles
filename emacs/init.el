@@ -4,7 +4,7 @@
 ;; core
 (setopt
  auto-save-default nil
- ispell-program-name "aspell" ;; use aspell instead of ispell
+ ispell-program-name "hunspell" ;; use hunspell instead of ispell
  use-short-answers t ;; use y/n instead of yes/no
  revert-buffer-quick-short-answers t ;; use y/n instead of yes/no
  create-lockfiles nil ;; lockfiles causes issues with react-scripts
@@ -21,7 +21,6 @@
 ;; (global-visual-line-mode)
 (electric-pair-mode) ;; auto close brackets
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
-;; (add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; spell check in comments
 
 ;; evil
 (use-package evil
@@ -125,6 +124,11 @@
   (dirvish-override-dired-mode))
 
 ;; diagnostic
+(use-package jinx
+  ;; spell checking
+  :config
+  (global-jinx-mode))
+
 (use-package flycheck
   :custom
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc)) ;; https://emacs.stackexchange.com/questions/21664/how-to-prevent-flycheck-from-treating-my-init-el-as-a-package-file
@@ -132,7 +136,8 @@
   (bind-keys :map leader-map
 	     ("e l" . flycheck-list-errors)
 	     ("e n" . flycheck-next-error)
-	     ("e p" . flycheck-previous-error)))
+	     ("e p" . flycheck-previous-error))
+  (global-flycheck-mode))
 
 ;; completion
 (use-package vertico

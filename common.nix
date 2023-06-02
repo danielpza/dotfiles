@@ -41,13 +41,14 @@ in {
     logseq
     helix
     # command line helpers
-    aspell # spell checking for emacs
-    aspellDicts.en # english dictionary for aspell
-    aspellDicts.en-computers # english computer dictionary for aspell
     fd # faster find
     ripgrep # faster grep
     tldr
     dprint # code formatter
+    # others
+    enchant
+    hunspell
+    hunspellDicts.en_US
     # web dev
     nodejs
     yarn
@@ -91,6 +92,7 @@ in {
         flycheck
         git-link
         git-modes
+        jinx
         kind-icon
         lsp-mode
         magit
