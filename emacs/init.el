@@ -198,31 +198,28 @@
   (editorconfig-mode))
 
 (use-package treesit
-  :config
-  (setq auto-mode-alist
-	(append '(("\\.?Dockerfile\\'" . dockerfile-ts-mode)
-		  ;; js
-		  ("\\.[cm]?jsx?\\'" . js-ts-mode)
-		  ("\\.[cm]?ts\\'" . typescript-ts-mode)
-		  ("\\.[cm]?tsx\\'" . tsx-ts-mode)
-		  ;; css
-		  ("\\.css\\'" . css-ts-mode)
-		  ;; json
-		  ("\\.json\\'" . json-ts-mode)
-		  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
-		  ;; yaml
-		  ("\\.ya?ml\\'" . yaml-ts-mode)
-		  ;; bash/shell
-		  ("\\.sh\\'" . bash-ts-mode)
-		  ;; python
-		  ("\\.py\\'" . python-ts-mode))
-		auto-mode-alist))
-  (setq interpreter-mode-alist
-	(append '(("node" . js-ts-mode)
-		  ("bash" . bash-ts-mode)
-		  ("sh" . bash-ts-mode)
-		  ("python" . python-ts-mode))
-		interpreter-mode-alist)))
+  :mode
+  ("\\.Dockefile\\'" . dockerfile-ts-mode)
+  ;; js
+  ("\\.[cm]?jsx?\\'" . js-ts-mode)
+  ("\\.[cm]?ts\\'" . typescript-ts-mode)
+  ("\\.[cm]?tsx\\'" . tsx-ts-mode)
+  ;; css
+  ("\\.css\\'" . css-ts-mode)
+  ;; json
+  ("\\.json\\'" . json-ts-mode)
+  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+  ;; yaml
+  ("\\.ya?ml\\'" . yaml-ts-mode)
+  ;; bash/shell
+  ("\\.sh\\'" . bash-ts-mode)
+  ;; python
+  ("\\.py\\'" . python-ts-mode)
+  :interpreter
+  ("node" . js-ts-mode)
+  ("bash" . bash-ts-mode)
+  ("sh" . bash-ts-mode)
+  ("python" . python-ts-mode))
 
 (use-package apheleia
   :config
