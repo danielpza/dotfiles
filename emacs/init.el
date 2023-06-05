@@ -204,7 +204,7 @@
 
 (use-package treesit
   :mode
-  ("\\.Dockefile\\'" . dockerfile-ts-mode)
+  ("\\.Dockerfile\\'" . dockerfile-ts-mode)
   ;; js
   ("\\.[cm]?jsx?\\'" . js-ts-mode)
   ("\\.[cm]?ts\\'" . typescript-ts-mode)
