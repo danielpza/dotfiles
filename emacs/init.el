@@ -349,6 +349,19 @@
   (interactive)
   (describe-symbol (symbol-at-point)))
 
+(defmacro my/hs-hide-level (level)
+  `(progn
+     (defun ,(intern (format "my/hs-hide-level-%d" level)) ()
+       (interactive)
+       (hs-hide-level ,level))
+     (bind-keys (,(format "M-%d" level) . ,(intern (format "my/hs-hide-level-%d" level))))))
+
+(my/hs-hide-level 1)
+(my/hs-hide-level 2)
+(my/hs-hide-level 3)
+(my/hs-hide-level 4)
+(my/hs-hide-level 5)
+
 ;; general keybindings
 (bind-keys ("<f1>" . my/describe-symbol)
 	   ("<f6>" . load-theme)
