@@ -71,7 +71,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable-pgtk;
+    package = pkgs.emacs-unstable;
     extraPackages = epkgs:
       with epkgs;
       [
