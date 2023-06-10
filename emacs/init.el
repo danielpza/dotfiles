@@ -22,8 +22,12 @@
 (electric-pair-mode) ;; auto close brackets
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
 
+(require 'hideshow)
+
 ;; evil
 (use-package evil
+  :defines evil-normal-state-map evil-window-map
+  :functions evil-define-key evil-make-intercept-map evil-get-auxiliary-keymap evil-mode
   :init
   ;; these variables need to be set before loading evil
   (setopt evil-want-integration t ;; required by evil-collection
@@ -61,11 +65,13 @@
   (evil-mode))
 
 (use-package evil-collection
+  :functions evil-collection-init
   :after evil
   :config
   (evil-collection-init))
 
 (use-package evil-indent-plus
+  :defines evil-inner-text-objects-map evil-outer-text-objects-map
   :after evil
   :bind
   (:map evil-inner-text-objects-map
@@ -83,13 +89,18 @@
 (use-package nerd-icons)
 
 (use-package nerd-icons-completion
+  :functions nerd-icons-completion-mode
   :after nerd-icons
   :config
   (nerd-icons-completion-mode))
 
+(require 'dired)
+
 (use-package dirvish
   :demand
   :commands (dired project-switch-project)
+  :defines dirvish-subtree-state-style dirvish-attributes dirvish-mode-map
+  :functions dirvish-dwim dirvish-side dirvish-subtree-up dirvish-subtree-toggle-or-open dirvish-quicksort dirvish-ls-switches-menu dirvish-yank-menu dirvish-dispatch dirvish-quit dirvish-quick-access dirvish-file-info-menu dirvish-subtree-toggle dirvish-override-dired-mode
   :bind
   ("C-x d" . dirvish-dwim)
   (:map leader-map
@@ -125,11 +136,13 @@
 
 ;; diagnostic
 (use-package jinx
+  :functions global-jinx-mode
   ;; spell checking
   :config
   (global-jinx-mode))
 
 (use-package flycheck
+  :functions global-flycheck-mode flycheck-list-errors flycheck-next-error flycheck-previous-error
   :custom
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc)) ;; https://emacs.stackexchange.com/questions/21664/how-to-prevent-flycheck-from-treating-my-init-el-as-a-package-file
   :config
@@ -141,6 +154,7 @@
 
 ;; completion
 (use-package vertico
+  :functions vertico-mode
   :config
   (vertico-mode))
 
@@ -152,12 +166,14 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package corfu
+  :functions global-corfu-mode
   :custom
   (corfu-auto t) ;; Enable auto completion
   :config
   (global-corfu-mode))
 
 (use-package consult
+  :functions consult-ripgrep consult-line consult-buffer consult-theme consult-imenu consult-recent-file consult-flycheck consult-xref
   :config
   (bind-keys ([remap project-find-regexp] . consult-ripgrep)
 	     ([remap isearch-forward] . consult-line)
@@ -172,6 +188,7 @@
 
 ;; git
 (use-package magit
+  :functions magit-blame magit-status magit-stage-file magit-log-buffer-file
   :config
   (bind-keys :map leader-map
 	     ("g b" . magit-blame)
@@ -180,6 +197,7 @@
 	     ("g l b" . magit-log-buffer-file)))
 
 (use-package git-link
+  :functions git-link
   :config
   (bind-keys :map leader-map
 	     ("g l l" . git-link))
@@ -187,6 +205,7 @@
   (git-link-use-commit t))
 
 (use-package diff-hl
+  :functions diff-hl-previous-hunk diff-hl-next-hunk diff-hl-magit-pre-refresh diff-hl-magit-post-refresh diff-hl-flydiff-mode global-diff-hl-mode
   :config
   (bind-keys :map leader-map
 	     ("g [" . diff-hl-previous-hunk)
@@ -199,6 +218,7 @@
 
 ;; lang helpers
 (use-package editorconfig
+  :functions editorconfig-mode
   :config
   (editorconfig-mode))
 
@@ -227,6 +247,8 @@
   ("python" . python-ts-mode))
 
 (use-package apheleia
+  :defines apheleia-formatters apheleia-mode-alist
+  :functions apheleia-format-buffer apheleia-global-mode
   :config
   (bind-keys :map leader-map
 	     ("c f" . apheleia-format-buffer))
@@ -261,6 +283,8 @@
   (apheleia-global-mode))
 
 (use-package copilot
+  :defines copilot-completion-map
+  :functions copilot-mode copilot-next-completion copilot-accept-completion
   :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
   :config
   (bind-keys :map copilot-completion-map
@@ -269,12 +293,14 @@
 	     ("TAB" . copilot-accept-completion)))
 
 (use-package yasnippet
+  :functions yas-global-mode
   :config
   (yas-global-mode 1))
 
 (use-package lsp-mode
   :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
   :commands (lsp lsp-deferred)
+  :defines lsp-command-map
   :custom
   (lsp-completion-provider :none)
   (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
@@ -297,11 +323,13 @@
 	("f" . consult-lsp-diagnostics)))
 
 (use-package which-key
+  :functions which-key-mode
   :config
   (which-key-mode))
 
 ;; languages
 (use-package markdown-mode
+  :defines markdown-mode-map
   :mode ("README\\.md\\'" . gfm-mode)
   :bind (:map markdown-mode-map
 	      ("C-c C-e" . markdown-do)))
