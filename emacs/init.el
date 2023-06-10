@@ -109,7 +109,7 @@
 	("t" . dirvish-side))
   :config
   (custom-set-variables '(dirvish-subtree-state-style 'nerd)
-			'(dirvish-attributes '(vc-state
+			'(dirvish-attributes '(;; vc-state
 					       subtree-state nerd-icons collapse
 					       ;; git-msg file-time file-size
 					       )))
