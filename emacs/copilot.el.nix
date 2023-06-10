@@ -1,12 +1,12 @@
 { trivialBuild, fetchFromGitHub, s, dash, editorconfig }:
 trivialBuild rec {
   pname = "copilot";
-  version = "15a698ebc1d6ffa10da7d6d7e9f972786d0ce526";
+  version = "efd6c1079a0abe989c8645cf1fb1c2e6c5e97c70";
   src = fetchFromGitHub {
     owner = "zerolfx";
     repo = "copilot.el";
-    rev = "15a698ebc1d6ffa10da7d6d7e9f972786d0ce526";
-    hash = "sha256-/+XyEI8iTwYf0R/kLC1tXCq9PP5fs6Xob55lrwLWhUg=";
+    rev = "efd6c1079a0abe989c8645cf1fb1c2e6c5e97c70";
+    hash = "sha256-VxgeXEFdhawRb978eSbj4aYMluBBTJQ333CvEk51YYk=";
   };
   # elisp dependencies
   propagatedUserEnvPkgs = [ s dash editorconfig ];
