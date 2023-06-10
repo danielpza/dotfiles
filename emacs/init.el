@@ -216,6 +216,9 @@
   (global-diff-hl-mode 1)
   (diff-hl-flydiff-mode 1))
 
+(use-package topsy
+  :hook prog-mode)
+
 ;; lang helpers
 (use-package editorconfig
   :functions editorconfig-mode
