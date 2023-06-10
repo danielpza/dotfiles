@@ -261,7 +261,7 @@
   (apheleia-global-mode))
 
 (use-package copilot
-  :hook ((prog-mode markdown-mode) . copilot-mode)
+  :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
   :config
   (bind-keys :map copilot-completion-map
 	     ("M-C" . copilot-next-completion)
