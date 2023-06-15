@@ -416,6 +416,7 @@
 	   ("f f" . find-file)
 	   ("f s" . save-buffer)
 	   ("f r" . recentf)
+	   ("f R" . rename-visited-file)
 
 	   ("d d" . my/find-init-file)
 	   ("d n" . my/find-home-manager-config)
