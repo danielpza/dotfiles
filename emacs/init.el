@@ -304,10 +304,18 @@
 (use-package lsp-mode
   :after (yasnippet) ;; https://github.com/emacs-lsp/lsp-mode/discussions/4033
   :commands (lsp lsp-deferred)
+  :functions lsp-inlay-hints-mode
   :defines lsp-command-map
   :custom
   (lsp-completion-provider :none)
-  (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
+  (lsp-inlay-hint-enable t)
+  (lsp-javascript-display-enum-member-value-hints t)
+  (lsp-javascript-display-parameter-name-hints-when-argument-matches-name t)
+  (lsp-javascript-display-parameter-type-hints t)
+  (lsp-javascript-display-property-declaration-type-hints t)
+  (lsp-javascript-display-return-type-hints t)
+  (lsp-javascript-display-variable-type-hints t)
+  ;; (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
 	  ;; config files modes
@@ -317,6 +325,7 @@
 	  ;; others
 	  lua-mode python-ts-mode nix-mode) . lsp-deferred)
   :config
+  (lsp-inlay-hints-mode)
   (keymap-set leader-map "l" lsp-command-map))
 
 (use-package consult-lsp
