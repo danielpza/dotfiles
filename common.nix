@@ -19,7 +19,18 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
+  programs.exa = {
+    enable = true;
+    extraOptions = [ "--group-directories-first" ];
+  };
+  home.shellAliases = {
+    "ls" = "exa";
+    "ll" = "exa -la";
+    "l" = "exa -a";
+  };
+
   programs.bat.enable = true;
+  home.shellAliases.cat = "bat";
 
   programs.bash.enable = true;
   programs.bash.bashrcExtra = ''
@@ -175,13 +186,7 @@ in {
   ];
 
   home.shellAliases = {
-    "cat" = "bat";
     "pq" = "pretty-quick";
-    # "pq" = "yarn dlx -p pretty-quick -p prettier pretty-quick";
-    # makes ls nicer: https://stackoverflow.com/a/18451819/6051261 and others
-    "ls" = "LC_ALL=C ls --color=auto -h --group-directories-first";
-    "ll" = "ls -la";
-    "l" = "ls -a";
     "ncu" = "ncu -i --format=group";
     "hm" = "home-manager switch";
   };
