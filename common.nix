@@ -32,10 +32,17 @@ in {
   programs.bat.enable = true;
   home.shellAliases.cat = "bat";
 
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+    settings = {
+      gcloud.disabled = true;
+      docker_context.disabled = true;
+      buf.disabled = true;
+    };
+  };
+
   programs.bash.enable = true;
-  programs.bash.bashrcExtra = ''
-    PS1='\[\e[0;2m\]$? \[\e[0;1;32m\]\w\[\e[0;1;32m\]\$ \[\e[0m\]'
-  '';
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
