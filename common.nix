@@ -56,6 +56,8 @@ in {
     ripgrep # faster grep
     tldr
     dprint # code formatter
+    hyperfine
+    onefetch
     # others
     enchant
     hunspell
