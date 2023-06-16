@@ -39,6 +39,8 @@ in {
       gcloud.disabled = true;
       docker_context.disabled = true;
       buf.disabled = true;
+      git_branch.disabled = true;
+      nodejs.disabled = true;
     };
   };
 
