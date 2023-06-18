@@ -44,4 +44,3 @@ home-manager switch
 
 - [ ] flakes (https://nixos.wiki/wiki/Flakes)
 - [ ] DE agnostic setup (only apply dconf settings if gnome is installed, etc)
-- [ ] emacsclient/emacs daemon
