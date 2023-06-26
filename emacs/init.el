@@ -313,7 +313,7 @@
   (lsp-javascript-display-parameter-name-hints-when-argument-matches-name t)
   (lsp-javascript-display-parameter-type-hints t)
   (lsp-javascript-display-property-declaration-type-hints t)
-  (lsp-javascript-display-return-type-hints t)
+  (lsp-javascript-display-return-type-hints nil)
   (lsp-javascript-display-variable-type-hints t)
   ;; (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   :hook ((;; js modes
