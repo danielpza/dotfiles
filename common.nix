@@ -71,9 +71,9 @@ in {
     enchant
     hunspell
     hunspellDicts.en_US
-    # web dev
-    nodejs
-    yarn
+    # # volta # for nodejs
+    # nodejs
+    # yarn
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
