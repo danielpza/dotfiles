@@ -323,6 +323,7 @@
 	  ;; css modes
 	  scss-mode css-ts-mode
 	  ;; others
+	  terraform-mode
 	  lua-mode python-ts-mode nix-mode) . lsp-deferred)
   :config
   (lsp-inlay-hints-mode)
@@ -354,6 +355,10 @@
 
 (use-package git-modes
   :mode ("\\.*ignore\\'" . gitignore-mode))
+
+(use-package terraform-mode
+  :config
+  (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 

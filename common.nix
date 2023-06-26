@@ -68,6 +68,8 @@ in {
     hyperfine
     onefetch
     # others
+    terraform-ls # terraform language server
+    terraform
     enchant
     hunspell
     hunspellDicts.en_US
@@ -121,6 +123,7 @@ in {
         nix-mode
         orderless
         protobuf-mode
+        terraform-mode
         treesit-grammars.with-all-grammars
         vertico
         which-key
