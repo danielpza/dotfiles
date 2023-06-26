@@ -2,6 +2,7 @@
   imports = [ ./common.nix ];
 
   home.packages = with pkgs; [
+    gnome-feeds
     signal-desktop
     spotify
     slack
