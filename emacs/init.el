@@ -437,4 +437,6 @@
 (keymap-set leader-map "h" help-map)
 
 ;; load custom config file if exists
-(require 'init.custom nil t)
+(let ((custom-file (concat user-emacs-directory "init.custom.el")))
+  (when (file-exists-p custom-file)
+    (load custom-file)))

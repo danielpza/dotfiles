@@ -25,6 +25,9 @@
   :config
   (doom-modeline-mode))
 
+(load-theme 'ef-night t)
+
 ;; load custom config file if exists
-(unless (require 'early-init.custom nil t)
-  (load-theme 'ef-night t))
+(let ((custom-file (concat user-emacs-directory "early-init.custom.el")))
+  (when (file-exists-p custom-file)
+    (load-file custom-file)))
