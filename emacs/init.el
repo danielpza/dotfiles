@@ -430,3 +430,6 @@
 
 (keymap-set leader-map "p" project-prefix-map)
 (keymap-set leader-map "h" help-map)
+
+;; load custom config file if exists
+(require 'init.custom nil t)

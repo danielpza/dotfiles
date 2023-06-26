@@ -16,15 +16,15 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; visual
-(use-package doom-themes
-  :disabled
-  :config
-  (load-theme 'doom-dark+ t))
+(use-package doom-themes)
 
-(use-package ef-themes
-  :config
-  (load-theme 'ef-night t))
+(use-package ef-themes)
 
 (use-package doom-modeline
+  :functions doom-modeline-mode
   :config
   (doom-modeline-mode))
+
+;; load custom config file if exists
+(unless (require 'early-init.custom nil t)
+  (load-theme 'ef-night t))
