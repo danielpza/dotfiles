@@ -237,7 +237,7 @@
   ("\\.css\\'" . css-ts-mode)
   ;; json
   ("\\.json\\'" . json-ts-mode)
-  ("\\.*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+  ("\\.\\(babel\\|prettier\\|eslint\\)*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
   ;; yaml
   ("\\.ya?ml\\'" . yaml-ts-mode)
   ;; bash/shell
@@ -367,6 +367,7 @@
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
 
 ;; my functions
 (defun my/find-init-file ()
@@ -431,6 +432,8 @@
 
 	   ("d d" . my/find-init-file)
 	   ("d n" . my/find-home-manager-config)
+
+	   ("l s" . sort-lines)
 
 	   ("b b" . switch-to-buffer)
 	   ("b d" . kill-current-buffer)
