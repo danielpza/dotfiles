@@ -1,16 +1,7 @@
 { pkgs, ... }: {
   imports = [ ./common.nix ];
 
-  home.packages = with pkgs; [
-    gnome-feeds
-    signal-desktop
-    spotify
-    slack
-    firefox
-    # webdev
-    nodejs
-    yarn
-  ];
+  home.packages = with pkgs; [ slack firefox ];
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

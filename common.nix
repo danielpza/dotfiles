@@ -55,11 +55,15 @@ in {
 
   home.packages = (with pkgs; [
     # apps
-    # firefox
+    gnome-feeds
+    helix
     keepassxc
     libreoffice
     logseq
-    helix
+    signal-desktop
+    spotify
+    # web dev
+    volta
     # command line helpers
     fd # faster find
     ripgrep # faster grep
@@ -186,7 +190,15 @@ in {
 
     # kde
     KDEHOME = "${config.xdg.configHome}/kde";
+
+    NIX_LD_LIBRARY_PATH =
+      lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl ]);
+    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   };
+
+  programs.bash.bashrcExtra = ''
+    export PATH="$VOLTA_HOME/bin:$PATH"
+  '';
 
   home.sessionPath = [
     "$BUN_INSTALL/bin"
