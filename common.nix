@@ -191,6 +191,12 @@ in {
     # kde
     KDEHOME = "${config.xdg.configHome}/kde";
 
+    # others
+    CALCHISTFILE = "${config.xdg.cacheHome}/calc_history";
+    ASPELL_CONF =
+      "${config.xdg.configHome}/aspell/aspell.conf; personal ${config.xdg.configHome}/aspell/en.pws; repl ${config.xdg.configHome}/aspell/en.prepl";
+
+    # volta fix
     NIX_LD_LIBRARY_PATH =
       lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl ]);
     NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
