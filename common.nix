@@ -210,12 +210,19 @@ in {
 
   # GNOME configuration
   dconf.settings = {
-    "org/gnome/desktop/interface" = { show-battery-percentage = true; };
+    "org/gnome/desktop/interface" = {
+      show-battery-percentage = true;
+      enable-hot-corners = false;
+    };
     "org/gnome/desktop/input-sources" = { xkb-options = [ "caps:escape" ]; };
     "org/gtk/gtk4/settings/file-chooser" = { sort-directories-first = true; };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
       night-light-schedule-automatic = true;
+    };
+    "org/gnome/desktop/session" = { idle-delay = 600; };
+    "org/gnome/settings-daemon/plugins/power" = {
+      power-button-action = "hibernate";
     };
   };
 }
