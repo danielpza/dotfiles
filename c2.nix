@@ -13,6 +13,11 @@
     zoom-us
   ];
 
+  home.sessionVariables = {
+    QT_XCB_GL_INTEGRATION =
+      "none"; # fix for zoom-us issue on nixos https://github.com/NixOS/nixpkgs/issues/82959
+  };
+
   targets.genericLinux.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1u" ];
