@@ -201,6 +201,9 @@ in {
     "pq" = "pretty-quick";
     "ncu" = "ncu -i --format=group";
     "hm" = "home-manager switch";
+    "hmu" = "nix-channel --update && home-manager switch";
+    "nixosup" = "sudo nix-channel --update && sudo nixos-rebuild switch";
+    "nixosedit" = "sudo -E emacs /etc/nixos/configuration.nix";
   };
 
   # home.keyboard.options = [ "caps:escape" ];
