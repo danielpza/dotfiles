@@ -116,6 +116,7 @@ in {
         jinx
         kind-icon
         lsp-mode
+        lsp-ui
         magit
         markdown-mode
         nerd-icons

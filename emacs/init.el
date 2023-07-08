@@ -329,6 +329,12 @@
   (lsp-inlay-hints-mode)
   (keymap-set leader-map "l" lsp-command-map))
 
+(use-package lsp-ui
+  :custom
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-show-with-cursor t))
+
 (use-package consult-lsp
   :after (lsp-mode consult)
   :bind
