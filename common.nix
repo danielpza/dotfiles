@@ -55,7 +55,7 @@ in {
 
   home.packages = (with pkgs; [
     # apps
-    firefox
+    # firefox
     keepassxc
     libreoffice
     logseq

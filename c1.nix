@@ -6,6 +6,7 @@
     signal-desktop
     spotify
     slack
+    firefox
     # webdev
     nodejs
     yarn
