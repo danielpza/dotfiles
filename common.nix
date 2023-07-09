@@ -35,6 +35,7 @@ in {
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
     settings = {
       gcloud.disabled = true;
       docker_context.disabled = true;
@@ -45,6 +46,12 @@ in {
   };
 
   programs.bash.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
+  };
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
@@ -204,6 +211,9 @@ in {
   };
 
   programs.bash.bashrcExtra = ''
+    export PATH="$VOLTA_HOME/bin:$PATH"
+  '';
+  programs.zsh.profileExtra = ''
     export PATH="$VOLTA_HOME/bin:$PATH"
   '';
 
