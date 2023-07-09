@@ -77,6 +77,7 @@ in {
     enchant
     hunspell
     hunspellDicts.en_US
+    shfmt
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
