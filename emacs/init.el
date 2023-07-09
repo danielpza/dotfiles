@@ -368,6 +368,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.env.*\\'" . conf-mode))
 
 ;; my functions
 (defun my/find-init-file ()
