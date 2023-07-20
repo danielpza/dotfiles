@@ -283,6 +283,14 @@
 	(setq-local apheleia-formatter 'prettier-json-stringify)))
     (add-hook 'json-ts-mode-hook 'my/set-package-json-apheleia-formatter))
 
+  ;; https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
+  (defun shou/fix-apheleia-project-dir (orig-fn &rest args)
+    (let ((project (project-current)))
+      (if (not (null project))
+          (let ((default-directory (project-root project))) (apply orig-fn args))
+        (apply orig-fn args))))
+  (advice-add 'apheleia-format-buffer :around #'shou/fix-apheleia-project-dir)
+
   (my/setup-fix-for-apheleia-prettier-package-json-files)
   (apheleia-global-mode))
 
