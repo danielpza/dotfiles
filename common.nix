@@ -209,16 +209,23 @@ in {
       "${config.xdg.configHome}/aspell/aspell.conf; personal ${config.xdg.configHome}/aspell/en.pws; repl ${config.xdg.configHome}/aspell/en.prepl";
 
     # volta fix
+    # https://discourse.nixos.org/t/node2nix-issues/10762/2
     NIX_LD_LIBRARY_PATH =
-      lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl ]);
+      lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl libuuid ]);
     NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   };
 
   programs.bash.bashrcExtra = ''
     export PATH="$VOLTA_HOME/bin:$PATH"
+    export LD_LIBRARY_PATH="${
+      lib.makeLibraryPath (with pkgs; [ libGL libuuid ])
+    }:$LD_LIBRARY_PATH"
   '';
   programs.zsh.profileExtra = ''
     export PATH="$VOLTA_HOME/bin:$PATH"
+    export LD_LIBRARY_PATH="${
+      lib.makeLibraryPath (with pkgs; [ libGL libuuid ])
+    }:$LD_LIBRARY_PATH"
   '';
 
   home.sessionPath = [
