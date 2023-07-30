@@ -9,6 +9,8 @@
     teams-for-linux
     vscodium
     zoom-us
+    docker
+    google-cloud-sdk
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1u" ];

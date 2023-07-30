@@ -323,7 +323,7 @@
   (lsp-javascript-display-property-declaration-type-hints t)
   (lsp-javascript-display-return-type-hints nil)
   (lsp-javascript-display-variable-type-hints t)
-  ;; (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
+  (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
 	  ;; config files modes
@@ -331,7 +331,9 @@
 	  ;; css modes
 	  scss-mode css-ts-mode
 	  ;; others
-	  terraform-mode
+	  bash-ts-mode
+	  gfm-mode markdown-mode
+	  dockerfile-ts-mode terraform-mode
 	  lua-mode python-ts-mode nix-mode) . lsp-deferred)
   :config
   (lsp-inlay-hints-mode)
@@ -342,6 +344,9 @@
   (lsp-ui-sideline-show-diagnostics t)
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-show-with-cursor t))
+
+(use-package lsp-pyright
+  :after (lsp-mode))
 
 (use-package consult-lsp
   :after (lsp-mode consult)
@@ -373,6 +378,8 @@
 (use-package terraform-mode
   :config
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
+
+(use-package earthfile-mode)
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
