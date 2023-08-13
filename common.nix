@@ -238,6 +238,8 @@ in {
 
     # https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization)
     # LSP_USE_PLISTS = "true";
+
+    MOZ_USE_XINPUT2 = "1";
   };
 
   programs.bash.bashrcExtra = extraProfile;
