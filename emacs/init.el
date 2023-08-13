@@ -418,6 +418,18 @@
   (interactive)
   (describe-symbol (symbol-at-point)))
 
+(defun delete-visited-file (buffer-name)
+  "Delete the file visited by the buffer named BUFFER-NAME."
+  ;; https://zck.org/deleting-files-in-emacs
+  (interactive "bDelete file visited by buffer ")
+  (let* ((buffer (get-buffer buffer-name))
+         (filename (buffer-file-name buffer)))
+    (when buffer
+      (when (and filename
+                 (file-exists-p filename))
+        (delete-file filename))
+      (kill-buffer buffer))))
+
 (defmacro my/hs-hide-level (level)
   `(progn
      (defun ,(intern (format "my/hs-hide-level-%d" level)) ()
