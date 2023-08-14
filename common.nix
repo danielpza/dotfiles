@@ -165,6 +165,8 @@ in {
         which-key
         yasnippet
         earthfile-mode # https://github.com/earthly/earthly-emacs
+        embark
+        embark-consult
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {
