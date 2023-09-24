@@ -20,11 +20,12 @@ let
     }:$LD_LIBRARY_PATH"
   '';
 
-  gnomeExtensions = with pkgs.gnomeExtensions;
-    [
-      dash-to-panel
-      # material-shell
-    ];
+  gnomeExtensions = with pkgs.gnomeExtensions; [
+    dash-to-panel
+    # material-shell
+    # github-notifications
+    appindicator
+  ];
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
