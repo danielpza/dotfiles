@@ -263,7 +263,7 @@ in {
   ];
 
   home.shellAliases = {
-    "pq" = "pretty-quick";
+    "pq" = "yarn dlx -p prettier -p pretty-quick pretty-quick";
     "ncu" = "ncu -i --format=group";
     "hm" = "home-manager switch";
     "hmu" = "nix-channel --update && home-manager switch";
