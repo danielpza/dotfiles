@@ -348,6 +348,11 @@
   (lsp-javascript-display-return-type-hints nil)
   (lsp-javascript-display-variable-type-hints t)
   (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
+  :bind
+  ("M-i" . lsp-inlay-hints-mode)
+  ("M-r" . lsp-rename)
+  ("M-s" . lsp)
+  ("M-R" . lsp-javascript-rename-file)
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
 	  ;; config files modes
