@@ -153,6 +153,7 @@ in {
         flycheck
         git-link
         git-modes
+        feature-mode # cucumber
         jinx
         kind-icon
         lsp-mode
