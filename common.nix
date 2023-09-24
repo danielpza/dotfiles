@@ -19,6 +19,12 @@ let
       ])
     }:$LD_LIBRARY_PATH"
   '';
+
+  gnomeExtensions = with pkgs.gnomeExtensions;
+    [
+      dash-to-panel
+      # material-shell
+    ];
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
@@ -284,5 +290,9 @@ in {
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "hibernate";
     };
+
+    # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
+    "org/gnome/shell".enabled-extensions =
+      map (extension: extension.extensionUuid) gnomeExtensions;
   };
 }
