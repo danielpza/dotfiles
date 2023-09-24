@@ -295,6 +295,7 @@
 		  (bash-ts-mode . shfmt)
 		  (protobuf-mode . protobuf)
 		  (dockerfile-ts-mode . dprint)
+		  ;; (mhtml-mode . prettier-html)
 		  ) apheleia-mode-alist))
 
   ;; support for more languages
@@ -409,6 +410,17 @@
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (use-package earthfile-mode)
+
+(use-package feature-mode
+  :mode ("\\.feature\\'" . feature-mode)
+  :defines feature-default-language
+  :config
+  (setq feature-default-language "fi"))
+
+(use-package org
+  :bind (:map org-mode-map
+	      ("M-S" . org-sort)
+	      ))
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
