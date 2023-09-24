@@ -123,7 +123,7 @@ in {
     yaml-language-server
     bash-language-server
     dockerfile-language-server-nodejs
-  ]);
+  ]) ++ gnomeExtensions;
 
   programs.zoxide = {
     enable = true;
