@@ -52,7 +52,7 @@ in {
   };
 
   programs.bat.enable = true;
-  home.shellAliases.cat = "bat";
+  home.shellAliases.cat = "bat -p";
 
   programs.starship = {
     enable = true;
