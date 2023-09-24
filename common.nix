@@ -283,7 +283,7 @@ in {
     "org/gnome/desktop/input-sources" = { xkb-options = [ "caps:escape" ]; };
     "org/gtk/gtk4/settings/file-chooser" = { sort-directories-first = true; };
     "org/gnome/settings-daemon/plugins/color" = {
-      night-light-enabled = true;
+      night-light-enabled = false;
       night-light-schedule-automatic = true;
     };
     "org/gnome/desktop/session" = { idle-delay = 0; };
