@@ -13,7 +13,7 @@
     google-cloud-sdk
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1u" ];
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

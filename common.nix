@@ -11,13 +11,16 @@ let
       lib.makeLibraryPath (with pkgs; [
         stdenv.cc.cc
         openssl
-        # openssl_1_1 # https://discourse.nixos.org/t/how-to-fix-library-is-missing-or-cannot-be-opened-libcrypto-so-1-1/30730
-        # lzlib # related https://github.com/NixOS/nix/issues/1550
+        openssl_1_1 # https://discourse.nixos.org/t/how-to-fix-library-is-missing-or-cannot-be-opened-libcrypto-so-1-1/30730, https://github.com/nodkz/mongodb-memory-server/issues/782
+        lzlib # related https://github.com/NixOS/nix/issues/1550
         libGL
         libuuid
-        # curlFull
+        curlFull
       ])
     }:$LD_LIBRARY_PATH"
+    # mss https://nodkz.github.io/mongodb-memory-server/docs/api/config-options/
+    # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
+    export MONGOMS_DISTRO="ubuntu2204"
   '';
 
   gnomeExtensions = with pkgs.gnomeExtensions; [
