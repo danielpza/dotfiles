@@ -321,10 +321,11 @@
 
 (use-package copilot
   :defines copilot-completion-map
-  :functions copilot-mode copilot-next-completion copilot-accept-completion
+  :functions copilot-mode copilot-next-completion copilot-accept-completion copilot-diagnose
   :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
   :config
-  (bind-keys :map copilot-completion-map
+  (bind-keys ("M-S" . copilot-diagnose)
+	     :map copilot-completion-map
 	     ("M-C" . copilot-next-completion)
 	     ("<tab>" . copilot-accept-completion)
 	     ("TAB" . copilot-accept-completion)))
@@ -348,11 +349,13 @@
   (lsp-javascript-display-property-declaration-type-hints t)
   (lsp-javascript-display-return-type-hints nil)
   (lsp-javascript-display-variable-type-hints t)
+  (lsp-auto-execute-action nil)
   (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   :bind
-  ("M-i" . lsp-inlay-hints-mode)
+  ;; ("M-i" . lsp-inlay-hints-mode)
   ("M-r" . lsp-rename)
   ("M-s" . lsp)
+  ("M-a" . lsp-execute-code-action)
   ("M-R" . lsp-javascript-rename-file)
   :hook ((;; js modes
 	  js-ts-mode tsx-ts-mode typescript-ts-mode
@@ -393,7 +396,9 @@
 ;; languages
 (use-package markdown-mode
   :defines markdown-mode-map
-  :mode ("README\\.md\\'" . gfm-mode)
+  :mode
+  ("README\\.md\\'" . gfm-mode)
+  ("\\.mdx\\'" . markdown-mode)
   :bind (:map markdown-mode-map
 	      ("C-c C-e" . markdown-do)))
 
@@ -518,3 +523,46 @@
 (let ((custom-file (concat user-emacs-directory "init.custom.el")))
   (when (file-exists-p custom-file)
     (load custom-file)))
+
+;; https://stackoverflow.com/questions/13981899/how-can-i-kill-all-buffers-in-my-emacs
+(defun my/kill-all-buffers ()
+  (interactive)
+  ;; kill all file buffers except current buffer
+  (dolist (buffer (buffer-list))
+    (unless (or (string-match-p "^\\*" (buffer-name buffer))
+		(eq buffer (current-buffer)))
+      (kill-buffer buffer))))
+
+;; bind spc b K to kill all buffers
+(bind-keys :map leader-map
+	   ("b K" . my/kill-all-buffers))
+
+(defun my/insert-line-before (message)
+  ;; https://stackoverflow.com/questions/622440/emacs-command-to-insert-and-indent-line-above-cursor
+  ;; https://emacs.stackexchange.com/questions/32958/insert-line-above-below
+  (save-excursion
+    (beginning-of-line)
+    (end-of-line 0)
+    (newline-and-indent)
+    (insert message)))
+
+(defun my/insert-ts-expect-error ()
+  (interactive)
+  (my/insert-line-before "// @ts-expect-error -- TODO fix later"))
+
+(defun my/insert-ts-expect-error-tsx ()
+  (interactive)
+  (my/insert-line-before "{/* @ts-expect-error -- TODO fix later */}"))
+
+(defun my/insert-eslint-disable-next-line ()
+  (interactive)
+  (my/insert-line-before "// eslint-disable-next-line"))
+
+(defun my/insert-eslint-disable-next-line-tsx ()
+  (interactive)
+  (my/insert-line-before "{/* eslint-disable-next-line */}"))
+
+(bind-keys ("M-i" . my/insert-ts-expect-error)
+	   ("M-I" . my/insert-ts-expect-error-tsx)
+	   ("M-e" . my/insert-eslint-disable-next-line)
+	   ("M-E" . my/insert-eslint-disable-next-line-tsx))
