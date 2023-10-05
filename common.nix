@@ -28,6 +28,7 @@ let
     # material-shell
     # github-notifications
     appindicator
+    caffeine
   ];
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
