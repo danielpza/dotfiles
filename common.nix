@@ -45,14 +45,14 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
     extraOptions = [ "--group-directories-first" ];
   };
   home.shellAliases = {
-    "ls" = "exa";
-    "ll" = "exa -la";
-    "l" = "exa -a";
+    "ls" = "eza";
+    "ll" = "eza -la";
+    "l" = "eza -a";
   };
 
   programs.bat.enable = true;
