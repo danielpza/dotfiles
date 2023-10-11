@@ -108,6 +108,7 @@ in {
     dprint # code formatter
     hyperfine
     onefetch
+    protonvpn-gui
     # others
     terraform-ls # terraform language server
     marksman # markdown language server
