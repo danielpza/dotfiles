@@ -355,6 +355,7 @@
   ;; ("M-i" . lsp-inlay-hints-mode)
   ("M-r" . lsp-rename)
   ("M-s" . lsp)
+  ("M-W" . lsp-workspace-restart)
   ("M-a" . lsp-execute-code-action)
   ("M-R" . lsp-javascript-rename-file)
   :hook ((;; js modes
