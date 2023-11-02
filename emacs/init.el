@@ -212,7 +212,7 @@
 
 ;; git
 (use-package magit
-  :functions magit-blame magit-status magit-stage-file magit-log-buffer-file
+  :functions magit-blame magit-status magit-stage-file magit-log-buffer-file magit-refresh-all
   :config
   (bind-keys :map leader-map
 	     ("g b" . magit-blame)
@@ -566,3 +566,43 @@
 	   ("M-I" . my/insert-ts-expect-error-tsx)
 	   ("M-e" . my/insert-eslint-disable-next-line)
 	   ("M-E" . my/insert-eslint-disable-next-line-tsx))
+
+(defun my/refresh-magit-sentinel (process signal)
+  (when (memq (process-status process) '(exit signal))
+    (magit-refresh-all)
+    (shell-command-sentinel process signal)))
+
+(defun my/run-silent-and-refresh-magit (cmd)
+  "Run CMD in a shell without displaying the output."
+  ;; https://emacs.stackexchange.com/questions/42172/run-elisp-when-async-shell-command-is-done
+  (let* ((buffer-name (generate-new-buffer  "*Yarn Async Shell Command*"))
+	 (display-buffer-alist '(("*Yarn Async Shell Command*" display-buffer-no-window)))
+	 (proc (progn
+
+		 (async-shell-command cmd buffer-name)
+		 (get-buffer-process buffer-name))
+	       ))
+    (if (process-live-p proc)
+	(set-process-sentinel proc #'my/refresh-magit-sentinel)
+      (magit-refresh-all))
+    ))
+
+(defun my/yarn-stage ()
+  "See https://yarnpkg.com/cli/stage."
+  (interactive)
+  (my/run-silent-and-refresh-magit "yarn stage"))
+
+(defun my/yarn-constraints-fix ()
+  "See https://yarnpkg.com/cli/constraints."
+  (interactive)
+  (my/run-silent-and-refresh-magit "yarn constraints --fix"))
+
+(defun my/yarn-install ()
+  (interactive)
+  (my/run-silent-and-refresh-magit "yarn install"))
+
+;; bind to spc y
+(bind-keys :map leader-map
+	   ("y s" . my/yarn-stage)
+	   ("y c" . my/yarn-constraints-fix)
+	   ("y i" . my/yarn-install))
