@@ -342,7 +342,7 @@
   :defines lsp-command-map
   :custom
   (lsp-completion-provider :none)
-  (lsp-inlay-hint-enable t)
+  (lsp-inlay-hint-enable nil)
   (lsp-javascript-display-enum-member-value-hints t)
   (lsp-javascript-display-parameter-name-hints-when-argument-matches-name t)
   (lsp-javascript-display-parameter-type-hints t)
