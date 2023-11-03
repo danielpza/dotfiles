@@ -13,6 +13,7 @@
  ;; dired related
  dired-mouse-drag-files t ;; allow drag and drop from dired
  mouse-drag-and-drop-region-cross-program t ;; allow drag and drop from emacs to other programs
+ custom-file (expand-file-name "custom.el" user-emacs-directory)
  dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group")
 
 (recentf-mode)
