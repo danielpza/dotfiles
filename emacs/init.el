@@ -414,7 +414,7 @@
 
 (use-package terraform-mode
   :config
-  (add-hook 'terraform-mode-hook #'outline-minor-mode))
+  (add-hook 'terraform-mode-hook #'hs-minor-mode))
 
 (use-package earthfile-mode)
 
