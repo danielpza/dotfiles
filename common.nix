@@ -279,6 +279,16 @@ in {
     "nedit" = "sudo -E emacs /etc/nixos/configuration.nix";
   };
 
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        showDesktopNotification = false;
+        saveAfterCopy = true;
+      };
+    };
+  };
+
   # home.keyboard.options = [ "caps:escape" ];
 
   # GNOME configuration
@@ -297,6 +307,27 @@ in {
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "hibernate";
     };
+
+    # https://the-empire.systems/nixos-gnome-settings-and-keyboard-shortcuts
+    # https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275
+    "org/gnome/shell/keybindings" = {
+      toggle-application-view = [ ];
+      toggle-overview = [ ];
+      show-screenshot-ui = [ "<Super>R" ];
+      show-desktop = [ "<Super>D>" ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      help = [ ];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+      {
+        name = "flameshot";
+        command = "flameshot gui";
+        binding = "<Super>S";
+      };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
     "org/gnome/shell".enabled-extensions =
