@@ -320,6 +320,7 @@ in {
       help = [ ];
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
@@ -327,6 +328,12 @@ in {
         name = "flameshot";
         command = "flameshot gui";
         binding = "<Super>S";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
+      {
+        name = "restart wifi";
+        command = "sh ${./bin/restart-wifi.sh}";
+        binding = "<Super>C";
       };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
