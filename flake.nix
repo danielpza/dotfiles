@@ -1,5 +1,4 @@
 {
-  # following https://www.youtube.com/watch?v=AGVXJ-TIv3Y
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
