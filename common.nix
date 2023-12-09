@@ -194,6 +194,10 @@ in {
       source = ./hyprland;
       recursive = true;
     };
+    "awesome" = {
+      source = ./awesome;
+      recursive = true;
+    };
   };
 
   programs.git = {
