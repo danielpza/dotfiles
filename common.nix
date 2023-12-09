@@ -7,17 +7,6 @@ let
 
   extraProfile = ''
     export PATH="$VOLTA_HOME/bin:$PATH"
-    export LD_LIBRARY_PATH="${
-      lib.makeLibraryPath (with pkgs; [
-        stdenv.cc.cc
-        openssl
-        openssl_1_1 # https://discourse.nixos.org/t/how-to-fix-library-is-missing-or-cannot-be-opened-libcrypto-so-1-1/30730, https://github.com/nodkz/mongodb-memory-server/issues/782
-        lzlib # related https://github.com/NixOS/nix/issues/1550
-        libGL
-        libuuid
-        curlFull
-      ])
-    }:$LD_LIBRARY_PATH"
     # mss https://nodkz.github.io/mongodb-memory-server/docs/api/config-options/
     # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
     export MONGOMS_DISTRO="ubuntu2204"
@@ -252,12 +241,6 @@ in {
     CALCHISTFILE = "${config.xdg.cacheHome}/calc_history";
     ASPELL_CONF =
       "${config.xdg.configHome}/aspell/aspell.conf; personal ${config.xdg.configHome}/aspell/en.pws; repl ${config.xdg.configHome}/aspell/en.prepl";
-
-    # volta fix
-    # https://discourse.nixos.org/t/node2nix-issues/10762/2
-    NIX_LD_LIBRARY_PATH =
-      lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl libuuid ]);
-    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
 
     # https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization)
     # LSP_USE_PLISTS = "true";
