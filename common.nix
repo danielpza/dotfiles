@@ -105,6 +105,8 @@ in {
     hunspell
     hunspellDicts.en_US
     shfmt
+    # lua
+    luajitPackages.lua-lsp
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
