@@ -262,7 +262,7 @@
   ("\\.css\\'" . css-ts-mode)
   ;; json
   ("\\.json\\'" . json-ts-mode)
-  ("\\.\\(babel\\|prettier\\|eslint\\)*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+  ("\\.\\(babel\\|prettier\\|eslint\\|madge\\)*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
   ;; yaml
   ("\\.ya?ml\\'" . yaml-ts-mode)
   ;; bash/shell
@@ -278,6 +278,8 @@
 (use-package apheleia
   :defines apheleia-formatters apheleia-mode-alist
   :functions apheleia-format-buffer apheleia-global-mode
+  :custom
+  (apheleia-log-debug-info t)
   :config
   (bind-keys :map leader-map
 	     ("c f" . apheleia-format-buffer))
@@ -352,6 +354,7 @@
   (lsp-javascript-display-variable-type-hints t)
   (lsp-auto-execute-action nil)
   (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
+  (lsp-eslint-auto-fix-on-save t)
   :bind
   ;; ("M-i" . lsp-inlay-hints-mode)
   ("M-r" . lsp-rename)
