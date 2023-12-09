@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ./common.nix ];
-
   home.packages = with pkgs; [
     firefox-devedition
     gh
@@ -14,6 +12,11 @@
 
     obs-studio
   ];
+
+  home.shellAliases = {
+    "hm" =
+      "home-manager switch --flake path:/home/daniel/.config/home-manager#c2";
+  };
 
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
