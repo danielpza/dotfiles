@@ -293,6 +293,12 @@ in {
     };
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   # home.keyboard.options = [ "caps:escape" ];
 
   # GNOME configuration
