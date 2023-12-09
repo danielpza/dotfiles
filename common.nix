@@ -321,6 +321,7 @@ in {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
@@ -334,6 +335,12 @@ in {
         name = "restart wifi";
         command = "sh ${./bin/restart-wifi.sh}";
         binding = "<Super>C";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
+      {
+        name = "reconnect bluetooth";
+        command = "sh ${./bin/reconnect-bluetooth}";
+        binding = "<Super>F";
       };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263

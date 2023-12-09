@@ -1,0 +1,20 @@
+#!/bin/env sh
+
+device=$(bluetoothctl devices | grep Device)
+name=$(echo $device | sed -n 's/.* [0-9A-C:]\{17\} \(.*\)/\1/p')
+address=$(echo $device | awk '{ print $2; }')
+
+echo "Disconnect $name ($device)"
+bluetoothctl disconnect $address
+sleep 1
+
+echo "Connect $name ($device)"
+bluetoothctl connect $address
+sleep 1
+
+# card=$(pacmd list-cards | grep -oP 'name: <\K(bluez[^>]*)')
+# echo "Switching $card to HSP"
+# pacmd set-card-profile $card headset_head_unit
+# sleep 1
+# echo "Switching $card to A2DP"
+# pacmd set-card-profile $card a2dp_sink
