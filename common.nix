@@ -90,6 +90,7 @@ in {
     tldr
     dprint # code formatter
     gdtoolkit # godot code formatter
+    stylua # lua formatter
     hyperfine
     onefetch
     protonvpn-gui
@@ -168,6 +169,7 @@ in {
         embark
         embark-consult
         gdscript-mode
+        lua-mode
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {
