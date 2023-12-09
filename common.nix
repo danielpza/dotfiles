@@ -202,6 +202,10 @@ in {
       source = ./emacs;
       recursive = true;
     };
+    "hypr" = {
+      source = ./hyprland;
+      recursive = true;
+    };
   };
 
   programs.git = {
