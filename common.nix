@@ -98,6 +98,7 @@ in {
     logseq
     signal-desktop
     spotify
+    neovim
     # web dev
     volta
     # command line helpers
