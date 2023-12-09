@@ -18,12 +18,14 @@
         config.allowUnfree = true;
         overlays = [ emacs-overlay.overlay ];
       };
-      username = "daniel";
     in {
-      homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home.nix ];
-        };
+      homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./common.nix ./c1.nix ];
+      };
+      homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./common.nix ./c2.nix ];
+      };
     };
 }

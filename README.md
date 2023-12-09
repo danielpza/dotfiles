@@ -6,19 +6,10 @@ Previous dotfiles of arch linux + dwm + emacs doom are available at https://gith
 
 ## Installation
 
-- Clone config and select configuration
-
 ```sh
 git clone git@github.com:danielpza/dotfiles.git ~/.config/home-manager
-cd .config/home-manager
-ln -sfr $PWD/c1.nix home.nix
-# or c2.nix, etc
-```
 
-- Then run home manager:
-
-```sh
-nix run home-manager -- switch
+nix run home-manager -- switch --flake path:/home/daniel/.config/home-manager#c1
 ```
 
 ## Reference
