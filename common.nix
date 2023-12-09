@@ -111,6 +111,7 @@ in {
     protonvpn-gui
     yq # yaml/xml/toml processor
     jq # json processor
+    github-copilot-cli
     # others
     terraform-ls # terraform language server
     marksman # markdown language server
