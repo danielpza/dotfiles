@@ -288,7 +288,7 @@
   (setq apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
 				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
 				      (prettier-json-stringify . ("apheleia-npx" "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
-				      (gdformat . ("gdformat"))
+				      (gdformat . ("gdformat" "-"))
 				      ) apheleia-formatters))
 
   (setq apheleia-mode-alist
