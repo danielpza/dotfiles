@@ -109,6 +109,8 @@ in {
     hyperfine
     onefetch
     protonvpn-gui
+    yq # yaml/xml/toml processor
+    jq # json processor
     # others
     terraform-ls # terraform language server
     marksman # markdown language server
