@@ -49,6 +49,8 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   # hyprland https://wiki.hyprland.org/Nix/
   programs.hyprland = {
     enable = true;
