@@ -90,7 +90,8 @@ in {
     spotify
     neovim
     # web dev
-    volta
+    nodejs
+    yarn
     # command line helpers
     fd # faster find
     ripgrep # faster grep
