@@ -183,6 +183,7 @@ in {
         earthfile-mode # https://github.com/earthly/earthly-emacs
         embark
         embark-consult
+        gdscript-mode
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {

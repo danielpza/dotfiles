@@ -368,6 +368,8 @@
 	  json-ts-mode yaml-ts-mode
 	  ;; css modes
 	  scss-mode css-ts-mode
+	  ;; godot
+	  gdscript-ts-mode
 	  ;; others
 	  bash-ts-mode
 	  gfm-mode markdown-mode
@@ -611,3 +613,6 @@
 	   ("y s" . my/yarn-stage)
 	   ("y c" . my/yarn-constraints-fix)
 	   ("y i" . my/yarn-install))
+
+(use-package gdscript-mode
+  :mode ("\\.gd\\'" . gdscript-ts-mode))
