@@ -89,6 +89,7 @@ in {
     ripgrep # faster grep
     tldr
     dprint # code formatter
+    gdtoolkit # godot code formatter
     hyperfine
     onefetch
     protonvpn-gui
