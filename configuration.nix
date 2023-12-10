@@ -49,7 +49,9 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Tiling WMs
   services.xserver.windowManager.awesome.enable = true;
+  programs.river.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 

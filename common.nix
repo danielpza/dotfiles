@@ -202,6 +202,10 @@ in {
       source = ./awesome;
       recursive = true;
     };
+    "river" = {
+      source = ./river;
+      recursive = true;
+    };
   };
 
   programs.git = {
