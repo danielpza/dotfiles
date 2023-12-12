@@ -31,5 +31,9 @@
         inherit system;
         modules = [ ./c1-configuration.nix ];
       };
+      nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [ ./c2-configuration.nix ];
+      };
     };
 }

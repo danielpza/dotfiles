@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  configDir = "/home/daniel/.config/home-manager";
+  config = "c2";
+in {
   home.packages = with pkgs; [
     firefox-devedition
     gh
@@ -14,8 +18,9 @@
   ];
 
   home.shellAliases = {
-    "hm" =
-      "home-manager switch --flake path:/home/daniel/.config/home-manager#c2";
+    "hm" = "home-manager switch --flake path:${configDir}#${config}";
+    "nu" = "nix flake update ${configDir}";
+    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${config}";
   };
 
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
