@@ -1,12 +1,14 @@
 { pkgs, ... }:
-let configDir = "/home/daniel/.config/home-manager";
+let
+  configDir = "/home/daniel/.config/home-manager";
+  config = "c1";
 in {
   home.packages = with pkgs; [ slack firefox ];
 
   home.shellAliases = {
-    "hm" = "home-manager switch --flake path:${configDir}#c1";
+    "hm" = "home-manager switch --flake path:${configDir}#${config}";
     "nu" = "nix flake update ${configDir}";
-    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#c1";
+    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${config}";
   };
 
   dconf.settings = {
