@@ -27,9 +27,9 @@
         inherit pkgs;
         modules = [ ./common.nix ./c2.nix ];
       };
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ ./configuration.nix ];
+        modules = [ ./c1-configuration.nix ];
       };
     };
 }

@@ -6,7 +6,7 @@ in {
   home.shellAliases = {
     "hm" = "home-manager switch --flake path:${configDir}#c1";
     "nu" = "nix flake update ${configDir}";
-    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#nixos";
+    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#c1";
   };
 
   dconf.settings = {
