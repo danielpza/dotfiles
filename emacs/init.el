@@ -14,7 +14,9 @@
  dired-mouse-drag-files t ;; allow drag and drop from dired
  mouse-drag-and-drop-region-cross-program t ;; allow drag and drop from emacs to other programs
  custom-file (expand-file-name "custom.el" user-emacs-directory)
- dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group")
+ dired-listing-switches "--almost-all --human-readable --group-directories-first -l --no-group"
+ tab-width 4 ;; 8 as default is too much
+ )
 
 (recentf-mode)
 (global-display-line-numbers-mode)
@@ -32,8 +34,8 @@
   :init
   ;; these variables need to be set before loading evil
   (setopt evil-want-integration t ;; required by evil-collection
-	  evil-want-keybinding nil ;; required by evil-collection
-	  evil-respect-visual-line-mode t)
+		  evil-want-keybinding nil ;; required by evil-collection
+		  evil-respect-visual-line-mode t)
   :custom
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
@@ -41,7 +43,7 @@
   :config
   (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
   (bind-keys :map evil-normal-state-map
-	     ("z l" . hs-hide-level))
+			 ("z l" . hs-hide-level))
   (defun my/setup-evil-leader-key ()
     ;; leader key https://github.com/noctuid/evil-guide#preventing-certain-keys-from-being-overridden
     (define-minor-mode leader-mode
@@ -76,15 +78,15 @@
   :after evil
   :bind
   (:map evil-inner-text-objects-map
-	("i" . evil-indent-plus-i-indent)
-	("I" . evil-indent-plus-i-indent-up)
-	("k" . evil-indent-plus-i-indent-up)
-	("j" . evil-indent-plus-i-indent-up-down)
-	("J" . evil-indent-plus-i-indent-up-down))
+		("i" . evil-indent-plus-i-indent)
+		("I" . evil-indent-plus-i-indent-up)
+		("k" . evil-indent-plus-i-indent-up)
+		("j" . evil-indent-plus-i-indent-up-down)
+		("J" . evil-indent-plus-i-indent-up-down))
   (:map evil-outer-text-objects-map
-	("i" . evil-indent-plus-a-indent)
-	("I" . evil-indent-plus-a-indent-up)
-	("J" . evil-indent-plus-a-indent-up-down)))
+		("i" . evil-indent-plus-a-indent)
+		("I" . evil-indent-plus-a-indent-up)
+		("J" . evil-indent-plus-a-indent-up-down)))
 
 ;; core improvements
 (use-package nerd-icons)
@@ -105,34 +107,34 @@
   :bind
   ("C-x d" . dirvish-dwim)
   (:map leader-map
-	("a d" . dirvish-dwim))
+		("a d" . dirvish-dwim))
   (:map project-prefix-map
-	("t" . dirvish-side))
+		("t" . dirvish-side))
   :config
   (custom-set-variables '(dirvish-subtree-state-style 'nerd)
-			'(dirvish-attributes '(;; vc-state
-					       subtree-state nerd-icons collapse
-					       ;; git-msg file-time file-size
-					       )))
+						'(dirvish-attributes '(;; vc-state
+											   subtree-state nerd-icons collapse
+											   ;; git-msg file-time file-size
+											   )))
   (bind-keys :map dired-mode-map
-	     ("u" . dirvish-subtree-up))
+			 ("u" . dirvish-subtree-up))
   (bind-keys :map dirvish-mode-map
-	     ("<mouse-1>" . dirvish-subtree-toggle-or-open)
-	     ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
-	     ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
-	     ([remap dired-do-copy] . dirvish-yank-menu)
-	     ("?" . dirvish-dispatch)
-	     ("q" . dirvish-quit)
-	     ("a" . dirvish-quick-access)
-	     ("f" . dirvish-file-info-menu)
-	     ("x" . dired-do-delete)
-	     ("X" . dired-do-flagged-delete)
-	     ("y" . dirvish-yank-menu)
-	     ("s" . dirvish-quicksort)
-	     ("u" . dirvish-subtree-up)
-	     ;; ("<return>" . dirvish-subtree-toggle)
-	     ("<tab>" . dirvish-subtree-toggle)
-	     ("TAB" . dirvish-subtree-toggle))
+			 ("<mouse-1>" . dirvish-subtree-toggle-or-open)
+			 ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
+			 ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
+			 ([remap dired-do-copy] . dirvish-yank-menu)
+			 ("?" . dirvish-dispatch)
+			 ("q" . dirvish-quit)
+			 ("a" . dirvish-quick-access)
+			 ("f" . dirvish-file-info-menu)
+			 ("x" . dired-do-delete)
+			 ("X" . dired-do-flagged-delete)
+			 ("y" . dirvish-yank-menu)
+			 ("s" . dirvish-quicksort)
+			 ("u" . dirvish-subtree-up)
+			 ;; ("<return>" . dirvish-subtree-toggle)
+			 ("<tab>" . dirvish-subtree-toggle)
+			 ("TAB" . dirvish-subtree-toggle))
   (dirvish-override-dired-mode))
 
 ;; diagnostic
@@ -148,9 +150,9 @@
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc)) ;; https://emacs.stackexchange.com/questions/21664/how-to-prevent-flycheck-from-treating-my-init-el-as-a-package-file
   :config
   (bind-keys :map leader-map
-	     ("e l" . flycheck-list-errors)
-	     ("e n" . flycheck-next-error)
-	     ("e p" . flycheck-previous-error))
+			 ("e l" . flycheck-list-errors)
+			 ("e n" . flycheck-next-error)
+			 ("e p" . flycheck-previous-error))
   (global-flycheck-mode))
 
 ;; completion
@@ -177,15 +179,15 @@
   :functions consult-ripgrep consult-line consult-buffer consult-theme consult-imenu consult-recent-file consult-flycheck consult-xref
   :config
   (bind-keys ([remap project-find-regexp] . consult-ripgrep)
-	     ([remap isearch-forward] . consult-line)
-	     ([remap switch-to-buffer] . consult-buffer)
-	     ([remap load-theme]. consult-theme)
-	     ([remap imenu] . consult-imenu)
-	     ([remap recentf] . consult-recent-file))
+			 ([remap isearch-forward] . consult-line)
+			 ([remap switch-to-buffer] . consult-buffer)
+			 ([remap load-theme]. consult-theme)
+			 ([remap imenu] . consult-imenu)
+			 ([remap recentf] . consult-recent-file))
   (bind-keys :map leader-map
-	     ("e c" . consult-flycheck))
+			 ("e c" . consult-flycheck))
   (setopt xref-show-xrefs-function #'consult-xref
-	  xref-show-definitions-function #'consult-xref))
+		  xref-show-definitions-function #'consult-xref))
 
 (use-package embark
   :bind
@@ -216,16 +218,16 @@
   :functions magit-blame magit-status magit-stage-file magit-log-buffer-file magit-refresh-all
   :config
   (bind-keys :map leader-map
-	     ("g b" . magit-blame)
-	     ("g g" . magit-status)
-	     ("g s" . magit-stage-file)
-	     ("g l b" . magit-log-buffer-file)))
+			 ("g b" . magit-blame)
+			 ("g g" . magit-status)
+			 ("g s" . magit-stage-file)
+			 ("g l b" . magit-log-buffer-file)))
 
 (use-package git-link
   :functions git-link
   :config
   (bind-keys :map leader-map
-	     ("g l l" . git-link))
+			 ("g l l" . git-link))
   :custom
   (git-link-use-commit t))
 
@@ -233,8 +235,8 @@
   :functions diff-hl-previous-hunk diff-hl-next-hunk diff-hl-magit-pre-refresh diff-hl-magit-post-refresh diff-hl-flydiff-mode global-diff-hl-mode
   :config
   (bind-keys :map leader-map
-	     ("g [" . diff-hl-previous-hunk)
-	     ("g ]" . diff-hl-next-hunk))
+			 ("g [" . diff-hl-previous-hunk)
+			 ("g ]" . diff-hl-next-hunk))
   (with-eval-after-load "magit"
     (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
@@ -282,26 +284,26 @@
   (apheleia-log-debug-info t)
   :config
   (bind-keys :map leader-map
-	     ("c f" . apheleia-format-buffer))
+			 ("c f" . apheleia-format-buffer))
 
   ;; more formatters
   (setq apheleia-formatters (append '((dprint . ("dprint" "fmt" "--stdin" filepath "--config" "/home/daniel/.config/dprint/config.json"))
-				      (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
-				      (prettier-json-stringify . ("apheleia-npx" "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
-				      (gdformat . ("gdformat" "-"))
-				      ) apheleia-formatters))
+									  (protobuf . ("buf" "format" "--path" filepath))  ;; for .proto files https://github.com/bufbuild/buf
+									  (prettier-json-stringify . ("apheleia-npx" "prettier" "--stdin-filepath" filepath "--parser=json-stringify")) ;; https://github.com/radian-software/apheleia/pull/183
+									  (gdformat . ("gdformat" "-"))
+									  ) apheleia-formatters))
 
   (setq apheleia-mode-alist
-	(append '((emacs-lisp-mode . lisp-indent)
-		  (gfm-mode . prettier-markdown)
-		  (markdown-mode . prettier-markdown)
-		  (sh-mode . shfmt)
-		  (bash-ts-mode . shfmt)
-		  (protobuf-mode . protobuf)
-		  (dockerfile-ts-mode . dprint)
-		  (gdscript-ts-mode . gdformat)
-		  ;; (mhtml-mode . prettier-html)
-		  ) apheleia-mode-alist))
+		(append '((emacs-lisp-mode . lisp-indent)
+				  (gfm-mode . prettier-markdown)
+				  (markdown-mode . prettier-markdown)
+				  (sh-mode . shfmt)
+				  (bash-ts-mode . shfmt)
+				  (protobuf-mode . protobuf)
+				  (dockerfile-ts-mode . dprint)
+				  (gdscript-ts-mode . gdformat)
+				  ;; (mhtml-mode . prettier-html)
+				  ) apheleia-mode-alist))
 
   ;; support for more languages
   (defun my/setup-fix-for-apheleia-prettier-package-json-files ()
@@ -310,7 +312,7 @@
     (defun my/set-package-json-apheleia-formatter ()
       "Set the apheleia formatter to json-stringnify for package.json file."
       (when (equal (file-name-nondirectory (buffer-file-name)) "package.json")
-	(setq-local apheleia-formatter 'prettier-json-stringify)))
+		(setq-local apheleia-formatter 'prettier-json-stringify)))
     (add-hook 'json-ts-mode-hook 'my/set-package-json-apheleia-formatter))
 
   ;; https://github.com/radian-software/apheleia/issues/30#issuecomment-778150037
@@ -330,10 +332,10 @@
   :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
   :config
   (bind-keys ("M-S" . copilot-diagnose)
-	     :map copilot-completion-map
-	     ("M-C" . copilot-next-completion)
-	     ("<tab>" . copilot-accept-completion)
-	     ("TAB" . copilot-accept-completion)))
+			 :map copilot-completion-map
+			 ("M-C" . copilot-next-completion)
+			 ("<tab>" . copilot-accept-completion)
+			 ("TAB" . copilot-accept-completion)))
 
 (use-package yasnippet
   :functions yas-global-mode
@@ -365,18 +367,18 @@
   ("M-a" . lsp-execute-code-action)
   ("M-R" . lsp-javascript-rename-file)
   :hook ((;; js modes
-	  js-ts-mode tsx-ts-mode typescript-ts-mode
-	  ;; config files modes
-	  json-ts-mode yaml-ts-mode
-	  ;; css modes
-	  scss-mode css-ts-mode
-	  ;; godot
-	  gdscript-ts-mode
-	  ;; others
-	  bash-ts-mode
-	  gfm-mode markdown-mode
-	  dockerfile-ts-mode terraform-mode
-	  lua-mode python-ts-mode nix-mode) . lsp-deferred)
+		  js-ts-mode tsx-ts-mode typescript-ts-mode
+		  ;; config files modes
+		  json-ts-mode yaml-ts-mode
+		  ;; css modes
+		  scss-mode css-ts-mode
+		  ;; godot
+		  gdscript-ts-mode
+		  ;; others
+		  bash-ts-mode
+		  gfm-mode markdown-mode
+		  dockerfile-ts-mode terraform-mode
+		  lua-mode python-ts-mode nix-mode) . lsp-deferred)
   :config
   (lsp-inlay-hints-mode)
   (keymap-set leader-map "l" lsp-command-map))
@@ -394,8 +396,8 @@
   :after (lsp-mode consult)
   :bind
   (:map lsp-command-map
-	([remap xref-find-apropos] . consult-lsp-symbols)
-	("f" . consult-lsp-diagnostics)))
+		([remap xref-find-apropos] . consult-lsp-symbols)
+		("f" . consult-lsp-diagnostics)))
 
 (use-package which-key
   :functions which-key-mode
@@ -409,7 +411,7 @@
   ("README\\.md\\'" . gfm-mode)
   ("\\.mdx\\'" . markdown-mode)
   :bind (:map markdown-mode-map
-	      ("C-c C-e" . markdown-do)))
+			  ("C-c C-e" . markdown-do)))
 
 (use-package nix-mode)
 
@@ -433,8 +435,8 @@
 
 (use-package org
   :bind (:map org-mode-map
-	      ("M-S" . org-sort)
-	      ))
+			  ("M-S" . org-sort)
+			  ))
 
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
@@ -500,30 +502,30 @@
 
 ;; general keybindings
 (bind-keys ("<f1>" . my/describe-symbol)
-	   ("<f6>" . load-theme)
-	   ("C--" . my/text-scale-decrease)
-	   ("C-=" . my/text-scale-increase)
-	   ("C-SPC" . completion-at-point)
-	   ("M-Y" . yank-from-kill-ring))
+		   ("<f6>" . load-theme)
+		   ("C--" . my/text-scale-decrease)
+		   ("C-=" . my/text-scale-increase)
+		   ("C-SPC" . completion-at-point)
+		   ("M-Y" . yank-from-kill-ring))
 
 ;; leader keybindings
 (bind-keys :map leader-map
-	   ("f f" . find-file)
-	   ("f s" . save-buffer)
-	   ("f r" . recentf)
-	   ("f R" . rename-visited-file)
+		   ("f f" . find-file)
+		   ("f s" . save-buffer)
+		   ("f r" . recentf)
+		   ("f R" . rename-visited-file)
 
-	   ("d d" . my/find-init-file)
-	   ("d n" . my/find-home-manager-config)
+		   ("d d" . my/find-init-file)
+		   ("d n" . my/find-home-manager-config)
 
-	   ("l s" . sort-lines)
+		   ("l s" . sort-lines)
 
-	   ("b b" . switch-to-buffer)
-	   ("b d" . kill-current-buffer)
-	   ("b r" . revert-buffer-quick)
+		   ("b b" . switch-to-buffer)
+		   ("b d" . kill-current-buffer)
+		   ("b r" . revert-buffer-quick)
 
-	   ("TAB" . my/switch-to-last-buffer)
-	   ("SPC" . execute-extended-command))
+		   ("TAB" . my/switch-to-last-buffer)
+		   ("SPC" . execute-extended-command))
 
 (keymap-set leader-map "p" project-prefix-map)
 (keymap-set leader-map "h" help-map)
@@ -539,12 +541,12 @@
   ;; kill all file buffers except current buffer
   (dolist (buffer (buffer-list))
     (unless (or (string-match-p "^\\*" (buffer-name buffer))
-		(eq buffer (current-buffer)))
+				(eq buffer (current-buffer)))
       (kill-buffer buffer))))
 
 ;; bind spc b K to kill all buffers
 (bind-keys :map leader-map
-	   ("b K" . my/kill-all-buffers))
+		   ("b K" . my/kill-all-buffers))
 
 (defun my/insert-line-before (message)
   ;; https://stackoverflow.com/questions/622440/emacs-command-to-insert-and-indent-line-above-cursor
@@ -584,9 +586,9 @@
   (my/insert-line-before "{/* eslint-disable-next-line */}"))
 
 (bind-keys ("M-i" . my/insert-ts-expect-error)
-	   ("M-I" . my/insert-ts-expect-error-tsx)
-	   ("M-e" . my/insert-eslint-disable-next-line)
-	   ("M-E" . my/insert-eslint-disable-next-line-tsx))
+		   ("M-I" . my/insert-ts-expect-error-tsx)
+		   ("M-e" . my/insert-eslint-disable-next-line)
+		   ("M-E" . my/insert-eslint-disable-next-line-tsx))
 
 ;; (defun my/insert-eslint-disable-import-no-restricted-paths ()
 ;;   (interactive)
@@ -613,14 +615,14 @@
   "Run CMD in a shell without displaying the output."
   ;; https://emacs.stackexchange.com/questions/42172/run-elisp-when-async-shell-command-is-done
   (let* ((buffer-name (generate-new-buffer  "*Yarn Async Shell Command*"))
-	 (display-buffer-alist '(("*Yarn Async Shell Command*" display-buffer-no-window)))
-	 (proc (progn
+		 (display-buffer-alist '(("*Yarn Async Shell Command*" display-buffer-no-window)))
+		 (proc (progn
 
-		 (async-shell-command cmd buffer-name)
-		 (get-buffer-process buffer-name))
-	       ))
+				 (async-shell-command cmd buffer-name)
+				 (get-buffer-process buffer-name))
+			   ))
     (if (process-live-p proc)
-	(set-process-sentinel proc #'my/refresh-magit-sentinel)
+		(set-process-sentinel proc #'my/refresh-magit-sentinel)
       (magit-refresh-all))
     ))
 
@@ -640,9 +642,9 @@
 
 ;; bind to spc y
 (bind-keys :map leader-map
-	   ("y s" . my/yarn-stage)
-	   ("y c" . my/yarn-constraints-fix)
-	   ("y i" . my/yarn-install))
+		   ("y s" . my/yarn-stage)
+		   ("y c" . my/yarn-constraints-fix)
+		   ("y i" . my/yarn-install))
 
 (use-package gdscript-mode
   :mode ("\\.gd\\'" . gdscript-ts-mode))
