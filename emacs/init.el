@@ -555,6 +555,18 @@
     (newline-and-indent)
     (insert message)))
 
+(defun my/insert-line-after (message)
+  (save-excursion
+    (end-of-line)
+    (newline-and-indent)
+    (insert message)))
+
+(defun my/insert-line-after (message)
+  (save-excursion
+    (end-of-line)
+    (newline-and-indent)
+    (insert message)))
+
 (defun my/insert-ts-expect-error ()
   (interactive)
   (my/insert-line-before "// @ts-expect-error -- TODO fix later"))
@@ -575,6 +587,22 @@
 	   ("M-I" . my/insert-ts-expect-error-tsx)
 	   ("M-e" . my/insert-eslint-disable-next-line)
 	   ("M-E" . my/insert-eslint-disable-next-line-tsx))
+
+;; (defun my/insert-eslint-disable-import-no-restricted-paths ()
+;;   (interactive)
+;;   (my/insert-line-before "/* eslint-disable import/no-restricted-paths */"))
+
+;; (defun my/insert-eslint-enable-import-no-restricted-paths ()
+;;   (interactive)
+;;   (my/insert-line-after "/* eslint-enable import/no-restricted-paths */"))
+
+;; (defun my/insert-eslint-disable-no-restricted-path-type-only ()
+;;   (interactive)
+;;   (my/insert-line-before "// eslint-disable-next-line import/no-restricted-paths -- type only import, doesn't affect bundle size"))
+
+;; (bind-keys ("M-o" . my/insert-eslint-disable-import-no-restricted-paths)
+;; 	   ("M-O" . my/insert-eslint-enable-import-no-restricted-paths)
+;; 	   ("M-p" . my/insert-eslint-disable-no-restricted-path-type-only))
 
 (defun my/refresh-magit-sentinel (process signal)
   (when (memq (process-status process) '(exit signal))
