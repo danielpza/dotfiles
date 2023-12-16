@@ -10,11 +10,20 @@ in {
     slack
     teams-for-linux
     vscodium
-    zoom-us
+
+    # libnotify
+    # solaar
+
+    # earthly
     docker
     google-cloud-sdk
 
+    robo3t
+    mongodb-compass
+
     obs-studio
+
+    bruno
   ];
 
   home.shellAliases = {
@@ -23,7 +32,7 @@ in {
     "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${config}";
   };
 
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

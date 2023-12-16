@@ -4,26 +4,13 @@ let
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
-
-  extraProfile = ''
-    export PATH="$VOLTA_HOME/bin:$PATH"
-    # mss https://nodkz.github.io/mongodb-memory-server/docs/api/config-options/
-    # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
-    export MONGOMS_DISTRO="ubuntu2204"
-  '';
-
-  gnomeExtensions = with pkgs.gnomeExtensions; [
-    dash-to-panel
-    # material-shell
-    # github-notifications
-    appindicator
-    caffeine
-  ];
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
 
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfreePredicate = _:
+  #   true; # https://nixos.wiki/wiki/Unfree_Software
 
   # TL;DR: don't touch this line
   home.stateVersion = "22.11";
@@ -110,16 +97,18 @@ in {
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
+    # libs needed? perhaps?
+    # curlFull
   ]) ++ (with pkgs.nodePackages_latest; [
     npm-check-updates
-    # prettier
+    prettier
     typescript
     typescript-language-server
     vscode-langservers-extracted
     yaml-language-server
     bash-language-server
     dockerfile-language-server-nodejs
-  ]) ++ gnomeExtensions;
+  ]);
 
   programs.zoxide = {
     enable = true;
@@ -214,14 +203,13 @@ in {
   home.sessionVariables = {
     EDITOR = "emacs --alternate-editor=";
 
-    NIXOS_OZONE_WL = "1"; # https://nixos.wiki/wiki/Slack
+    # NIXOS_OZONE_WL = "1"; # https://nixos.wiki/wiki/Slack
 
     # make other programs play nice with xdg https://wiki.archlinux.org/title/XDG_Base_Directory
     BUN_INSTALL =
       "${config.xdg.dataHome}/.bun"; # https://github.com/oven-sh/bun/issues/696
     GOPATH = "${config.xdg.dataHome}/go";
     PYENV_ROOT = "${config.xdg.dataHome}/pyenv";
-    VOLTA_HOME = "${config.xdg.dataHome}/volta";
     SSB_HOME = "${config.xdg.dataHome}/zoom"; # zoom app
 
     # pnpm
@@ -251,21 +239,16 @@ in {
     MOZ_USE_XINPUT2 = "1";
   };
 
-  programs.bash.bashrcExtra = extraProfile;
-  programs.zsh.profileExtra = extraProfile;
-
   home.sessionPath = [
     "$BUN_INSTALL/bin"
     "$GOPATH/bin"
     "$PYENV_ROOT/bin"
-    "$VOLTA_HOME/bin"
     "$PNPM_HOME/bin"
     "$npm_config_prefix/bin"
   ];
 
   home.shellAliases = {
     "pq" = "yarn dlx -p prettier -p pretty-quick pretty-quick";
-    "ncu" = "ncu -i --format=group";
   };
 
   services.flameshot = {
@@ -339,7 +322,5 @@ in {
       };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
-    "org/gnome/shell".enabled-extensions =
-      map (extension: extension.extensionUuid) gnomeExtensions;
   };
 }
