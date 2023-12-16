@@ -359,6 +359,9 @@
   (lsp-auto-execute-action nil)
   (lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
   (lsp-eslint-auto-fix-on-save t)
+  (lsp-auto-guess-root t)
+  (lsp-enable-suggest-server-download nil) ;; will be managed by home-manager
+  (lsp-references-exclude-definition t)
   :bind
   ;; ("M-i" . lsp-inlay-hints-mode)
   ("M-r" . lsp-rename)
