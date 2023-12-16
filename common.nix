@@ -9,6 +9,8 @@ in {
     ./personal/personal.nix;
 
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfreePredicate = _:
+  #   true; # https://nixos.wiki/wiki/Unfree_Software
 
   # TL;DR: don't touch this line
   home.stateVersion = "22.11";
@@ -201,7 +203,7 @@ in {
   home.sessionVariables = {
     EDITOR = "emacs --alternate-editor=";
 
-    NIXOS_OZONE_WL = "1"; # https://nixos.wiki/wiki/Slack
+    # NIXOS_OZONE_WL = "1"; # https://nixos.wiki/wiki/Slack
 
     # make other programs play nice with xdg https://wiki.archlinux.org/title/XDG_Base_Directory
     BUN_INSTALL =
@@ -247,7 +249,6 @@ in {
 
   home.shellAliases = {
     "pq" = "yarn dlx -p prettier -p pretty-quick pretty-quick";
-    "ncu" = "ncu -i --format=group";
   };
 
   services.flameshot = {
