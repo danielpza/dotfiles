@@ -19,10 +19,12 @@
       homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./common.nix ./c1.nix ];
+        extraSpecialArgs.configName = "c1";
       };
       homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./common.nix ./c2.nix ];
+        extraSpecialArgs.configName = "c2";
       };
       nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;

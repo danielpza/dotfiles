@@ -1,9 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, configName, ... }:
 let
   userfullname = "Daniel Perez Alvarez";
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
+  configDir = "/home/daniel/.config/home-manager";
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
@@ -33,6 +34,12 @@ in {
 
   programs.bat.enable = true;
   home.shellAliases.cat = "bat -p";
+
+  home.shellAliases = {
+    "hm" = "home-manager switch --flake path:${configDir}#${configName}";
+    "nu" = "nix flake update ${configDir}";
+    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${configName}";
+  };
 
   programs.starship = {
     enable = true;
@@ -274,6 +281,7 @@ in {
     "org/gnome/desktop/interface" = {
       show-battery-percentage = true;
       enable-hot-corners = false;
+      monospace-font-name = "Source Code Pro 20";
     };
     "org/gnome/desktop/input-sources" = { xkb-options = [ "caps:escape" ]; };
     "org/gtk/gtk4/settings/file-chooser" = { sort-directories-first = true; };
