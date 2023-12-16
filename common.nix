@@ -6,7 +6,6 @@ let
   homedir = "/home/${username}";
 
   extraProfile = ''
-    export PATH="$VOLTA_HOME/bin:$PATH"
     # mss https://nodkz.github.io/mongodb-memory-server/docs/api/config-options/
     # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
     export MONGOMS_DISTRO="ubuntu2204"
@@ -221,7 +220,6 @@ in {
       "${config.xdg.dataHome}/.bun"; # https://github.com/oven-sh/bun/issues/696
     GOPATH = "${config.xdg.dataHome}/go";
     PYENV_ROOT = "${config.xdg.dataHome}/pyenv";
-    VOLTA_HOME = "${config.xdg.dataHome}/volta";
     SSB_HOME = "${config.xdg.dataHome}/zoom"; # zoom app
 
     # pnpm
@@ -258,7 +256,6 @@ in {
     "$BUN_INSTALL/bin"
     "$GOPATH/bin"
     "$PYENV_ROOT/bin"
-    "$VOLTA_HOME/bin"
     "$PNPM_HOME/bin"
     "$npm_config_prefix/bin"
   ];
