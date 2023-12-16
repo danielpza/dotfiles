@@ -105,6 +105,7 @@ in {
     hunspell
     hunspellDicts.en_US
     shfmt
+    black # python formatter
     # lua
     luajitPackages.lua-lsp
     # nix:
@@ -121,6 +122,7 @@ in {
     yaml-language-server
     bash-language-server
     dockerfile-language-server-nodejs
+    pyright
   ]);
 
   programs.emacs = {
