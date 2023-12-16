@@ -22,25 +22,21 @@ in {
   home.username = username;
   home.homeDirectory = homedir;
 
+  # improved shell experience
+  # better ls
   programs.eza = {
     enable = true;
     extraOptions = [ "--group-directories-first" ];
   };
   home.shellAliases = {
-    "ls" = "eza";
-    "ll" = "eza -la";
-    "l" = "eza -a";
+    ls = "eza";
+    ll = "eza -la";
+    l = "eza -a";
   };
-
+  # better cat
   programs.bat.enable = true;
   home.shellAliases.cat = "bat -p";
-
-  home.shellAliases = {
-    "hm" = "home-manager switch --flake path:${configDir}#${configName}";
-    "nu" = "nix flake update ${configDir}";
-    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${configName}";
-  };
-
+  # better prompt
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
@@ -49,10 +45,14 @@ in {
       docker_context.disabled = true;
       buf.disabled = true;
       git_branch.disabled = true;
-      nodejs.disabled = true;
     };
   };
-
+  # autojump/zoxide
+  programs.zoxide = {
+    enable = true;
+    options = [ "--cmd" "j" ];
+  };
+  # use zsh
   programs.bash.enable = true;
   programs.zsh = {
     enable = true;
@@ -63,6 +63,13 @@ in {
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
     '';
+  };
+
+  # aliases to rebuild home-manager/nixos
+  home.shellAliases = {
+    "hm" = "home-manager switch --flake path:${configDir}#${configName}";
+    "nu" = "nix flake update ${configDir}";
+    "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${configName}";
   };
 
   home.packages = (with pkgs; [
@@ -115,11 +122,6 @@ in {
     bash-language-server
     dockerfile-language-server-nodejs
   ]);
-
-  programs.zoxide = {
-    enable = true;
-    options = [ "--cmd" "j" ];
-  };
 
   programs.emacs = {
     enable = true;
@@ -252,10 +254,6 @@ in {
     "$PNPM_HOME/bin"
     "$npm_config_prefix/bin"
   ];
-
-  home.shellAliases = {
-    "pq" = "yarn dlx -p prettier -p pretty-quick pretty-quick";
-  };
 
   services.flameshot = {
     enable = true;
