@@ -454,7 +454,7 @@
 (defun my/find-home-manager-config ()
   "Open home manager config file."
   (interactive)
-  (find-file "~/.config/home-manager/common.nix"))
+  (find-file "~/.config/home-manager/home.nix"))
 
 (defun my/text-scale-increase ()
   "Increase font size."
