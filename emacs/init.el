@@ -490,6 +490,12 @@
         (delete-file filename))
       (kill-buffer buffer))))
 
+(defun my/project-find-flake-nix-file ()
+  "Open flake.nix file in project."
+  (interactive)
+  (let ((default-directory (project-root (project-current t))))
+	(find-file "flake.nix")))
+
 (defmacro my/hs-hide-level (level)
   `(progn
      (defun ,(intern (format "my/hs-hide-level-%d" level)) ()
@@ -517,6 +523,7 @@
 		   ("f s" . save-buffer)
 		   ("f r" . recentf)
 		   ("f R" . rename-visited-file)
+		   ("f n" . my/project-find-flake-nix-file)
 
 		   ("d d" . my/find-init-file)
 		   ("d n" . my/find-home-manager-config)
