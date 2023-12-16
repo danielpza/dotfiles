@@ -3,8 +3,7 @@ let
   userfullname = "Daniel Perez Alvarez";
   username = "daniel";
   useremail = "danielpza@protonmail.com";
-  homedir = "/home/${username}";
-  configDir = "/home/daniel/.config/home-manager";
+  configDir = "/home/${username}/.config/home-manager";
 in {
   imports = (lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix) ++ [ ./gnome.nix ];
@@ -20,7 +19,7 @@ in {
   programs.home-manager.enable = true;
 
   home.username = username;
-  home.homeDirectory = homedir;
+  home.homeDirectory = "/home/${username}";
 
   # improved shell experience
   # better ls
