@@ -18,24 +18,24 @@
     in {
       homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./common.nix ./c1.nix ];
+        modules = [ ./home.nix ./home-c1.nix ];
         extraSpecialArgs.configName = "c1";
       };
       homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./common.nix ./c2.nix ];
+        modules = [ ./home.nix ./home-c2.nix ];
         extraSpecialArgs.configName = "c2";
       };
       nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ ./configuration-common.nix ./c1-configuration.nix ];
+        modules = [ ./configuration.nix ./configuration-c2.nix ];
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
-          ./configuration-common.nix
-          ./c2-configuration.nix
+          ./configuration.nix
+          ./configuration-c2.nix
         ];
       };
     };
