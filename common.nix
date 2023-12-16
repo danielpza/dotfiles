@@ -6,8 +6,8 @@ let
   homedir = "/home/${username}";
   configDir = "/home/daniel/.config/home-manager";
 in {
-  imports = lib.optional (builtins.pathExists ./personal/personal.nix)
-    ./personal/personal.nix;
+  imports = (lib.optional (builtins.pathExists ./personal/personal.nix)
+    ./personal/personal.nix) ++ [ ./gnome.nix ];
 
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowUnfreePredicate = _:
