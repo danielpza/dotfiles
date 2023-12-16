@@ -10,6 +10,11 @@ in {
     slack
     teams-for-linux
     vscodium
+
+    # libnotify
+    # solaar
+
+    # earthly
     docker
     google-cloud-sdk
 
