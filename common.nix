@@ -4,12 +4,6 @@ let
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   homedir = "/home/${username}";
-
-  extraProfile = ''
-    # mss https://nodkz.github.io/mongodb-memory-server/docs/api/config-options/
-    # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
-    export MONGOMS_DISTRO="ubuntu2204"
-  '';
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
@@ -240,9 +234,6 @@ in {
 
     MOZ_USE_XINPUT2 = "1";
   };
-
-  programs.bash.bashrcExtra = extraProfile;
-  programs.zsh.profileExtra = extraProfile;
 
   home.sessionPath = [
     "$BUN_INSTALL/bin"
