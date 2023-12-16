@@ -323,4 +323,6 @@ in {
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
   };
+
+  # programs.waybar.enable = true;
 }
