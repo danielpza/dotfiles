@@ -106,6 +106,7 @@ in {
     hunspellDicts.en_US
     shfmt
     black # python formatter
+    yapf # python formatter
     # lua
     luajitPackages.lua-lsp
     # nix:
