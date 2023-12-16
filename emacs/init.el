@@ -651,3 +651,5 @@
 
 (use-package gdscript-mode
   :mode ("\\.gd\\'" . gdscript-ts-mode))
+
+(envrc-global-mode)

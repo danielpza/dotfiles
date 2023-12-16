@@ -171,6 +171,7 @@ in {
         embark-consult
         gdscript-mode
         lua-mode
+        envrc
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {
