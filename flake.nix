@@ -30,7 +30,11 @@
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ ./c2-configuration.nix ];
+        modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
+          ./configuration-common.nix
+          ./c2-configuration.nix
+        ];
       };
     };
 }
