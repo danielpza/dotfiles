@@ -95,9 +95,11 @@ in {
     # nix:
     nil # nix lsp
     nixfmt # nix formatter
+    # libs needed? perhaps?
+    # curlFull
   ]) ++ (with pkgs.nodePackages_latest; [
     npm-check-updates
-    # prettier
+    prettier
     typescript
     typescript-language-server
     vscode-langservers-extracted
