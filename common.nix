@@ -10,14 +10,6 @@ let
     # export MONGOMS_DOWNLOAD_URL="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-5.0.18.tgz"
     export MONGOMS_DISTRO="ubuntu2204"
   '';
-
-  gnomeExtensions = with pkgs.gnomeExtensions; [
-    dash-to-panel
-    # material-shell
-    # github-notifications
-    appindicator
-    caffeine
-  ];
 in {
   imports = lib.optional (builtins.pathExists ./personal/personal.nix)
     ./personal/personal.nix;
@@ -118,7 +110,7 @@ in {
     yaml-language-server
     bash-language-server
     dockerfile-language-server-nodejs
-  ]) ++ gnomeExtensions;
+  ]);
 
   programs.zoxide = {
     enable = true;
@@ -336,7 +328,5 @@ in {
       };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
-    "org/gnome/shell".enabled-extensions =
-      map (extension: extension.extensionUuid) gnomeExtensions;
   };
 }
