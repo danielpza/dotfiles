@@ -280,8 +280,8 @@
 (use-package apheleia
   :defines apheleia-formatters apheleia-mode-alist
   :functions apheleia-format-buffer apheleia-global-mode
-  :custom
-  (apheleia-log-debug-info t)
+  ;; :custom
+  ;; (apheleia-log-debug-info t)
   :config
   (bind-keys :map leader-map
 			 ("c f" . apheleia-format-buffer))
