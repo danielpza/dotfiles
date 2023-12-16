@@ -13,7 +13,12 @@ in {
     docker
     google-cloud-sdk
 
+    robo3t
+    mongodb-compass
+
     obs-studio
+
+    bruno
   ];
 
   home.shellAliases = {
