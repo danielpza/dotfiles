@@ -16,16 +16,9 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; visual
-(use-package doom-themes)
-
-(use-package ef-themes)
-
-(use-package doom-modeline
-  :functions doom-modeline-mode
+(use-package ef-themes
   :config
-  (doom-modeline-mode))
-
-(load-theme 'ef-elea-dark t)
+  (load-theme 'ef-elea-dark t))
 
 ;; load custom config file if exists
 (let ((custom-file (concat user-emacs-directory "early-init.custom.el")))
