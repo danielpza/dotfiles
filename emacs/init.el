@@ -490,11 +490,39 @@
         (delete-file filename))
       (kill-buffer buffer))))
 
-(defun my/project-find-flake-nix-file ()
-  "Open flake.nix file in project."
+(defun my/get-nearest-file (FILE)
+  "Search for FILE in current directory. If not found searches in the parent."
+  (interactive "sFile: ")
+  (let ((current-dir (if (buffer-file-name)
+						 (file-name-directory (buffer-file-name))
+					   (dired-current-directory))))
+	(while (and (not (file-exists-p (concat current-dir FILE)))
+				(not (equal current-dir "/")))
+	  (setq current-dir (file-name-directory (directory-file-name current-dir))))
+	(if (file-exists-p (concat current-dir FILE))
+		(concat current-dir FILE)
+	  nil)))
+
+(defun my/open-nearest-file (FILE)
+  "Search for FILE in current directory. If not found searches in the parent."
+  (interactive "sFile: ")
+  (let ((file (my/get-nearest-file FILE)))
+	(if file
+		(find-file file)
+	  (message "File %s not found" FILE))))
+
+(defun my/open-nearest-manifest-file ()
+  "Searches for package.json or pyproject.toml in current directory. If not found searches in the parent."
   (interactive)
-  (let ((default-directory (project-root (project-current t))))
-	(find-file "flake.nix")))
+  (let ((file (or (my/get-nearest-file "package.json")
+				  (my/get-nearest-file "pyproject.toml"))))
+	(if file
+		(find-file file)
+	  (message "File not found"))))
+
+(defun my/open-nearest-flake-nix ()
+  (interactive)
+  (my/open-nearest-file "flake.nix"))
 
 (defmacro my/hs-hide-level (level)
   `(progn
@@ -523,7 +551,8 @@
 		   ("f s" . save-buffer)
 		   ("f r" . recentf)
 		   ("f R" . rename-visited-file)
-		   ("f n" . my/project-find-flake-nix-file)
+		   ("f n" . my/open-nearest-flake-nix)
+		   ("f p" . my/open-nearest-manifest-file)
 
 		   ("d d" . my/find-init-file)
 		   ("d n" . my/find-home-manager-config)
