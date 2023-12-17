@@ -1,6 +1,10 @@
 {
 	"dockerfile": {},
+	"toml": {},
 	"includes": ["**/*.*"],
 	"excludes": [],
-	"plugins": ["https://plugins.dprint.dev/dockerfile-0.3.0.wasm"]
+	"plugins": [
+		"https://plugins.dprint.dev/dockerfile-0.3.0.wasm",
+		"https://plugins.dprint.dev/toml-0.5.4.wasm"
+	]
 }
