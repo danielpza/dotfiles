@@ -24,6 +24,7 @@
 ;; (global-visual-line-mode)
 (electric-pair-mode) ;; auto close brackets
 (add-hook 'prog-mode-hook 'hs-minor-mode) ;; code folding
+(add-hook 'conf-unix-mode-hook 'hs-minor-mode)
 
 (require 'hideshow)
 
@@ -172,11 +173,17 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package corfu
+  :disabled
   :functions global-corfu-mode
   :custom
   (corfu-auto t) ;; Enable auto completion
   :config
   (global-corfu-mode))
+
+(use-package company
+  :functions global-company-mode
+  :config
+  (global-company-mode))
 
 (use-package consult
   :functions consult-ripgrep consult-line consult-buffer consult-theme consult-imenu consult-recent-file consult-flycheck consult-xref
