@@ -4,6 +4,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # https://github.com/Mic92/nix-ld
+  programs.nix-ld.enable = true;
+
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
