@@ -15,6 +15,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
 
   # WMs/Compositors
   # awesome WM
