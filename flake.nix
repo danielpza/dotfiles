@@ -12,29 +12,37 @@
   outputs = { nixpkgs, home-manager, emacs-overlay, nixos-hardware, ... }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ emacs-overlay.overlay ];
-      };
+      overlays = [ emacs-overlay.overlay ];
+      overlays-config = { nixpkgs.overlays = overlays; };
+      # pkgs = import nixpkgs {
+      #   inherit system;
+      #   inherit overlays;
+      # };
     in {
-      homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ./home-c1.nix ./wm-x.nix ./wm-wayland.nix ];
-        extraSpecialArgs.configName = "c1";
-      };
-      homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ./home-c2.nix ];
-        extraSpecialArgs.configName = "c2";
-      };
+      # homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
+      #   modules = [ ./home.nix ./home-c1.nix ./wm-x.nix ./wm-wayland.nix ];
+      #   extraSpecialArgs.configName = "c1";
+      # };
+      # homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
+      #   modules = [ ./home.nix ./home-c2.nix ];
+      #   extraSpecialArgs.configName = "c2";
+      # };
       nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ ./configuration.nix ./configuration-c1.nix ];
+        specialArgs.configName = "c1";
+        modules = [
+          home-manager.nixosModules.home-manager
+          overlays-config
+          ./configuration.nix
+          ./configuration-c1.nix
+        ];
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
           ./configuration.nix
           ./configuration-c2.nix

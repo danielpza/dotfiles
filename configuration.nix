@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }: {
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable the X11 windowing system.
