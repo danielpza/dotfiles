@@ -23,7 +23,6 @@
           overlays-config
           ./configuration.nix
           ./configuration-c1.nix
-          ./configuration-gnome.nix
         ];
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
@@ -35,7 +34,6 @@
           nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
           ./configuration.nix
           ./configuration-c2.nix
-          ./configuration-gnome.nix
         ];
       };
     };

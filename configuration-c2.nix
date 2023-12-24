@@ -5,7 +5,7 @@
 { config, lib, pkgs, homeUsername, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./configuration-gnome.nix ];
 
   home-manager.users.${homeUsername} = import ./home-c2.nix;
 
