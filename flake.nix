@@ -14,6 +14,7 @@
       system = "x86_64-linux";
       overlays = [ emacs-overlay.overlay ];
       overlays-config = { nixpkgs.overlays = overlays; };
+      username = "daniel";
       # pkgs = import nixpkgs {
       #   inherit system;
       #   inherit overlays;
@@ -32,11 +33,13 @@
       nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs.configName = "c1";
+        specialArgs.homeUsername = username;
         modules = [
           home-manager.nixosModules.home-manager
           overlays-config
           ./configuration.nix
           ./configuration-c1.nix
+          ./configuration-gnome.nix
         ];
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {

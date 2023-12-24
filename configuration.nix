@@ -14,11 +14,6 @@
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
-  # Enable the GNOME Desktop Environment. https://nixos.wiki/wiki/GNOME
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  environment.gnome.excludePackages = with pkgs; [ gnome-tour ];
-
   # zsh shell
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
