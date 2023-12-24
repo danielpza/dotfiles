@@ -9,9 +9,9 @@ Previous dotfiles of arch linux + dwm + emacs doom are available at https://gith
 ```sh
 git clone git@github.com:danielpza/dotfiles.git ~/.config/home-manager
 
-nix run home-manager -- switch --flake path:/home/daniel/.config/home-manager#c1
-
 cp /etc/nixos/hardware-configuration.nix .
+
+sudo nixos-rebuild switch --flake path:/home/daniel/.config/home-manager#c1
 ```
 
 ## Reference
