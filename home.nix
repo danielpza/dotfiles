@@ -40,6 +40,7 @@ in {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+    enableFishIntegration = true;
     settings = {
       docker_context.disabled = true;
       buf.disabled = true;
@@ -53,6 +54,7 @@ in {
   };
   # use zsh
   programs.bash.enable = true;
+  programs.fish.enable = true;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
