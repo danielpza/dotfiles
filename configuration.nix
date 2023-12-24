@@ -14,6 +14,13 @@
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
+  networking.hostName = "nixos"; # Define your hostname.
+
+  # Enable networking
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+
   # zsh shell
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;

@@ -66,7 +66,6 @@ in {
 
   # aliases to rebuild home-manager/nixos
   home.shellAliases = {
-    "hm" = "home-manager switch --flake path:${configDir}#${configName}";
     "nu" = "nix flake update ${configDir}";
     "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${configName}";
   };
