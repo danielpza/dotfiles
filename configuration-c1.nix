@@ -26,6 +26,17 @@
     xwayland.enable = true;
     # enableNvidiaPatches = true;
   };
+  # services.xserver.windowManager.dwm.enable = true;
+  # services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+  #   # use https://github.com/danielpza/dwm
+  #   # src = pkgs.fetchFromGitHub {
+  #   #   owner = "danielpza";
+  #   #   repo = "dwm";
+  #   #   rev = "004cf2676d5aaaf5a66461ccdfba7767907bdcc4";
+  #   #   sha256 = "sha256-CQkxvsuXuRxPluMmDvAtaLD/C2cKak9cHPRIsLezjJY=";
+  #   # };
+  #   src = /home/daniel/projects/dwm;
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

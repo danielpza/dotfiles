@@ -6,6 +6,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    # yofi.url = "github:l4l/yofi";
+    # yofi.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { nixpkgs, home-manager, emacs-overlay, nixos-hardware, ... }:
     let
@@ -18,7 +20,7 @@
     in {
       homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ./home-c1.nix ];
+        modules = [ ./home.nix ./home-c1.nix ./wm-x.nix ./wm-wayland.nix ];
         extraSpecialArgs.configName = "c1";
       };
       homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {

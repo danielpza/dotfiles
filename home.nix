@@ -80,6 +80,7 @@ in {
     signal-desktop
     spotify
     neovim
+    godot_4
     # web dev
     nodejs
     yarn
@@ -97,6 +98,7 @@ in {
     jq # json processor
     github-copilot-cli
     # others
+    grpcui
     terraform-ls # terraform language server
     marksman # markdown language server
     terraform # editor support for terraform
