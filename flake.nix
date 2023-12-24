@@ -28,7 +28,7 @@
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs.configName = "c1";
+        specialArgs.configName = "c2";
         specialArgs.homeUsername = username;
         modules = [
           home-manager.nixosModules.home-manager
