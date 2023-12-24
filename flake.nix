@@ -28,11 +28,14 @@
       };
       nixosConfigurations.c2 = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs.configName = "c1";
+        specialArgs.homeUsername = username;
         modules = [
           home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
           ./configuration.nix
           ./configuration-c2.nix
+          ./configuration-gnome.nix
         ];
       };
     };

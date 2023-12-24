@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, configName, homeUsername, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -28,15 +28,14 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.daniel = {
+  users.users.${homeUsername} = {
     isNormalUser = true;
     description = "Daniel Perez";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    # packages = with pkgs;
-    #   [
-    #      firefox
-    #      thunderbird
-    #   ];
+  };
+  home-manager = {
+    extraSpecialArgs.configName = configName;
+    users.${homeUsername} = import ./home.nix;
   };
 
   # Set your time zone.

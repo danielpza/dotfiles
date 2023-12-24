@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, configName, ... }:
+{ config, pkgs, lib, configName, homeUsername, ... }:
 
 {
   imports = [
@@ -44,16 +44,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.daniel = {
-    isNormalUser = true;
-    description = "Daniel Perez";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-  };
-  home-manager = {
-    extraSpecialArgs.configName = configName;
-    users.daniel.imports = [ ./home.nix ./home-c1.nix ];
-  };
+  home-manager.users.${homeUsername} = import ./home-c1.nix;
 
   # nix = {
   #   package = pkgs.nixFlakes;
