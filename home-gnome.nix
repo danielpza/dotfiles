@@ -54,6 +54,16 @@
         command = "sh ${./bin/reconnect-bluetooth}";
         binding = "<Super>F";
       };
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "emacsclient.desktop"
+        "org.gnome.Console.desktop"
+        "firefox.desktop"
+        "slack.desktop"
+        "org.gnome.Nautilus.desktop"
+        "logseq.desktop"
+      ];
+    };
 
     # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
   };
