@@ -143,6 +143,7 @@
 
 ;; diagnostic
 (use-package jinx
+  :disabled
   :functions global-jinx-mode
   ;; spell checking
   :config
