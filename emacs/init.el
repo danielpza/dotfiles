@@ -201,8 +201,8 @@
 
 (use-package embark
   :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
+  (("M-e" . embark-act)         ;; pick some comfortable binding
+   ("M-E" . embark-dwim)        ;; good alternative: M-.
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
   :init
   ;; Optionally replace the key help with a completing-read interface
@@ -636,8 +636,9 @@
 
 (bind-keys ("M-i" . my/insert-ts-expect-error)
 		   ("M-I" . my/insert-ts-expect-error-tsx)
-		   ("M-e" . my/insert-eslint-disable-next-line)
-		   ("M-E" . my/insert-eslint-disable-next-line-tsx))
+		   ;; ("M-e" . my/insert-eslint-disable-next-line)
+		   ;; ("M-E" . my/insert-eslint-disable-next-line-tsx)
+		   )
 
 ;; (defun my/insert-eslint-disable-import-no-restricted-paths ()
 ;;   (interactive)
