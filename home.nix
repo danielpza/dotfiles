@@ -86,6 +86,7 @@ in {
     nodejs
     yarn
     # command line helpers
+    tree
     fd # faster find
     ripgrep # faster grep
     tldr
@@ -116,6 +117,7 @@ in {
     nixfmt # nix formatter
     # libs needed? perhaps?
     # curlFull
+    nix-index
   ]) ++ (with pkgs.nodePackages_latest; [
     npm-check-updates
     prettier
@@ -126,6 +128,8 @@ in {
     bash-language-server
     dockerfile-language-server-nodejs
     pyright
+    pnpm
+    npm
   ]);
 
   programs.emacs = {
