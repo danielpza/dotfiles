@@ -70,6 +70,9 @@ in {
   home.shellAliases = {
     "nu" = "nix flake update ${configDir}";
     "nr" = "sudo nixos-rebuild switch --flake path:${configDir}#${configName}";
+    "tddj" = "yarn test -o --watch"; # expects npx jest --watch -o
+    "tddv" =
+      "yarn test --changed --watch"; # expects npx vitest --watch --changed
   };
 
   home.packages = (with pkgs; [
