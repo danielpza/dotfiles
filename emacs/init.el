@@ -183,6 +183,8 @@
 
 (use-package company
   :functions global-company-mode
+  :bind
+  ([remap completion-at-point] . company-capf)
   :config
   (global-company-mode))
 
