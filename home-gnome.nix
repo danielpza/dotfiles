@@ -1,6 +1,7 @@
 { pkgs, ... }: {
 
-  home.packages = with pkgs; [ gnome-feeds ];
+  home.packages = with pkgs;
+    [ gnome-feeds ] ++ (with pkgs.gnomeExtensions; [ caffeine ]);
 
   # GNOME configuration
   dconf.settings = {
