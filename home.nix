@@ -85,7 +85,6 @@ in {
     signal-desktop
     spotify
     neovim
-    godot_4
     appimage-run
     # web dev
     nodejs
