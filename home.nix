@@ -85,6 +85,7 @@ in {
     spotify
     neovim
     godot_4
+    appimage-run
     # web dev
     nodejs
     yarn
