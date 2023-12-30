@@ -712,22 +712,24 @@
 	(bury-buffer)
 	(get-buffer name)))
 
-(defun my/toggle-term-in-project ()
-  "Opens `term` in the current project root directory like vscode."
-  (interactive)
-  (let* ((buffer-name (format "*terminal %s*" (project-name (project-current))))
-		 (directory (project-root (project-current)))
-		 (buffer (or (get-buffer buffer-name)
-					 (my/spawn-terminal "fish" buffer-name directory)))
-		 (window (get-buffer-window buffer-name)))
+(defun my/toggle-term (program name &optional directory)
+  "Toggle a terminal with PROGRAM and NAME."
+  (let* ((buffer (or (get-buffer name)
+					 (my/spawn-terminal program name directory)))
+		 (window (get-buffer-window name)))
 	(if window
 		(progn
 		  (delete-window window)
 		  (bury-buffer buffer))
-	  (let ((window (split-window-vertically -10)))
-		(select-window window)
-		(switch-to-buffer buffer)
-		(evil-insert-state)))))
+	  (select-window (display-buffer buffer 'display-buffer-below-selected)))))
+
+(defun my/toggle-term-in-project ()
+  "Opens `term` in the current project root directory like vscode."
+  (interactive)
+  (my/toggle-term
+   "fish"
+   (format "*terminal %s*" (project-name (project-current)))
+   (project-root (project-current))))
 
 (bind-keys ("C-`" . my/toggle-term-in-project))
 
