@@ -703,3 +703,38 @@
   :mode ("\\.gd\\'" . gdscript-ts-mode))
 
 (envrc-global-mode)
+
+(defun my/toggle-term-in-project ()
+  "Opens `term` in the current project root directory like vscode."
+  (interactive)
+  (let* ((pname (project-name (project-current)))
+		 (buffer-name (format "*terminal %s*" pname))
+		 (buffer (get-buffer buffer-name))
+		 (window (get-buffer-window buffer-name)))
+	(if (and buffer (not window))
+		(let ((window (split-window-vertically -10)))
+		  (select-window window)
+		  (switch-to-buffer buffer)
+		  (evil-insert-state))
+	  (if (and buffer window)
+		  (delete-window window)
+		(progn
+		  (let ((default-directory (project-root (project-current)))
+				(window (split-window-vertically -10)))
+			(select-window window)
+			(term "fish")
+			(rename-buffer buffer-name)
+			(evil-insert-state)))))))
+
+(bind-keys ("C-`" . my/toggle-term-in-project))
+
+(bind-keys ("M-H" . shrink-window-horizontally)
+		   ("M-J" . shrink-window)
+		   ("M-K" . enlarge-window)
+		   ("M-L" . enlarge-window-horizontally))
+
+(bind-keys :map evil-insert-state-map
+		   ("M-H" . shrink-window-horizontally)
+		   ("M-J" . shrink-window)
+		   ("M-K" . enlarge-window)
+		   ("M-L" . enlarge-window-horizontally))
