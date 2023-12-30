@@ -704,27 +704,30 @@
 
 (envrc-global-mode)
 
+(defun my/spawn-terminal (program name &optional directory)
+  "Spawn a terminal with PROGRAM and NAME and return the buffer without displaying it."
+  (let ((default-directory (or directory default-directory)))
+	(term program)
+	(rename-buffer name)
+	(bury-buffer)
+	(get-buffer name)))
+
 (defun my/toggle-term-in-project ()
   "Opens `term` in the current project root directory like vscode."
   (interactive)
-  (let* ((pname (project-name (project-current)))
-		 (buffer-name (format "*terminal %s*" pname))
-		 (buffer (get-buffer buffer-name))
+  (let* ((buffer-name (format "*terminal %s*" (project-name (project-current))))
+		 (directory (project-root (project-current)))
+		 (buffer (or (get-buffer buffer-name)
+					 (my/spawn-terminal "fish" buffer-name directory)))
 		 (window (get-buffer-window buffer-name)))
-	(if (and buffer (not window))
-		(let ((window (split-window-vertically -10)))
-		  (select-window window)
-		  (switch-to-buffer buffer)
-		  (evil-insert-state))
-	  (if (and buffer window)
-		  (delete-window window)
+	(if window
 		(progn
-		  (let ((default-directory (project-root (project-current)))
-				(window (split-window-vertically -10)))
-			(select-window window)
-			(term "fish")
-			(rename-buffer buffer-name)
-			(evil-insert-state)))))))
+		  (delete-window window)
+		  (bury-buffer buffer))
+	  (let ((window (split-window-vertically -10)))
+		(select-window window)
+		(switch-to-buffer buffer)
+		(evil-insert-state)))))
 
 (bind-keys ("C-`" . my/toggle-term-in-project))
 
