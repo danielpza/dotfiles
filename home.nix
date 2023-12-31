@@ -90,6 +90,7 @@ in {
     nodejs
     yarn
     # command line helpers
+    marp-cli # markdown slides
     tree
     fd # faster find
     ripgrep # faster grep
