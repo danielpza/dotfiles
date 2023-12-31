@@ -755,7 +755,7 @@ If not found searches in the parent."
   (defun my/group-by-buffer-project ()
 	;; references among others: https://lists.gnu.org/archive/html/help-gnu-emacs/2020-08/msg00095.html
 	"Group tabs by project."
-	(let ((buffers (or (project-buffers (project-current))
+	(let ((buffers (or (when-let ((project (project-current))) (project-buffers project))
 					   (buffer-list))))
 	  (seq-sort-by #'buffer-name
 				   #'string-lessp
