@@ -751,10 +751,10 @@ If not found searches in the parent."
   (tab-line-new-button-show nil)
   (tab-line-close-button-show nil)
   ;; (tab-line-tabs-function 'tab-line-tabs-buffer-groups)
-  :bind
-  ("C-<tab>" . tab-line-switch-to-next-tab)
-  ("C-<iso-lefttab>" . tab-line-switch-to-prev-tab)
   :config
+  (bind-keys
+   ("C-<tab>" . tab-line-switch-to-next-tab)
+   ("C-<iso-lefttab>" . tab-line-switch-to-prev-tab))
   (global-tab-line-mode))
 
 (setopt
