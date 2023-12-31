@@ -736,3 +736,14 @@ If not found searches in the parent."
 		   ("M-J" . shrink-window)
 		   ("M-K" . enlarge-window)
 		   ("M-L" . enlarge-window-horizontally))
+
+(use-package tab-line
+  :custom
+  (tab-line-new-button-show nil)
+  (tab-line-close-button-show nil)
+  ;; (tab-line-tabs-function 'tab-line-tabs-buffer-groups)
+  :bind
+  ("C-<tab>" . tab-line-switch-to-next-tab)
+  ("C-<iso-lefttab>" . tab-line-switch-to-prev-tab)
+  :config
+  (global-tab-line-mode))
