@@ -720,7 +720,7 @@ If not found searches in the parent."
 	  (select-window (display-buffer buffer
 									 '((display-buffer-in-side-window)
 									   (side . bottom)
-									   (window-height . 0.3)
+									   (window-height . 0.5)
 									   (window-parameters
 										(no-other-window . t)))))
 	  (evil-insert-state))))
