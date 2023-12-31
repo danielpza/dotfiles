@@ -13,6 +13,10 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+(use-package doom-modeline
+  :config
+  (doom-modeline-mode))
+
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; visual
