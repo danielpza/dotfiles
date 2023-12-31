@@ -234,7 +234,12 @@
 			 ("g b" . magit-blame)
 			 ("g g" . magit-status)
 			 ("g s" . magit-stage-file)
-			 ("g l b" . magit-log-buffer-file)))
+			 ("g l b" . magit-log-buffer-file))
+  ;; (add-to-list 'display-buffer-alist
+  ;; 			   '("magit.*:"
+  ;; 				 (display-buffer-reuse-window display-buffer-same-window)))
+  (setq magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1) ;; https://stackoverflow.com/questions/9439702/how-to-open-magit-status-in-full-window
+  )
 
 (use-package git-link
   :functions git-link
