@@ -221,6 +221,7 @@ in {
     userName = userfullname;
     userEmail = useremail;
     extraConfig = { init.defaultBranch = "master"; };
+    ignores = [ ".dir-locals-2.el" ];
   };
 
   home.sessionVariables = {
