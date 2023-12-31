@@ -717,7 +717,12 @@ If not found searches in the parent."
 		(progn
 		  (delete-window window)
 		  (bury-buffer buffer))
-	  (select-window (display-buffer buffer 'display-buffer-below-selected))
+	  (select-window (display-buffer buffer
+									 '((display-buffer-in-side-window)
+									   (side . bottom)
+									   (window-height . 0.3)
+									   (window-parameters
+										(no-other-window . t)))))
 	  (evil-insert-state))))
 
 (defun my/toggle-term-in-project ()
