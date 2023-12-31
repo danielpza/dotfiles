@@ -752,6 +752,17 @@ If not found searches in the parent."
   (tab-line-close-button-show nil)
   ;; (tab-line-tabs-function 'tab-line-tabs-buffer-groups)
   :config
+  (defun my/group-by-buffer-project ()
+	"Group tabs by project."
+	(let ((buffers (or (project-buffers (project-current))
+					   (buffer-list))))
+	  (match-buffers
+	   '(and (not "^ ")
+			 (not "^*")
+			 (not "^magit.*:")
+			 (not (major-mode . dired-mode)))
+	   buffers)))
+  (setq tab-line-tabs-function 'my/group-by-buffer-project)
   (bind-keys
    ("C-<tab>" . tab-line-switch-to-next-tab)
    ("C-<iso-lefttab>" . tab-line-switch-to-prev-tab))
