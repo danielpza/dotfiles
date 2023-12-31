@@ -147,8 +147,8 @@ in {
         consult
         consult-flycheck
         consult-lsp
-        # corfu
-        company
+        corfu
+        # company
         diff-hl
         dirvish
         doom-modeline

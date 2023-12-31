@@ -113,7 +113,7 @@
 		("t" . dirvish-side))
   :custom
   (dirvish-header-line-height 20)
-  (dirvish-mode-line-height 20)
+  ;; (dirvish-mode-line-height 20)
   :config
   (custom-set-variables '(dirvish-subtree-state-style 'nerd)
 						'(dirvish-attributes '(;; vc-state
@@ -174,7 +174,6 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package corfu
-  :disabled
   :functions global-corfu-mode
   :custom
   (corfu-auto t) ;; Enable auto completion
@@ -182,6 +181,7 @@
   (global-corfu-mode))
 
 (use-package company
+  :disabled
   :functions global-company-mode
   :bind
   ([remap completion-at-point] . company-capf)
