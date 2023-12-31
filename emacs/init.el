@@ -503,35 +503,27 @@
         (delete-file filename))
       (kill-buffer buffer))))
 
-(defun my/get-nearest-file (FILE)
-  "Search for FILE in current directory. If not found searches in the parent."
-  (interactive "sFile: ")
-  (let ((current-dir (if (buffer-file-name)
-						 (file-name-directory (buffer-file-name))
-					   (dired-current-directory))))
-	(while (and (not (file-exists-p (concat current-dir FILE)))
-				(not (equal current-dir "/")))
-	  (setq current-dir (file-name-directory (directory-file-name current-dir))))
-	(if (file-exists-p (concat current-dir FILE))
-		(concat current-dir FILE)
-	  nil)))
+(defun my/locate-dominating-file (FILE NAME)
+  "Like locate-dominating-file but return the file path instead of the directory."
+  (when-let ((dir (locate-dominating-file FILE NAME)))
+	(file-name-concat dir NAME)))
 
 (defun my/open-nearest-file (FILE)
   "Search for FILE in current directory. If not found searches in the parent."
   (interactive "sFile: ")
-  (let ((file (my/get-nearest-file FILE)))
-	(if file
-		(find-file file)
-	  (message "File %s not found" FILE))))
+  (if-let ((file (my/locate-dominating-file default-directory FILE)))
+	  (find-file file)
+	(message "File %s not found" FILE)))
 
 (defun my/open-nearest-manifest-file ()
-  "Searches for package.json or pyproject.toml in current directory. If not found searches in the parent."
+  "Searches for package.json or pyproject.toml in current directory.
+If not found searches in the parent."
   (interactive)
-  (let ((file (or (my/get-nearest-file "package.json")
-				  (my/get-nearest-file "pyproject.toml"))))
-	(if file
-		(find-file file)
-	  (message "File not found"))))
+  (if-let ((file (or (my/locate-dominating-file default-directory "package.json")
+					 (my/locate-dominating-file default-directory "pyproject.toml")
+					 (my/locate-dominating-file default-directory "flake.nix"))))
+	  (find-file file)
+	(message "No package.json or pyproject.toml found")))
 
 (defun my/open-nearest-flake-nix ()
   (interactive)
