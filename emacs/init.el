@@ -756,3 +756,10 @@ If not found searches in the parent."
   ("C-<iso-lefttab>" . tab-line-switch-to-prev-tab)
   :config
   (global-tab-line-mode))
+
+(setopt
+ ;; https://www.masteringemacs.org/article/demystifying-emacs-window-manager
+ switch-to-buffer-obey-display-actions t
+ switch-to-buffer-in-dedicated-window 'pop)
+
+(bind-keys ("C-S-p" . window-toggle-side-windows))
