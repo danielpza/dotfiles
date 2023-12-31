@@ -222,6 +222,8 @@ in {
     userEmail = useremail;
     extraConfig = { init.defaultBranch = "master"; };
     ignores = [ ".dir-locals-2.el" ];
+    # delta.enable = true;
+    diff-so-fancy.enable = true;
   };
 
   home.sessionVariables = {
