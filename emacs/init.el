@@ -272,8 +272,7 @@
 
 (use-package treesit
   :mode
-  ("\\.Dockerfile\\'" . dockerfile-ts-mode)
-  ("Dockerfile\\'" . dockerfile-ts-mode)
+  ("\\.?Dockerfile\\'" . dockerfile-ts-mode)
   ;; js
   ("\\.[cm]?jsx?\\'" . js-ts-mode)
   ("\\.[cm]?ts\\'" . typescript-ts-mode)
@@ -282,7 +281,7 @@
   ("\\.css\\'" . css-ts-mode)
   ;; json
   ("\\.json\\'" . json-ts-mode)
-  ("\\.\\(babel\\|prettier\\|eslint\\|madge\\|swc\\)*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc and other .rc javascript configuration files
+  ("\\..*rc\\'" . json-ts-mode) ;; .babelrc .prettierrc, etc
   ;; yaml
   ("\\.ya?ml\\'" . yaml-ts-mode)
   ;; bash/shell
