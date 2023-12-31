@@ -113,7 +113,7 @@
 		("t" . dirvish-side))
   :custom
   (dirvish-header-line-height 20)
-  ;; (dirvish-mode-line-height 20)
+  (dirvish-mode-line-height 20)
   :config
   (custom-set-variables '(dirvish-subtree-state-style 'nerd)
 						'(dirvish-attributes '(;; vc-state
