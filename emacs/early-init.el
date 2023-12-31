@@ -19,6 +19,8 @@
 (use-package ef-themes
   :config
   (load-theme 'ef-elea-dark t))
+;; (load-theme 'doom-henna t)
+;; (load-theme 'doom-one t)
 
 ;; load custom config file if exists
 (let ((custom-file (concat user-emacs-directory "early-init.custom.el")))
