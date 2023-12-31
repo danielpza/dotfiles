@@ -225,6 +225,14 @@ in {
     # delta.enable = true;
     diff-so-fancy.enable = true;
   };
+  programs.jujutsu = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      user.name = userfullname;
+      user.email = useremail;
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "emacs --alternate-editor=";
