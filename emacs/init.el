@@ -713,7 +713,8 @@ If not found searches in the parent."
 		(progn
 		  (delete-window window)
 		  (bury-buffer buffer))
-	  (select-window (display-buffer buffer 'display-buffer-below-selected)))))
+	  (select-window (display-buffer buffer 'display-buffer-below-selected))
+	  (evil-insert-state))))
 
 (defun my/toggle-term-in-project ()
   "Opens `term` in the current project root directory like vscode."
