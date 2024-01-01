@@ -26,8 +26,9 @@
     "org/gnome/shell/keybindings" = {
       toggle-application-view = [ ];
       toggle-overview = [ ];
+      toggle-quick-settings = [ ];
       show-screenshot-ui = [ "<Super>R" ];
-      show-desktop = [ "<Super>D>" ];
+      show-desktop = [ "<Super>D" ];
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
       help = [ ];
@@ -35,6 +36,7 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
@@ -54,6 +56,12 @@
         name = "reconnect bluetooth";
         command = "sh ${./bin/reconnect-bluetooth}";
         binding = "<Super>F";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" =
+      {
+        name = "bemoji";
+        command = "bemoji -c -n";
+        binding = "<Super>E";
       };
     "org/gnome/shell" = {
       favorite-apps = [

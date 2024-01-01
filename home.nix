@@ -106,6 +106,11 @@ in {
     jq # json processor
     github-copilot-cli
     # others
+    bemoji # emoji picker
+    # dmenu # needed for bemoji on x11
+    rofi # needed for bemoji on x11
+    xclip # needed for bemoji on x11
+    xdotool # needed for bemoji on x11
     grpcui
     terraform-ls # terraform language server
     marksman # markdown language server
