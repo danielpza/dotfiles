@@ -214,6 +214,7 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package embark
+  :disabled
   :bind
   (("M-e" . embark-act)         ;; pick some comfortable binding
    ;; ("M-E" . embark-dwim)        ;; good alternative: M-.
