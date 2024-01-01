@@ -753,18 +753,21 @@ If not found searches in the parent."
   (tab-line-close-button-show nil)
   ;; (tab-line-tabs-function 'tab-line-tabs-buffer-groups)
   :config
+  (defvar my/group-by-buffer-project-exclude-buffers-filter
+	'(and (not "^ ")
+		  (not "^*")
+		  (not "^magit.*:")
+		  (not (major-mode . dired-mode))))
   (defun my/group-by-buffer-project ()
 	;; references among others: https://lists.gnu.org/archive/html/help-gnu-emacs/2020-08/msg00095.html
 	"Group tabs by project."
-	(let ((buffers (or (when-let ((project (project-current))) (project-buffers project))
+	(let ((buffers (or (when-let ((project (project-current)))
+						 (project-buffers project))
 					   (buffer-list))))
 	  (seq-sort-by #'buffer-name
 				   #'string-lessp
 				   (match-buffers
-					'(and (not "^ ")
-						  (not "^*")
-						  (not "^magit.*:")
-						  (not (major-mode . dired-mode)))
+					my/group-by-buffer-project-exclude-buffers-filter
 					buffers))))
   (setq tab-line-tabs-function 'my/group-by-buffer-project)
   (bind-keys
