@@ -7,7 +7,7 @@
 {
   imports = [ ./hardware-configuration.nix ./configuration-gnome.nix ];
 
-  home-manager.users.${homeUsername} = import ./home-c1.nix;
+  # home-manager.users.${homeUsername} = import ./home-c1.nix;
 
   # WMs/Compositors
   services.xserver.windowManager.awesome.enable = true;

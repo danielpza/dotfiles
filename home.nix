@@ -301,4 +301,6 @@ in {
   # home.keyboard.options = [ "caps:escape" ];
 
   # programs.waybar.enable = true;
+
+  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
 }

@@ -1,8 +1,12 @@
 { config, lib, pkgs, configName, homeUsername, ... }: {
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # home-manager = {
+  #   useGlobalPkgs = true;
+  #   useUserPackages = true;
+  #   extraSpecialArgs.configName = configName;
+  #   users.${homeUsername} = import ./home.nix;
+  # };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -36,10 +40,6 @@
     isNormalUser = true;
     description = "Daniel Perez";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-  };
-  home-manager = {
-    extraSpecialArgs.configName = configName;
-    users.${homeUsername} = import ./home.nix;
   };
 
   # Set your time zone.
