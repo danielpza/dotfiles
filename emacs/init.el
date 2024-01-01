@@ -40,8 +40,11 @@
 		  evil-respect-visual-line-mode t)
   :custom
   (evil-want-C-u-scroll t)
+  (evil-want-C-w-delete nil)
   (evil-want-Y-yank-to-eol t)
   (evil-undo-system 'undo-redo)
+  (evil-shift-width 2)
+  (evil-echo-state nil)
   :config
   (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
   (bind-keys :map evil-normal-state-map
