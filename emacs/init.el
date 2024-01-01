@@ -3,6 +3,7 @@
 
 ;; core
 (setopt
+ frame-resize-pixelwise t
  auto-save-default nil
  ispell-program-name "hunspell" ;; use hunspell instead of ispell
  use-short-answers t ;; use y/n instead of yes/no
