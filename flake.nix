@@ -20,6 +20,11 @@
         modules = [ ./home.nix ./home-c1.nix ./home-gnome.nix ];
         extraSpecialArgs.configName = "c1";
       };
+      homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home.nix ./home-c2.nix ./home-gnome.nix ];
+        extraSpecialArgs.configName = "c2";
+      };
       nixosConfigurations.c1 = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs.configName = "c1";
@@ -36,7 +41,7 @@
         specialArgs.configName = "c2";
         specialArgs.homeUsername = username;
         modules = [
-          home-manager.nixosModules.home-manager
+          # home-manager.nixosModules.home-manager
           overlays-config
           nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
           ./configuration.nix

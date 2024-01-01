@@ -7,7 +7,8 @@
 {
   imports = [ ./hardware-configuration.nix ./configuration-gnome.nix ];
 
-  home-manager.users.${homeUsername} = import ./home-c2.nix;
+  # home-manager.users.${homeUsername} = import ./home-c2.nix;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   virtualisation.docker.enable = true; # https://nixos.wiki/wiki/Docker
 
