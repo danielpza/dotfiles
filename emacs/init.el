@@ -205,7 +205,7 @@
 (use-package embark
   :bind
   (("M-e" . embark-act)         ;; pick some comfortable binding
-   ("M-E" . embark-dwim)        ;; good alternative: M-.
+   ;; ("M-E" . embark-dwim)        ;; good alternative: M-.
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
   :init
   ;; Optionally replace the key help with a completing-read interface
@@ -777,3 +777,6 @@ If not found searches in the parent."
  switch-to-buffer-in-dedicated-window 'pop)
 
 (bind-keys ("C-S-p" . window-toggle-side-windows))
+
+(bind-keys
+ ("M-E" . emoji-search))
