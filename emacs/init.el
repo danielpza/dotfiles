@@ -203,6 +203,11 @@
   (setopt xref-show-xrefs-function #'consult-xref
 		  xref-show-definitions-function #'consult-xref))
 
+(use-package cape
+  :config
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-emoji))
+
 (use-package embark
   :bind
   (("M-e" . embark-act)         ;; pick some comfortable binding

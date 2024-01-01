@@ -186,6 +186,7 @@ in {
         gdscript-mode
         lua-mode
         envrc
+        cape
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {
