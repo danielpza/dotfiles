@@ -207,9 +207,11 @@
 		  xref-show-definitions-function #'consult-xref))
 
 (use-package cape
-  :config
+  :disabled
+  :init
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-emoji))
+  (add-to-list 'completion-at-point-functions #'cape-emoji)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package embark
   :bind
