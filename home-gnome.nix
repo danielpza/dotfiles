@@ -1,13 +1,19 @@
-{ pkgs, ... }: {
-
-  home.packages = with pkgs;
-    [ gnome-feeds ] ++ (with pkgs.gnomeExtensions; [ caffeine ]);
+{ pkgs, ... }:
+let
+  # for Gnome Extensions see https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
+  extensions = (with pkgs.gnomeExtensions; [ caffeine steal-my-focus-window ]);
+in {
+  home.packages = with pkgs; [ gnome-feeds gnome.gnome-tweaks ] ++ extensions;
 
   # GNOME configuration
   dconf.settings = {
+    "org/gnome/shell".enabled-extensions =
+      map (extension: extension.extensionUuid) extensions;
+
     "org/gnome/desktop/interface" = {
       show-battery-percentage = true;
       enable-hot-corners = false;
+      gtk-enable-primary-paste = false;
       monospace-font-name = "Source Code Pro 20";
     };
     "org/gnome/desktop/input-sources" = { xkb-options = [ "caps:escape" ]; };
@@ -74,6 +80,9 @@
       ];
     };
 
-    # Gnome Extensions https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
+    "org/gnome/desktop/wm/preferences" = {
+      auto-raise = true;
+    }; # https://superuser.com/a/1616848/828790
+
   };
 }
