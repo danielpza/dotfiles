@@ -745,7 +745,20 @@ If not found searches in the parent."
    (format "*terminal %s*" (project-name (project-current)))
    (project-root (project-current))))
 
-(bind-keys ("C-`" . my/toggle-term-in-project))
+(defun my/toggle-term-in-workspace ()
+  "Opens `term` in the current npm/pnpm/yarn workspace."
+  (interactive)
+  (when-let ((workspace (locate-dominating-file default-directory "package.json")))
+	;; (message workspace)
+	;; (message (file-name-nondirectory (directory-file-name workspace)))
+	(my/toggle-term
+	 "fish"
+	 (format "*terminal %s*" (file-name-nondirectory (directory-file-name workspace)))
+	 workspace)))
+
+;; (file-name-nondirectory (directory-file-name (locate-dominating-file default-directory "package.json")))
+
+(bind-keys ("C-`" . my/toggle-term-in-workspace))
 
 (bind-keys ("M-H" . shrink-window-horizontally)
 		   ("M-J" . shrink-window)
