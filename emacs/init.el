@@ -808,3 +808,7 @@ If not found searches in the parent."
 
 (bind-keys
  ("M-E" . emoji-search))
+
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode))

@@ -191,6 +191,7 @@ in {
         lua-mode
         envrc
         cape
+        hl-todo
       ] ++ [
         # non elpa/melpa
         (callPackage ./emacs/copilot.el.nix {
