@@ -88,7 +88,7 @@ in {
     appimage-run
     # web dev
     nodejs
-    yarn
+    corepack
     # command line helpers
     marp-cli # markdown slides
     tree
@@ -138,8 +138,6 @@ in {
     bash-language-server
     dockerfile-language-server-nodejs
     pyright
-    pnpm
-    npm
   ]);
 
   programs.emacs = {
