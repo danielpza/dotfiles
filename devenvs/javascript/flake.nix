@@ -15,7 +15,7 @@
       devShell.${system} = pkgs.mkShell {
         packages = with pkgs; [
           git
-          volta
+          # volta
           corepack
           docker
           google-cloud-sdk
@@ -23,13 +23,13 @@
           buf
         ];
         shellHook = ''
-          VOLTA_HOME="$HOME/.volta";
-          PATH="$VOLTA_HOME/bin/:$PATH";
+          # VOLTA_HOME="$HOME/.volta";
+          # PATH="$VOLTA_HOME/bin/:$PATH";
           YARN_NM_MODE=hardlinks-global
         '';
         MONGOMS_DISTRO = "ubuntu-22.04";
         NIX_LD_LIBRARY_PATH = lib.makeLibraryPath
-          (with pkgs; [ stdenv.cc.cc openssl_1_1 curlFull xz ]);
+          (with pkgs; [ stdenv.cc.cc openssl_1_1 openssl_3 curlFull xz ]);
         NIX_LD =
           builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
       };
