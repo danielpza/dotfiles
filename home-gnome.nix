@@ -48,7 +48,7 @@ in {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
       {
         name = "flameshot";
-        command = "flameshot gui";
+        command = "sh ${./bin/flameshot.sh}";
         binding = "<Super>S";
       };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
