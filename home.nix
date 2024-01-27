@@ -1,6 +1,7 @@
 { config, pkgs, lib, configName, ... }:
 let
   userfullname = "Daniel Perez Alvarez";
+
   username = "daniel";
   useremail = "danielpza@protonmail.com";
   configDir = "/home/${username}/.config/home-manager";
@@ -89,6 +90,7 @@ in {
     # web dev
     nodejs
     corepack
+    oxlint
     # command line helpers
     marp-cli # markdown slides
     tree
@@ -140,6 +142,7 @@ in {
     pyright
   ]);
 
+  services.emacs.defaultEditor = true;
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-unstable;
@@ -308,4 +311,21 @@ in {
   # programs.waybar.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
+
+  xdg.mimeApps = let
+    editor = "emacsclient.desktop";
+    pdfviewer = "org.gnome.Evince.desktop";
+    associations = {
+      "text/plain" = [ editor ];
+      "text/org" = [ editor ];
+      "text/markdown" = [ editor ];
+      "application/json" = [ editor ];
+      "application/pdf" = [ pdfviewer ];
+    };
+  in {
+    enable = true;
+    associations.added = associations;
+    defaultApplications = associations;
+    # tip use xdg-mime query filetype ./file
+  };
 }

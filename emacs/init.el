@@ -75,6 +75,8 @@
 (use-package evil-collection
   :functions evil-collection-init
   :after evil
+  :custom
+  (evil-collection-key-blacklist '("SPC"))
   :config
   (evil-collection-init))
 
