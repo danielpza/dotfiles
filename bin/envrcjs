@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -e
+
+echo "use flake path:$HOME/.config/home-manager/devenvs/javascript --impure" >.envrc
+
+if [[ -d .git ]]; then
+	echo ".envrc" >>.git/info/exclude
+	echo ".direnv" >>.git/info/exclude
+fi
+
+direnv allow
