@@ -74,4 +74,6 @@
     # intelBusId = "PCI:0:2:0";
     # nvidiaBusId = "PCI:01:0:0";
   };
+
+  system.nixos.label = "gaming";
 }
