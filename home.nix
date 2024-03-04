@@ -243,7 +243,6 @@ in {
   };
   programs.jujutsu = {
     enable = true;
-    enableFishIntegration = true;
     settings = {
       user.name = userfullname;
       user.email = useremail;
