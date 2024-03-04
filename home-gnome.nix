@@ -1,7 +1,11 @@
 { pkgs, ... }:
 let
   # for Gnome Extensions see https://github.com/nix-community/home-manager/issues/284#issuecomment-1321199263
-  extensions = (with pkgs.gnomeExtensions; [ caffeine steal-my-focus-window ]);
+  extensions = (with pkgs.gnomeExtensions; [
+    caffeine
+    steal-my-focus-window
+    appindicator
+  ]);
 in {
   home.packages = with pkgs; [ gnome-feeds gnome.gnome-tweaks ] ++ extensions;
 
