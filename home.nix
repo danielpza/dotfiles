@@ -141,6 +141,13 @@ in {
     dockerfile-language-server-nodejs
     pyright
   ]);
+  programs.librewolf = {
+    enable = true;
+    settings = {
+      "privacy.resistFingerprinting.letterboxing" = true;
+      "privacy.clearOnShutdown.history" = false;
+    };
+  };
 
   services.emacs.defaultEditor = true;
   programs.emacs = {

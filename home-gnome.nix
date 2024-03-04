@@ -73,7 +73,7 @@ in {
       favorite-apps = [
         "emacsclient.desktop"
         "org.gnome.Console.desktop"
-        "firefox.desktop"
+        "librewolf.desktop"
         "slack.desktop"
         "org.gnome.Nautilus.desktop"
         "logseq.desktop"
