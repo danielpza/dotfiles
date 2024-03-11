@@ -66,6 +66,10 @@ in {
       bindkey "^[[1;5D" backward-word
     '';
   };
+  programs.ripgrep = {
+    enable = true;
+    arguments = [ "--hidden" ];
+  };
 
   # aliases to rebuild home-manager/nixos
   home.shellAliases = {
@@ -95,7 +99,6 @@ in {
     marp-cli # markdown slides
     tree
     fd # faster find
-    ripgrep # faster grep
     tldr
     dprint # code formatter
     gdtoolkit # godot code formatter
