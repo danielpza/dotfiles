@@ -32,6 +32,8 @@ in {
     ls = "eza";
     ll = "eza -la";
     l = "eza -a";
+    npm = "corepack npm";
+    npx = "corepack npx";
   };
   # better cat
   programs.bat.enable = true;
@@ -92,7 +94,7 @@ in {
     neovim
     appimage-run
     # web dev
-    nodejs
+    (nodejs.override { enableNpm = false; })
     corepack
     oxlint
     # command line helpers
