@@ -157,8 +157,7 @@ in {
     enable = true;
     package = pkgs.emacs-unstable;
     extraPackages = epkgs:
-      with epkgs;
-      [
+      with epkgs; [
         apheleia
         consult
         consult-flycheck
@@ -203,12 +202,7 @@ in {
         envrc
         cape
         hl-todo
-      ] ++ [
-        # non elpa/melpa
-        (callPackage ./emacs/copilot.el.nix {
-          inherit (pkgs) fetchFromGitHub;
-          inherit (epkgs) trivialBuild s dash editorconfig;
-        })
+        copilot
       ];
   };
 
