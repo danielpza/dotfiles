@@ -43,7 +43,7 @@
         modules = [
           # home-manager.nixosModules.home-manager
           overlays-config
-          nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
+          # nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
           ./configuration.nix
           ./configuration-c2.nix
         ];
