@@ -475,6 +475,8 @@
 (add-to-list 'auto-mode-alist '("\\.npmrc\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.env.*\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.godot\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.import\\'" . conf-mode))
 
 ;; my functions
 (defun my/find-init-file ()
