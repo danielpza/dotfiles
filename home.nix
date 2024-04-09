@@ -107,7 +107,6 @@ in {
     stylua # lua formatter
     hyperfine
     onefetch
-    protonvpn-gui
     yq # yaml/xml/toml processor
     jq # json processor
     github-copilot-cli
