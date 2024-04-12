@@ -189,6 +189,11 @@ in {
         nerd-icons-completion
         nix-mode
         orderless
+        treemacs
+        # treemacs-all-the-icons
+        treemacs-evil
+        treemacs-magit
+        treemacs-nerd-icons
         protobuf-mode
         terraform-mode
         treesit-grammars.with-all-grammars

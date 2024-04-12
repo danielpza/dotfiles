@@ -46,6 +46,7 @@
   (evil-shift-width 2)
   (evil-echo-state nil)
   :config
+  (bind-keys :map evil-insert-state-map ("<backtab>" . evil-shift-left-line))
   (bind-keys ([remap evil-goto-definition] . xref-find-definitions))
   (bind-keys :map evil-normal-state-map
 			 ("z l" . hs-hide-level))
@@ -108,15 +109,15 @@
 
 (use-package dirvish
   :demand
-  :commands (dired project-switch-project)
+  ;; :commands (dired project-switch-project)
   :defines dirvish-subtree-state-style dirvish-attributes dirvish-mode-map
   :functions dirvish-dwim dirvish-side dirvish-subtree-up dirvish-subtree-toggle-or-open dirvish-quicksort dirvish-ls-switches-menu dirvish-yank-menu dirvish-dispatch dirvish-quit dirvish-quick-access dirvish-file-info-menu dirvish-subtree-toggle dirvish-override-dired-mode
   :bind
   ("C-x d" . dirvish-dwim)
   (:map leader-map
 		("a d" . dirvish-dwim))
-  (:map project-prefix-map
-		("t" . dirvish-side))
+  ;; (:map project-prefix-map
+  ;; 		("t" . dirvish-side))
   :custom
   (dirvish-header-line-height 20)
   (dirvish-mode-line-height 20)
@@ -146,6 +147,29 @@
 			 ("<tab>" . dirvish-subtree-toggle)
 			 ("TAB" . dirvish-subtree-toggle))
   (dirvish-override-dired-mode))
+
+;; treemacs
+(use-package treemacs
+  :custom
+  (treemacs-pulse-on-success nil)
+  (treemacs-width-is-initially-locked nil)
+  :bind
+  (:map project-prefix-map
+		("t" . treemacs-display-current-project-exclusively))
+  :config
+  (treemacs-follow-mode))
+
+(use-package treemacs-evil
+  :after (treemacs evil))
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
+(use-package treemacs-nerd-icons
+  ;; :after (treemacs nerd-icons)
+  :functions treemacs-load-theme
+  :config
+  (treemacs-load-theme "nerd-icons"))
 
 ;; diagnostic
 (use-package jinx
@@ -216,7 +240,6 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package embark
-  :disabled
   :bind
   (("M-e" . embark-act)         ;; pick some comfortable binding
    ;; ("M-E" . embark-dwim)        ;; good alternative: M-.
@@ -361,6 +384,10 @@
   :defines copilot-completion-map
   :functions copilot-mode copilot-next-completion copilot-accept-completion copilot-diagnose
   :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
+  :custom
+  ;; https://github.com/copilot-emacs/copilot.el/pull/230, https://github.com/copilot-emacs/copilot.el/issues/220
+  (copilot-indent-offset-warning-disable t)
+  (copilot--indent-warning-printed-p t)
   :config
   (bind-keys ("M-S" . copilot-diagnose)
 			 :map copilot-completion-map
