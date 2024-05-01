@@ -1,24 +1,28 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
-  outputs = { nixpkgs, home-manager, emacs-overlay, nixos-hardware, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, emacs-overlay
+    , nixos-hardware, ... }:
     let
       system = "x86_64-linux";
       overlays = [ emacs-overlay.overlay ];
       overlays-config = { nixpkgs.overlays = overlays; };
-      pkgs = import nixpkgs { inherit system overlays; };
+      pkgs = import nixpkgs { inherit system; };
+      pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
       username = "daniel";
     in {
       homeConfigurations.c1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ./home-c1.nix ./home-gnome.nix ];
         extraSpecialArgs.configName = "c1";
+        extraSpecialArgs = { inherit pkgs-unstable; };
       };
       homeConfigurations.c2 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

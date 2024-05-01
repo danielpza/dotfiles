@@ -1,4 +1,4 @@
-{ config, pkgs, lib, configName, ... }:
+{ config, pkgs, pkgs-unstable, lib, configName, ... }:
 let
   userfullname = "Daniel Perez Alvarez";
 
@@ -156,7 +156,8 @@ in {
   services.emacs.defaultEditor = true;
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-unstable;
+    overrides = self: super: pkgs-unstable.emacsPackages;
+    package = pkgs-unstable.emacs-unstable;
     extraPackages = epkgs:
       with epkgs; [
         apheleia
