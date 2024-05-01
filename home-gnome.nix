@@ -34,6 +34,7 @@ in {
     # https://the-empire.systems/nixos-gnome-settings-and-keyboard-shortcuts
     # https://discourse.nixos.org/t/nixos-options-to-configure-gnome-keyboard-shortcuts/7275
     "org/gnome/shell/keybindings" = {
+      minimize = [ ];
       toggle-application-view = [ ];
       toggle-overview = [ ];
       toggle-quick-settings = [ ];
