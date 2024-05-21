@@ -320,7 +320,8 @@ in {
 
   # programs.waybar.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
+  nixpkgs.config.permittedInsecurePackages =
+    [ "electron-25.9.0" "electron-24.8.6" ];
 
   xdg.mimeApps = let
     editor = "emacsclient.desktop";
