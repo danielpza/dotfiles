@@ -5,6 +5,7 @@ let
     caffeine
     steal-my-focus-window
     appindicator
+    block-caribou-36
   ]);
 in {
   home.packages = with pkgs; [ gnome-feeds gnome.gnome-tweaks ] ++ extensions;
