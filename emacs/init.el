@@ -381,6 +381,8 @@
   (apheleia-global-mode))
 
 (use-package copilot
+  :disabled
+
   :defines copilot-completion-map
   :functions copilot-mode copilot-next-completion copilot-accept-completion copilot-diagnose
   :hook ((prog-mode markdown-mode conf-mode yaml-ts-mode) . copilot-mode)
