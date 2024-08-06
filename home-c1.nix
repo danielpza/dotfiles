@@ -1,9 +1,17 @@
-{ pkgs, pkgs-unstable, ... }: {
+{ pkgs, pkgs-unstable, pkgs-2311, lib, ... }: {
   home.packages = with pkgs;
-    [ protonvpn-cli freetube godot_4 thunderbird standardnotes protonvpn-gui ]
-    ++ (with pkgs-unstable; [
-      # protonvpn-gui
-      protonmail-desktop
-      libsecret
-    ]);
+    [
+      freetube
+      # godot_4
+      # thunderbird
+    ] ++ (with pkgs-unstable; [
+      protonvpn-gui
+      protonvpn-cli
+      tangram
+      proton-pass
+      (lib.hiPrio protonmail-desktop)
+    ]) ++ (with pkgs-2311;
+      [
+        standardnotes # latest version not working but 2311 ones does
+      ]);
 }
