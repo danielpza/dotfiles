@@ -11,6 +11,7 @@
 
   # WMs/Compositors
   services.xserver.windowManager.awesome.enable = true;
+  programs.river.enable = true;
   programs.hyprland = {
     # https://wiki.hyprland.org/Nix/
     enable = true;
