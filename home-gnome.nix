@@ -80,9 +80,12 @@ in {
         "emacsclient.desktop"
         "org.gnome.Console.desktop"
         "librewolf.desktop"
-        "slack.desktop"
         "org.gnome.Nautilus.desktop"
-        "logseq.desktop"
+        "standard-notes.desktop"
+        "proton-mail.desktop"
+        "proton-pass.desktop"
+        "org.keepassxc.KeePassXC.desktop"
+        # "logseq.desktop"
       ];
     };
 
