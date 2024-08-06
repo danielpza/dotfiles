@@ -83,6 +83,9 @@
     #media-session.enable = true;
   };
 
+  hardware.logitech.wireless.enable =
+    true; # https://search.nixos.org/packages?channel=unstable&show=solaar&size=50&sort=relevance&type=packages&query=solaar
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];

@@ -32,4 +32,6 @@
     "/crypto_keyfile.bin";
 
   system.stateVersion = "22.11"; # TL;DR: don't touch this line
+
+  environment.systemPackages = [ pkgs.solaar ];
 }
