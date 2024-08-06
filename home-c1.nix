@@ -7,7 +7,6 @@
     ] ++ (with pkgs-unstable; [
       protonvpn-gui
       protonvpn-cli
-      tangram
       proton-pass
       (lib.hiPrio protonmail-desktop)
     ]) ++ (with pkgs-2311;
