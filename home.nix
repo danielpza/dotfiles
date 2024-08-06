@@ -129,7 +129,7 @@ in {
     luajitPackages.lua-lsp
     # nix:
     nil # nix lsp
-    nixfmt # nix formatter
+    nixfmt-classic # nix formatter
     # libs needed? perhaps?
     # curlFull
     nix-index
