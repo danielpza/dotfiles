@@ -94,9 +94,8 @@ in {
     neovim
     appimage-run
     # web dev
-    (nodejs.override { enableNpm = false; })
-    corepack
-    oxlint
+    (pkgs-unstable.nodejs_22.override { enableNpm = false; })
+    pkgs-unstable.corepack
     # command line helpers
     marp-cli # markdown slides
     tree
